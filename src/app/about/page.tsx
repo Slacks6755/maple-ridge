@@ -4,7 +4,7 @@ import { ArrowRight, MapPin, Phone, Shield, Award, Users, Heart, Target, TreePin
 
 export const metadata: Metadata = {
   title: 'About Us | Maple Ridge Construction & Development',
-  description: 'Learn about Maple Ridge Construction, your trusted general contractor in Southeast Tennessee. Licensed, insured, and committed to quality craftsmanship in McMinn, Bradley, Polk, and Monroe Counties.',
+  description: 'Learn about Maple Ridge Construction, your trusted general contractor in Southeast Tennessee. Committed to quality craftsmanship in McMinn, Bradley, Polk, and Monroe Counties.',
   keywords: [
     'about Maple Ridge Construction',
     'general contractor Southeast Tennessee',
@@ -39,11 +39,11 @@ const values = [
 
 const credentials = [
   'Licensed General Contractor - State of Tennessee',
-  'Comprehensive General Liability Insurance',
-  'Workers\' Compensation Coverage',
-  'Member of Local Building Association',
-  'Continuing Education in Building Codes',
-  'OSHA Safety Trained Crews',
+  'Fully Insured',
+  'Workers\' Comp Coverage',
+  'Local Building Association Member',
+  'Up to Date on Building Codes',
+  'Safety-Focused Crews',
 ]
 
 export default function AboutPage() {
@@ -166,9 +166,9 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="section-label">The Paperwork</span>
-              <h2 className="section-title">Licensed and Insured</h2>
+              <h2 className="section-title">Credentials</h2>
               <p className="section-subtitle">
-                We have all the licensing and insurance you'd expect from a legitimate contractor.
+                We have all the credentials you'd expect from a legitimate contractor.
                 You're covered.
               </p>
             </div>

@@ -54,7 +54,7 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-6">
                 <div className="flex items-center gap-2 text-stone-300">
                   <Shield className="h-5 w-5 text-ridge-400" />
-                  <span className="text-sm">Licensed & Insured</span>
+                  <span className="text-sm">Licensed Contractor</span>
                 </div>
                 <div className="flex items-center gap-2 text-stone-300">
                   <Award className="h-5 w-5 text-ridge-400" />

@@ -305,9 +305,9 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
             <div className="grid sm:grid-cols-3 gap-8 mt-12 text-left">
               <div className="card p-6">
                 <Building className="h-8 w-8 text-ridge-500 mb-4" />
-                <h3 className="font-semibold text-stone-900 mb-2">Licensed & Insured</h3>
+                <h3 className="font-semibold text-stone-900 mb-2">Fully Credentialed</h3>
                 <p className="text-stone-600 text-sm">
-                  Fully licensed Tennessee General Contractor with comprehensive insurance coverage.
+                  Licensed Tennessee General Contractor. Covered and ready to work.
                 </p>
               </div>
               <div className="card p-6">
