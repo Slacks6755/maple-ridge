@@ -1,0 +1,21 @@
+{
+  "name": "Maple Ridge Construction & Development",
+  "short_name": "Maple Ridge",
+  "description": "Licensed General Contractor serving Southeast Tennessee. New construction, remodeling, and land development.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f8f7",
+  "theme_color": "#547454",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
