@@ -22,20 +22,22 @@ const bodyFont = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://mapleridgeconstruction.com'),
   title: {
-    default: 'Maple Ridge Construction & Development | General Contractor in Southeast TN',
+    default: 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
     template: '%s | Maple Ridge Construction',
   },
-  description: 'Licensed General Contractor serving Southeast Tennessee. Specializing in new construction homes, complete home remodels, and land development in McMinn, Bradley, Polk & Monroe Counties.',
+  description: 'Licensed General Contractor in Southeast Tennessee. New home construction, remodeling, and land development in McMinn, Bradley, Polk & Monroe Counties. Call (423) 506-2380 for a free estimate.',
   keywords: [
     'general contractor Tennessee',
     'home builder Etowah TN',
-    'new construction homes Southeast TN',
+    'new construction Southeast TN',
     'home remodeling Athens TN',
     'land development Cleveland TN',
     'custom home builder McMinn County',
-    'residential contractor Bradley County',
+    'contractor Bradley County',
     'construction company Polk County',
     'home renovation Monroe County',
+    'general contractor Sweetwater TN',
+    'home builder Madisonville TN',
   ],
   authors: [{ name: 'Maple Ridge Construction & Development' }],
   creator: 'Maple Ridge Construction & Development',
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://mapleridgeconstruction.com',
     siteName: 'Maple Ridge Construction & Development',
-    title: 'Maple Ridge Construction & Development | General Contractor in Southeast TN',
+    title: 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
     description: 'Licensed General Contractor serving Southeast Tennessee. New construction, remodeling, and land development.',
     images: [
       {
@@ -86,10 +88,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#547454" />
         <meta name="geo.region" content="US-TN" />
         <meta name="geo.placename" content="Etowah, Tennessee" />

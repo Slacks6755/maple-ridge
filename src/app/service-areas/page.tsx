@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, MapPin, Phone } from 'lucide-react'
+import { ArrowRight, MapPin } from 'lucide-react'
+import { serviceAreas, counties } from '@/data/service-areas'
+import PageHero from '@/components/PageHero'
+import CTASection from '@/components/CTASection'
 
 export const metadata: Metadata = {
-  title: 'Service Areas | Construction Services in Southeast Tennessee',
-  description: 'Maple Ridge Construction serves McMinn, Bradley, Polk, and Monroe Counties in Southeast Tennessee. Find construction services in Etowah, Athens, Cleveland, Benton, Madisonville, Tellico Plains, Sweetwater, and Englewood.',
+  title: 'Service Areas | General Contractor in Southeast Tennessee',
+  description: 'Maple Ridge Construction serves McMinn, Bradley, Polk, and Monroe Counties in Southeast Tennessee. Construction services in Etowah, Athens, Cleveland, Benton, Madisonville, Tellico Plains, Sweetwater, Englewood, Riceville, and Ocoee.',
   keywords: [
     'construction service areas Tennessee',
     'general contractor Southeast TN',
@@ -15,92 +18,14 @@ export const metadata: Metadata = {
   ],
 }
 
-const serviceAreas = [
-  {
-    name: 'Etowah',
-    slug: 'etowah',
-    county: 'McMinn',
-    description: 'Our home base. Serving Etowah and surrounding McMinn County communities with local expertise.',
-  },
-  {
-    name: 'Athens',
-    slug: 'athens',
-    county: 'McMinn',
-    description: 'The county seat of McMinn County. Experienced with city and county building requirements.',
-  },
-  {
-    name: 'Cleveland',
-    slug: 'cleveland',
-    county: 'Bradley',
-    description: 'Bradley County\'s largest city. Residential and commercial construction services.',
-  },
-  {
-    name: 'Benton',
-    slug: 'benton',
-    county: 'Polk',
-    description: 'Gateway to Cherokee National Forest. Mountain and riverside property expertise.',
-  },
-  {
-    name: 'Madisonville',
-    slug: 'madisonville',
-    county: 'Monroe',
-    description: 'Monroe County seat. Full construction services for residential and commercial projects.',
-  },
-  {
-    name: 'Tellico Plains',
-    slug: 'tellico-plains',
-    county: 'Monroe',
-    description: 'Mountain construction specialists. Cabins, vacation homes, and challenging terrain.',
-  },
-  {
-    name: 'Sweetwater',
-    slug: 'sweetwater',
-    county: 'Monroe',
-    description: 'Convenient I-75 location. Residential construction and renovation services.',
-  },
-  {
-    name: 'Englewood',
-    slug: 'englewood',
-    county: 'McMinn',
-    description: 'Rural McMinn County community. New construction and land development.',
-  },
-]
-
-const counties = [
-  { name: 'McMinn County', cities: ['Etowah', 'Athens', 'Englewood', 'Niota', 'Calhoun', 'Riceville'] },
-  { name: 'Bradley County', cities: ['Cleveland', 'Charleston', 'McDonald'] },
-  { name: 'Polk County', cities: ['Benton', 'Ducktown', 'Copperhill', 'Delano'] },
-  { name: 'Monroe County', cities: ['Madisonville', 'Tellico Plains', 'Sweetwater', 'Vonore', 'Greenback'] },
-]
-
 export default function ServiceAreasPage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-stone-900 text-white py-20 lg:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-ridge-500" />
-
-        <div className="container-wide section-padding relative">
-          <div className="max-w-3xl">
-            <span className="inline-block text-ridge-400 font-medium text-sm uppercase tracking-wider mb-4">
-              Where We Work
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Serving Southeast Tennessee
-            </h1>
-            <p className="text-xl text-stone-300 leading-relaxed">
-              Maple Ridge Construction provides professional construction services throughout
-              McMinn, Bradley, Polk, and Monroe Counties. From the Tennessee River Valley to
-              the Cherokee Forest foothills, we&apos;re your local building partner.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Where We Work"
+        title="Serving Southeast Tennessee"
+        description="Maple Ridge Construction provides construction services throughout McMinn, Bradley, Polk, and Monroe Counties. From the Tennessee River Valley to the Cherokee Forest foothills, we're your local building partner."
+      />
 
       {/* Service Areas Grid */}
       <section className="py-20 lg:py-28 bg-stone-50">
@@ -113,7 +38,7 @@ export default function ServiceAreasPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceAreas.map((area) => (
               <Link
                 key={area.slug}
@@ -175,29 +100,10 @@ export default function ServiceAreasPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 lg:py-28 bg-ridge-700 text-white">
-        <div className="container-wide section-padding">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6">
-              Ready to Build in Southeast Tennessee?
-            </h2>
-            <p className="text-xl text-ridge-200 mb-10">
-              Contact us today for a free consultation and estimate on your construction project.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn bg-white text-ridge-700 hover:bg-earth-50">
-                Request Free Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <a href="tel:+14235551234" className="btn bg-ridge-600 text-white hover:bg-ridge-500 border border-ridge-500">
-                <Phone className="mr-2 h-5 w-5" />
-                (423) 555-1234
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        heading="Ready to Build in Southeast Tennessee?"
+        description="Contact us today for a free consultation and estimate on your construction project."
+      />
     </>
   )
 }

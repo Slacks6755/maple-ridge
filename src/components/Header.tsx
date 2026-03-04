@@ -4,29 +4,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
+import { contact } from '@/data/contact'
+import { services } from '@/data/services'
+import { serviceAreas } from '@/data/service-areas'
 
-const navigation = {
-  services: [
-    { name: 'New Construction', href: '/services/new-construction', description: 'Custom-built homes from the ground up' },
-    { name: 'Home Remodeling', href: '/services/remodeling', description: 'Complete renovations and updates' },
-    { name: 'Land Development', href: '/services/land-development', description: 'Site preparation and development' },
-  ],
-  serviceAreas: [
-    { name: 'Etowah', href: '/service-areas/etowah' },
-    { name: 'Athens', href: '/service-areas/athens' },
-    { name: 'Cleveland', href: '/service-areas/cleveland' },
-    { name: 'Benton', href: '/service-areas/benton' },
-    { name: 'Madisonville', href: '/service-areas/madisonville' },
-    { name: 'Tellico Plains', href: '/service-areas/tellico-plains' },
-    { name: 'Sweetwater', href: '/service-areas/sweetwater' },
-    { name: 'Englewood', href: '/service-areas/englewood' },
-  ],
-  main: [
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Contact', href: '/contact' },
-  ],
-}
+const mainLinks = [
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -39,10 +24,10 @@ export default function Header() {
       <div className="bg-ridge-700 text-white">
         <div className="container-wide section-padding">
           <div className="flex justify-between items-center py-2 text-sm">
-            <span className="hidden sm:block">Licensed General Contractor • Southeast Tennessee</span>
-            <a href="tel:+14235551234" className="flex items-center gap-2 hover:text-earth-200 transition-colors">
+            <span className="hidden sm:block">Licensed General Contractor &bull; Southeast Tennessee</span>
+            <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-earth-200 transition-colors">
               <Phone className="h-4 w-4" />
-              <span>(423) 555-1234</span>
+              <span>{contact.phone}</span>
             </a>
           </div>
         </div>
@@ -79,7 +64,7 @@ export default function Header() {
                 onMouseLeave={() => setServicesOpen(false)}
               >
                 <div className="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden">
-                  {navigation.services.map((item) => (
+                  {services.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
@@ -110,13 +95,13 @@ export default function Header() {
                 onMouseLeave={() => setAreasOpen(false)}
               >
                 <div className="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden max-h-80 overflow-y-auto">
-                  {navigation.serviceAreas.map((item) => (
+                  {serviceAreas.map((area) => (
                     <Link
-                      key={item.name}
-                      href={item.href}
+                      key={area.slug}
+                      href={`/service-areas/${area.slug}`}
                       className="block px-4 py-2.5 hover:bg-ridge-50 transition-colors text-stone-700 hover:text-ridge-700 border-b border-stone-50 last:border-0"
                     >
-                      {item.name}, TN
+                      {area.name}, TN
                     </Link>
                   ))}
                 </div>
@@ -124,7 +109,7 @@ export default function Header() {
             </div>
 
             {/* Main links */}
-            {navigation.main.map((item) => (
+            {mainLinks.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -164,7 +149,7 @@ export default function Header() {
             {/* Services */}
             <div className="py-2">
               <span className="text-xs font-medium text-stone-400 uppercase tracking-wider px-2">Services</span>
-              {navigation.services.map((item) => (
+              {services.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -176,9 +161,26 @@ export default function Header() {
               ))}
             </div>
 
+            {/* Service Areas */}
+            <div className="py-2 border-t border-stone-100 mt-2">
+              <span className="text-xs font-medium text-stone-400 uppercase tracking-wider px-2">Service Areas</span>
+              <div className="grid grid-cols-2 gap-x-2">
+                {serviceAreas.map((area) => (
+                  <Link
+                    key={area.slug}
+                    href={`/service-areas/${area.slug}`}
+                    className="block px-2 py-2 text-stone-700 hover:text-ridge-600 font-medium text-sm"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {area.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Main links */}
             <div className="py-2 border-t border-stone-100 mt-2">
-              {navigation.main.map((item) => (
+              {mainLinks.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -191,7 +193,7 @@ export default function Header() {
             </div>
 
             {/* CTA */}
-            <div className="pt-4 border-t border-stone-100 mt-2">
+            <div className="pt-4 border-t border-stone-100 mt-2 space-y-3">
               <Link
                 href="/contact"
                 className="btn-primary w-full"
@@ -199,6 +201,13 @@ export default function Header() {
               >
                 Get a Free Quote
               </Link>
+              <a
+                href={contact.phoneHref}
+                className="flex items-center justify-center gap-2 text-stone-700 font-medium py-2"
+              >
+                <Phone className="h-4 w-4" />
+                {contact.phone}
+              </a>
             </div>
           </div>
         )}

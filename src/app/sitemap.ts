@@ -1,26 +1,27 @@
 import { MetadataRoute } from 'next'
+import { serviceAreas } from '@/data/service-areas'
+import { services } from '@/data/services'
+
+export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://mapleridgeconstruction.com'
 
-  // Service areas
-  const serviceAreas = [
-    'etowah',
-    'athens',
-    'cleveland',
-    'benton',
-    'madisonville',
-    'tellico-plains',
-    'sweetwater',
-    'englewood',
-  ]
-
   const serviceAreaUrls = serviceAreas.map((area) => ({
-    url: `${baseUrl}/service-areas/${area}`,
+    url: `${baseUrl}/service-areas/${area.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
+
+  const comboUrls = serviceAreas.flatMap((area) =>
+    services.map((service) => ({
+      url: `${baseUrl}/service-areas/${area.slug}/${service.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+  )
 
   return [
     {
@@ -42,10 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/projects`,
+      url: `${baseUrl}/services`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/services/new-construction`,
@@ -65,6 +66,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/service-areas`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     ...serviceAreaUrls,
+    ...comboUrls,
   ]
 }

@@ -1,15 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static exports for better performance
-  output: 'standalone',
+  // Static export for Netlify
+  output: 'export',
 
-  // Image optimization
+  // Image optimization (unoptimized for static export)
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
-
-  // Enable compression
-  compress: true,
 
   // Strict mode for better development
   reactStrictMode: true,

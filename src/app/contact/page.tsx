@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Clock, MessageSquare, ArrowRight } from 'lucide-react'
+import { contact } from '@/data/contact'
+import { serviceAreas } from '@/data/service-areas'
+import PageHero from '@/components/PageHero'
+import CopyButton from '@/components/CopyButton'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Free Estimate | Maple Ridge Construction',
-  description: 'Contact Maple Ridge Construction for a free estimate on your construction project. Serving Etowah, Athens, Cleveland and Southeast Tennessee. Call (423) 555-1234.',
+  title: 'Contact Maple Ridge Construction | Free Estimate Etowah, TN',
+  description: `Contact Maple Ridge Construction for a free estimate. Licensed general contractor serving Etowah and Southeast Tennessee. Call ${contact.phone} or email ${contact.email}.`,
   keywords: [
     'contact Maple Ridge Construction',
     'free construction estimate Tennessee',
@@ -14,79 +18,15 @@ export const metadata: Metadata = {
   ],
 }
 
-const contactInfo = [
-  {
-    icon: Phone,
-    title: 'Phone',
-    primary: '(423) 555-1234',
-    secondary: 'Mon-Fri 7AM-5PM',
-    action: 'tel:+14235551234',
-    actionLabel: 'Call Now',
-  },
-  {
-    icon: Mail,
-    title: 'Email',
-    primary: 'info@mapleridgeconstruction.com',
-    secondary: 'We respond within 24 hours',
-    action: 'mailto:info@mapleridgeconstruction.com',
-    actionLabel: 'Send Email',
-  },
-  {
-    icon: MapPin,
-    title: 'Location',
-    primary: 'Etowah, Tennessee',
-    secondary: 'Serving McMinn, Bradley, Polk & Monroe Counties',
-    action: null,
-    actionLabel: null,
-  },
-  {
-    icon: Clock,
-    title: 'Hours',
-    primary: 'Monday - Friday: 8AM - 5PM',
-    secondary: 'Closed weekends',
-    action: null,
-    actionLabel: null,
-  },
-]
-
-const serviceAreas = [
-  { name: 'Etowah', county: 'McMinn' },
-  { name: 'Athens', county: 'McMinn' },
-  { name: 'Cleveland', county: 'Bradley' },
-  { name: 'Benton', county: 'Polk' },
-  { name: 'Madisonville', county: 'Monroe' },
-  { name: 'Tellico Plains', county: 'Monroe' },
-  { name: 'Sweetwater', county: 'Monroe' },
-  { name: 'Englewood', county: 'McMinn' },
-]
-
 export default function ContactPage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-stone-900 text-white py-20 lg:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-ridge-500" />
-
-        <div className="container-wide section-padding relative">
-          <div className="max-w-3xl">
-            <span className="inline-block text-ridge-400 font-medium text-sm uppercase tracking-wider mb-4">
-              Contact Us
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Let&apos;s Discuss Your Project
-            </h1>
-            <p className="text-xl text-stone-300 leading-relaxed">
-              Ready to build, renovate, or develop? Contact us for a free consultation and estimate.
-              We&apos;re here to answer your questions and help bring your vision to life.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Contact Us"
+        title="Let&apos;s Talk About Your Project"
+        description="Ready to build, renovate, or develop? Reach out for a free estimate. We'll get back to you within one business day."
+        showCTA={false}
+      />
 
       {/* Contact Info + Form */}
       <section className="py-20 lg:py-28 bg-stone-50">
@@ -97,32 +37,66 @@ export default function ContactPage() {
               <span className="section-label">Get in Touch</span>
               <h2 className="section-title">Contact Information</h2>
               <p className="section-subtitle">
-                Reach out by phone or email, or fill out the form and we&apos;ll get back to you
-                within one business day.
+                Reach out by phone or email, or fill out the form and we&apos;ll get back to
+                you within one business day.
               </p>
 
               <div className="mt-10 space-y-6">
-                {contactInfo.map((item) => (
-                  <div key={item.title} className="flex gap-5">
-                    <div className="flex-shrink-0 w-12 h-12 bg-ridge-100 rounded-xl flex items-center justify-center">
-                      <item.icon className="h-6 w-6 text-ridge-600" />
-                    </div>
-                    <div className="flex-grow">
-                      <h3 className="font-semibold text-stone-900 mb-1">{item.title}</h3>
-                      <p className="text-stone-700">{item.primary}</p>
-                      <p className="text-sm text-stone-500">{item.secondary}</p>
-                      {item.action && (
-                        <a
-                          href={item.action}
-                          className="inline-flex items-center text-ridge-600 hover:text-ridge-700 font-medium text-sm mt-2"
-                        >
-                          {item.actionLabel}
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </a>
-                      )}
-                    </div>
+                {/* Phone */}
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-ridge-100 rounded-xl flex items-center justify-center">
+                    <Phone className="h-6 w-6 text-ridge-600" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="font-semibold text-stone-900 mb-1">Phone</h3>
+                    <a
+                      href={contact.phoneHref}
+                      className="text-stone-700 hover:text-ridge-600 transition-colors"
+                    >
+                      {contact.phone}
+                    </a>
+                    <CopyButton text={contact.phone} />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-ridge-100 rounded-xl flex items-center justify-center">
+                    <Mail className="h-6 w-6 text-ridge-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-stone-900 mb-1">Email</h3>
+                    <a
+                      href={contact.emailHref}
+                      className="text-stone-700 hover:text-ridge-600 transition-colors"
+                    >
+                      {contact.email}
+                    </a>
+                    <CopyButton text={contact.email} />
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-ridge-100 rounded-xl flex items-center justify-center">
+                    <MapPin className="h-6 w-6 text-ridge-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-stone-900 mb-1">Location</h3>
+                    <p className="text-stone-700">{contact.address.full}</p>
+                  </div>
+                </div>
+
+                {/* Hours */}
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-ridge-100 rounded-xl flex items-center justify-center">
+                    <Clock className="h-6 w-6 text-ridge-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-stone-900 mb-1">Hours</h3>
+                    <p className="text-stone-700">{contact.hours}</p>
+                  </div>
+                </div>
               </div>
 
               {/* Service Areas */}
@@ -131,11 +105,11 @@ export default function ContactPage() {
                 <div className="grid grid-cols-2 gap-2">
                   {serviceAreas.map((area) => (
                     <Link
-                      key={area.name}
-                      href={`/service-areas/${area.name.toLowerCase().replace(' ', '-')}`}
+                      key={area.slug}
+                      href={`/service-areas/${area.slug}`}
                       className="text-sm text-stone-600 hover:text-ridge-600"
                     >
-                      {area.name}, TN
+                      {area.name}, {contact.address.region}
                     </Link>
                   ))}
                 </div>
@@ -146,121 +120,75 @@ export default function ContactPage() {
             <div className="card p-8 lg:p-10">
               <div className="flex items-center gap-3 mb-6">
                 <MessageSquare className="h-6 w-6 text-ridge-500" />
-                <h3 className="font-display text-xl font-semibold text-stone-900">Request a Free Estimate</h3>
+                <h3 className="font-display text-xl font-semibold text-stone-900">
+                  Request a Free Estimate
+                </h3>
               </div>
 
-              <form className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-stone-700 mb-2">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                      placeholder="John"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-stone-700 mb-2">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                      placeholder="Smith"
-                    />
-                  </div>
-                </div>
+              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" className="space-y-6">
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden">
+                  <label>
+                    Don&apos;t fill this out: <input name="bot-field" />
+                  </label>
+                </p>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-2">
-                    Email Address *
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-stone-700 mb-2"
+                  >
+                    Name *
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type="text"
+                    id="name"
+                    name="name"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                    placeholder="john@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-2">
-                    Phone Number
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-stone-700 mb-2"
+                  >
+                    Phone Number *
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                    placeholder="(423) 555-1234"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="projectType" className="block text-sm font-medium text-stone-700 mb-2">
-                    Project Type *
-                  </label>
-                  <select
-                    id="projectType"
-                    name="projectType"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors bg-white"
-                  >
-                    <option value="">Select a project type</option>
-                    <option value="new-construction">New Home Construction</option>
-                    <option value="remodeling">Home Remodeling</option>
-                    <option value="land-development">Land Development</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-stone-700 mb-2">
-                    Project Location
-                  </label>
-                  <input
-                    type="text"
-                    id="location"
-                    name="location"
                     className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                    placeholder="City or County"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-2">
-                    Tell Us About Your Project *
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-stone-700 mb-2"
+                  >
+                    Project Details *
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={6}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors resize-none"
-                    placeholder="Describe your project, timeline, and any specific requirements..."
+                    placeholder="Tell us what you're looking to build, renovate, or develop..."
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn-primary w-full justify-center"
-                >
+                <button type="submit" className="btn-primary w-full justify-center">
                   Send Message
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
 
                 <p className="text-xs text-stone-500 text-center">
-                  We&apos;ll respond within one business day. Your information is kept confidential.
+                  We&apos;ll respond within one business day.
                 </p>
               </form>
             </div>
@@ -268,21 +196,59 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Quick Call CTA */}
-      <section className="py-16 bg-ridge-600 text-white">
+      {/* Map */}
+      <section className="py-16 bg-white">
         <div className="container-wide section-padding">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h2 className="font-display text-2xl font-bold mb-2">Prefer to Talk?</h2>
-              <p className="text-ridge-200">Give us a call and speak directly with our team.</p>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-display text-2xl font-bold text-stone-900 mb-3 text-center">
+              Find Us
+            </h2>
+            <p className="text-stone-600 text-center mb-8">
+              {contact.address.full}
+            </p>
+            <div className="aspect-[16/9] rounded-xl overflow-hidden border border-stone-200">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52069.72783782744!2d-84.5720334987126!3d35.34676102066476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885e469d38c9ab1b%3A0xebc8a923c84bb8e1!2sEtowah%2C%20TN!5e0!3m2!1sen!2sus!4v1772593257308!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Maple Ridge Construction location - Etowah, TN"
+              />
             </div>
-            <a
-              href="tel:+14235551234"
-              className="btn bg-white text-ridge-700 hover:bg-earth-50 flex-shrink-0"
-            >
-              <Phone className="mr-2 h-5 w-5" />
-              (423) 555-1234
-            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Prefer to reach out directly */}
+      <section className="py-16 bg-stone-100">
+        <div className="container-wide section-padding">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="font-display text-2xl font-bold text-stone-900 mb-3">
+              Prefer to Reach Out Directly?
+            </h2>
+            <p className="text-stone-600 mb-8">
+              Skip the form. Call or email {contact.owner} and we&apos;ll get your project
+              moving.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={contact.phoneHref}
+                className="btn-primary"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                {contact.phone}
+              </a>
+              <a
+                href={contact.emailHref}
+                className="btn bg-white text-stone-700 hover:bg-stone-50 border border-stone-300"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                {contact.email}
+              </a>
+            </div>
           </div>
         </div>
       </section>

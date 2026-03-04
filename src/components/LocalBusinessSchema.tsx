@@ -1,71 +1,39 @@
+import { contact } from '@/data/contact'
+import { serviceAreas } from '@/data/service-areas'
+
 export default function LocalBusinessSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'GeneralContractor',
     name: 'Maple Ridge Construction & Development',
-    description: 'Licensed General Contractor serving Southeast Tennessee. Specializing in new construction homes, complete home remodels, and land development.',
-    url: 'https://mapleridgeconstruction.com',
-    telephone: '+1-423-555-1234',
-    email: 'info@mapleridgeconstruction.com',
+    description: 'Licensed General Contractor serving Southeast Tennessee. New construction homes, complete home remodels, and land development.',
+    url: contact.url,
+    telephone: contact.phoneRaw,
+    email: contact.email,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Etowah',
-      addressRegion: 'TN',
-      addressCountry: 'US',
+      streetAddress: contact.address.street,
+      addressLocality: contact.address.locality,
+      addressRegion: contact.address.region,
+      postalCode: contact.address.postalCode,
+      addressCountry: contact.address.country,
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 35.3237,
-      longitude: -84.5252,
+      latitude: contact.geo.latitude,
+      longitude: contact.geo.longitude,
     },
-    areaServed: [
-      {
-        '@type': 'City',
-        name: 'Etowah',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Athens',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Cleveland',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Benton',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Madisonville',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Tellico Plains',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Sweetwater',
-        addressRegion: 'TN',
-      },
-      {
-        '@type': 'City',
-        name: 'Englewood',
-        addressRegion: 'TN',
-      },
-    ],
+    areaServed: serviceAreas.map((area) => ({
+      '@type': 'City',
+      name: area.name,
+      addressRegion: 'TN',
+    })),
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '08:00',
-        closes: '17:00',
+        dayOfWeek: [...contact.hoursStructured.days],
+        opens: contact.hoursStructured.opens,
+        closes: contact.hoursStructured.closes,
       },
     ],
     priceRange: '$$',
