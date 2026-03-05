@@ -25,7 +25,7 @@ export default function ContactPage() {
       <PageHero
         label="Contact Us"
         title="Let&apos;s Talk About Your Project"
-        description="Ready to build, renovate, or develop? Reach out for a free estimate. We'll get back to you within one business day."
+        description="Ready to build, renovate, or develop? Reach out for a free estimate."
         showCTA={false}
       />
 
@@ -38,8 +38,8 @@ export default function ContactPage() {
               <span className="section-label">Get in Touch</span>
               <h2 className="section-title">Contact Information</h2>
               <p className="section-subtitle">
-                Reach out by phone or email, or fill out the form and we&apos;ll get back to
-                you within one business day.
+                Reach out by phone or email, or fill out the form and we&apos;ll be in
+                touch.
               </p>
 
               <div className="mt-10 space-y-6">

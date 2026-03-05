@@ -28,7 +28,7 @@ export default function ContactForm() {
           Message Sent
         </h3>
         <p className="text-stone-600">
-          We&apos;ll get back to you within one business day.
+          We&apos;ll be in touch soon.
         </p>
       </div>
     )
@@ -113,7 +113,7 @@ export default function ContactForm() {
         </button>
 
         <p className="text-xs text-stone-500 text-center">
-          We&apos;ll respond within one business day.
+          We&apos;ll be in touch.
         </p>
       </form>
     </div>
