@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Phone, Mail, MapPin, Clock, MessageSquare, ArrowRight } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import { contact } from '@/data/contact'
 import { serviceAreas } from '@/data/service-areas'
 import PageHero from '@/components/PageHero'
 import CopyButton from '@/components/CopyButton'
+import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Contact Maple Ridge Construction | Free Estimate Etowah, TN',
@@ -117,81 +118,7 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Form */}
-            <div className="card p-8 lg:p-10">
-              <div className="flex items-center gap-3 mb-6">
-                <MessageSquare className="h-6 w-6 text-ridge-500" />
-                <h3 className="font-display text-xl font-semibold text-stone-900">
-                  Request a Free Estimate
-                </h3>
-              </div>
-
-              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" className="space-y-6">
-                <input type="hidden" name="form-name" value="contact" />
-                <p className="hidden">
-                  <label>
-                    Don&apos;t fill this out: <input name="bot-field" />
-                  </label>
-                </p>
-
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-stone-700 mb-2"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-stone-700 mb-2"
-                  >
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-stone-700 mb-2"
-                  >
-                    Project Details *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors resize-none"
-                    placeholder="Tell us what you're looking to build, renovate, or develop..."
-                  />
-                </div>
-
-                <button type="submit" className="btn-primary w-full justify-center">
-                  Send Message
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </button>
-
-                <p className="text-xs text-stone-500 text-center">
-                  We&apos;ll respond within one business day.
-                </p>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
