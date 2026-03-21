@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Phone, ChevronDown } from 'lucide-react'
+import { Menu, X, Phone, MessageSquare, Copy, Check, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
 import { contact } from '@/data/contact'
 import { services } from '@/data/services'
@@ -17,6 +17,13 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [areasOpen, setAreasOpen] = useState(false)
+  const [phoneCopied, setPhoneCopied] = useState(false)
+
+  const copyPhone = async () => {
+    await navigator.clipboard.writeText(contact.phone)
+    setPhoneCopied(true)
+    setTimeout(() => setPhoneCopied(false), 2000)
+  }
 
   return (
     <header className="bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-stone-100">
@@ -25,10 +32,33 @@ export default function Header() {
         <div className="container-wide section-padding">
           <div className="flex justify-between items-center py-2 text-sm">
             <span className="hidden sm:block">Licensed General Contractor &bull; Southeast Tennessee</span>
-            <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-earth-200 transition-colors">
-              <Phone className="h-4 w-4" />
-              <span>{contact.phone}</span>
-            </a>
+            <div className="flex items-center gap-1">
+              <span className="text-ridge-200 mr-1 hidden sm:inline">{contact.phone}</span>
+              <a
+                href={contact.phoneHref}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
+                title="Call"
+              >
+                <Phone className="h-3.5 w-3.5" />
+                <span className="sm:inline hidden">Call</span>
+              </a>
+              <a
+                href={`sms:${contact.phoneRaw}`}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
+                title="Text"
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+                <span className="sm:inline hidden">Text</span>
+              </a>
+              <button
+                onClick={copyPhone}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
+                title="Copy number"
+              >
+                {phoneCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                <span className="sm:inline hidden">{phoneCopied ? 'Copied' : 'Copy'}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

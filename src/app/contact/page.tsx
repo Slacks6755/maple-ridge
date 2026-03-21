@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import { contact } from '@/data/contact'
 import { serviceAreas } from '@/data/service-areas'
 import PageHero from '@/components/PageHero'
-import { PhoneActions, EmailActions } from '@/components/ContactActions'
+import { EmailActions } from '@/components/ContactActions'
 import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
@@ -56,7 +56,6 @@ export default function ContactPage() {
                     >
                       {contact.phone}
                     </a>
-                    <PhoneActions />
                   </div>
                 </div>
 

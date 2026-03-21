@@ -126,7 +126,6 @@ export default function ContactForm() {
             id="email"
             name="email"
             className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
-            placeholder="Optional — in case you prefer email"
           />
         </div>
 
