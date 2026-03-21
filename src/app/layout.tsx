@@ -92,11 +92,11 @@ export default function RootLayout({
         <meta name="theme-color" content="#547454" />
         <meta name="geo.region" content="US-TN" />
         <meta name="geo.placename" content="Etowah, Tennessee" />
-        {/* Google Analytics — replace G-XXXXXXXXXX with your measurement ID */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NEE25MJKMQ" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NEE25MJKMQ');`,
           }}
         />
       </head>
