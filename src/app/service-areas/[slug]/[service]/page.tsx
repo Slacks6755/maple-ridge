@@ -6,6 +6,7 @@ import { serviceAreas, serviceAreasBySlug } from '@/data/service-areas'
 import { services, servicesBySlug } from '@/data/services'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 const serviceIcons: Record<string, React.ElementType> = {
   'new-construction': Home,
@@ -145,6 +146,12 @@ export default async function ServiceAreaServicePage({
         description={content.intro(area.name, area.county)}
         ctaLabel="Get Free Estimate"
       />
+      <Breadcrumbs items={[
+        { name: 'Home', href: '/' },
+        { name: 'Service Areas', href: '/service-areas' },
+        { name: `${area.name}, TN`, href: `/service-areas/${slug}` },
+        { name: service.name },
+      ]} />
 
       {/* Service Features */}
       <section className="py-20 lg:py-24 bg-white">

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, Navigation } from 'lucide-react'
 import { contact } from '@/data/contact'
 import { serviceAreas } from '@/data/service-areas'
 import PageHero from '@/components/PageHero'
-import { EmailActions } from '@/components/ContactActions'
+import { PhoneActions, EmailActions } from '@/components/ContactActions'
 import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
@@ -56,6 +56,7 @@ export default function ContactPage() {
                     >
                       {contact.phone}
                     </a>
+                    <PhoneActions />
                   </div>
                 </div>
 
@@ -119,28 +120,26 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map */}
+      {/* Directions */}
       <section className="py-16 bg-white">
         <div className="container-wide section-padding">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-stone-900 mb-3 text-center">
+          <div className="max-w-xl mx-auto text-center">
+            <MapPin className="h-10 w-10 text-ridge-500 mx-auto mb-4" />
+            <h2 className="font-display text-2xl font-bold text-stone-900 mb-2">
               Find Us
             </h2>
-            <p className="text-stone-600 text-center mb-8">
+            <p className="text-stone-600 mb-6">
               {contact.address.full}
             </p>
-            <div className="aspect-[16/9] rounded-xl overflow-hidden border border-stone-200">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52069.72783782744!2d-84.5720334987126!3d35.34676102066476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885e469d38c9ab1b%3A0xebc8a923c84bb8e1!2sEtowah%2C%20TN!5e0!3m2!1sen!2sus!4v1772593257308!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Maple Ridge Construction location - Etowah, TN"
-              />
-            </div>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address.full)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 btn-primary"
+            >
+              <Navigation className="h-5 w-5" />
+              Get Directions
+            </a>
           </div>
         </div>
       </section>

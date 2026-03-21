@@ -66,11 +66,17 @@ export default function HomePage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Home className="h-16 w-16 text-stone-700" />
                 </div>
-                <img
-                  src="/hero.jpg"
-                  alt="Pool house built by Maple Ridge Construction in Southeast Tennessee"
-                  className="relative w-full h-full object-cover"
-                />
+                <picture className="relative w-full h-full">
+                  <source srcSet="/hero.webp" type="image/webp" />
+                  <img
+                    src="/hero.jpg"
+                    alt="Pool house built by Maple Ridge Construction in Southeast Tennessee"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    width={1600}
+                    height={900}
+                  />
+                </picture>
               </div>
             </div>
           </div>

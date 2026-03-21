@@ -6,6 +6,7 @@ import { serviceAreasBySlug, serviceAreaSlugs, serviceAreas } from '@/data/servi
 import { services } from '@/data/services'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 const serviceIcons: Record<string, typeof Home> = {
   'new-construction': Home,
@@ -64,6 +65,11 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
         title={area.heroTitle}
         description={area.description}
       />
+      <Breadcrumbs items={[
+        { name: 'Home', href: '/' },
+        { name: 'Service Areas', href: '/service-areas' },
+        { name: `${area.name}, TN` },
+      ]} />
 
       {/* Local Highlights */}
       <section className="py-16 bg-ridge-600 text-white">

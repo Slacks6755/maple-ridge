@@ -75,8 +75,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add Google Search Console verification when available
-    // google: 'verification-code',
+    // TODO: Add your Google Search Console verification code here
+    // google: 'YOUR_VERIFICATION_CODE',
   },
 }
 
@@ -92,6 +92,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#547454" />
         <meta name="geo.region" content="US-TN" />
         <meta name="geo.placename" content="Etowah, Tennessee" />
+        {/* Google Analytics — replace G-XXXXXXXXXX with your measurement ID */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');`,
+          }}
+        />
       </head>
       <body className="font-body min-h-screen flex flex-col">
         <LocalBusinessSchema />

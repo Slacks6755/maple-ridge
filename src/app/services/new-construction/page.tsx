@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Ruler, Leaf, Palette, Shield, Wrench, Clock, CheckCircle } from 'lucide-react'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Custom Home Builder Southeast Tennessee | New Construction',
@@ -139,6 +140,11 @@ export default function NewConstructionPage() {
         description="Want to build new? We handle custom homes from scratch — your plans, your land, your choices. We just make sure it gets built right."
         ctaLabel="Start Your Build"
       />
+      <Breadcrumbs items={[
+        { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
+        { name: 'New Construction' },
+      ]} />
 
       {/* Overview Section */}
       <section className="py-20 lg:py-28 bg-stone-50">

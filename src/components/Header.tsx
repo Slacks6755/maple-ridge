@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X, Phone, MessageSquare, Copy, Check, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
+import { trackEvent } from '@/lib/analytics'
 import { contact } from '@/data/contact'
 import { services } from '@/data/services'
 import { serviceAreas } from '@/data/service-areas'
@@ -22,6 +23,7 @@ export default function Header() {
   const copyPhone = async () => {
     await navigator.clipboard.writeText(contact.phone)
     setPhoneCopied(true)
+    trackEvent('click', 'contact', 'copy_phone_header')
     setTimeout(() => setPhoneCopied(false), 2000)
   }
 
@@ -36,19 +38,21 @@ export default function Header() {
               <span className="text-ridge-200 mr-1">{contact.phone}</span>
               <a
                 href={contact.phoneHref}
+                onClick={() => trackEvent('click', 'contact', 'call_header')}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Call"
               >
                 <Phone className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Call</span>
+                Call
               </a>
               <a
                 href={`sms:${contact.phoneRaw}`}
+                onClick={() => trackEvent('click', 'contact', 'text_header')}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Text"
               >
                 <MessageSquare className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Text</span>
+                Text
               </a>
               <button
                 onClick={copyPhone}
@@ -56,7 +60,7 @@ export default function Header() {
                 title="Copy number"
               >
                 {phoneCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                <span className="hidden sm:inline">{phoneCopied ? 'Copied' : 'Copy'}</span>
+                {phoneCopied ? 'Copied' : 'Copy'}
               </button>
             </div>
           </div>

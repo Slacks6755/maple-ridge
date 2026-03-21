@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { UtensilsCrossed, Bath, PlusSquare, Home, Paintbrush, Zap, CheckCircle } from 'lucide-react'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Home Remodeling Southeast TN | Kitchen, Bath & Whole-Home Renovation',
@@ -146,6 +147,11 @@ export default function RemodelingPage() {
         description="Love where you live but hate how it looks? We fix that. Kitchens, bathrooms, additions, or the whole house — we make old homes work like new ones."
         ctaLabel="Get a Quote"
       />
+      <Breadcrumbs items={[
+        { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
+        { name: 'Home Remodeling' },
+      ]} />
 
       {/* Introduction */}
       <section className="py-20 lg:py-28 bg-stone-50">

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { TreePine, Mountain, Droplets, Zap, Route, FileCheck, CheckCircle } from 'lucide-react'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Land Development & Site Prep Southeast TN | Clearing, Grading, Utilities',
@@ -164,6 +165,11 @@ export default function LandDevelopmentPage() {
         description="Got land but can't build on it yet? We handle clearing, grading, driveways, and utilities — everything you need before construction can start."
         ctaLabel="Discuss Your Project"
       />
+      <Breadcrumbs items={[
+        { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
+        { name: 'Land Development' },
+      ]} />
 
       {/* Introduction */}
       <section className="py-20 lg:py-28 bg-stone-50">
