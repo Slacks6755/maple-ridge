@@ -24,6 +24,6 @@ export const contact = {
     latitude: 35.3237,
     longitude: -84.5252,
   },
-  url: 'https://www.mapleridgeconstruction.com',
+  url: 'https://www.mapleridgedev.com',
   owner: 'Zack Newman',
 } as const

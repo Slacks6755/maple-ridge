@@ -13,7 +13,7 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      ...(item.href ? { item: `https://mapleridgeconstruction.com${item.href}` } : {}),
+      ...(item.href ? { item: `https://www.mapleridgedev.com${item.href}` } : {}),
     })),
   }
 

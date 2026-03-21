@@ -4,8 +4,8 @@
 
 # Redirect non-www to www (prevents duplicate content in search engines)
 [[redirects]]
-  from = "https://mapleridgeconstruction.com/*"
-  to = "https://www.mapleridgeconstruction.com/:splat"
+  from = "https://mapleridgedev.com/*"
+  to = "https://www.mapleridgedev.com/:splat"
   status = 301
   force = true
 
