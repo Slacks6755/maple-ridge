@@ -5,7 +5,7 @@ import CTASection from '@/components/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Home Remodeling Southeast TN | Kitchen, Bath & Whole-Home Renovation',
+  title: 'Home Remodeling in Southeast TN',
   description:
     'Complete home remodeling services in Southeast Tennessee. Kitchen renovations, bathroom remodels, room additions, and whole-home renovations by a licensed general contractor. Serving Etowah, Athens, Cleveland and surrounding areas.',
   keywords: [

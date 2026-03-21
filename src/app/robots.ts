@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/private/'],
     },
-    sitemap: 'https://mapleridgeconstruction.com/sitemap.xml',
+    sitemap: 'https://www.mapleridgeconstruction.com/sitemap.xml',
   }
 }

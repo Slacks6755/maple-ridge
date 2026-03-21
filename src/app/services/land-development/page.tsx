@@ -5,7 +5,7 @@ import CTASection from '@/components/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Land Development & Site Prep Southeast TN | Clearing, Grading, Utilities',
+  title: 'Land Development & Site Prep in Southeast TN',
   description:
     'Professional land development services in Southeast Tennessee. Site clearing, grading, drainage, utility installation, and driveway construction. Serving McMinn, Bradley, Polk & Monroe Counties.',
   keywords: [

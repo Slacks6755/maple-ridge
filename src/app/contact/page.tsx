@@ -8,7 +8,7 @@ import { PhoneActions, EmailActions } from '@/components/ContactActions'
 import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Contact Maple Ridge Construction | Free Estimate Etowah, TN',
+  title: 'Get a Free Estimate in Etowah, TN',
   description: `Contact Maple Ridge Construction for a free estimate. Licensed general contractor serving Etowah and Southeast Tennessee. Call ${contact.phone} or email ${contact.email}.`,
   keywords: [
     'contact Maple Ridge Construction',

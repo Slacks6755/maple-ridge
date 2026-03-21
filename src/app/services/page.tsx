@@ -6,7 +6,7 @@ import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
 
 export const metadata: Metadata = {
-  title: 'Construction Services in Southeast TN | New Homes, Remodeling & Land Development',
+  title: 'New Homes, Remodeling & Land Development in Southeast TN',
   description:
     'Maple Ridge Construction offers new home construction, home remodeling, and land development services in Southeast Tennessee. Licensed general contractor serving McMinn, Bradley, Polk & Monroe Counties.',
   keywords: [

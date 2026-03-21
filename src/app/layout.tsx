@@ -20,7 +20,7 @@ const bodyFont = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mapleridgeconstruction.com'),
+  metadataBase: new URL('https://www.mapleridgeconstruction.com'),
   title: {
     default: 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
     template: '%s | Maple Ridge Construction',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mapleridgeconstruction.com',
+    url: 'https://www.mapleridgeconstruction.com',
     siteName: 'Maple Ridge Construction & Development',
     title: 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
     description: 'Licensed General Contractor serving Southeast Tennessee. New construction, remodeling, and land development.',

@@ -5,7 +5,7 @@ import { services } from '@/data/services'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://mapleridgeconstruction.com'
+  const baseUrl = 'https://www.mapleridgeconstruction.com'
 
   const serviceAreaUrls = serviceAreas.map((area) => ({
     url: `${baseUrl}/service-areas/${area.slug}`,

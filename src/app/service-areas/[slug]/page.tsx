@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Home, Hammer, TreePine, CheckCircle, Building, MapPin } from 'lucide-react'
 import { serviceAreasBySlug, serviceAreaSlugs, serviceAreas } from '@/data/service-areas'
 import { services } from '@/data/services'
+import { contact } from '@/data/contact'
 import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
@@ -29,8 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `General Contractor ${area.name}, TN | Construction Services ${area.county} County`,
-    description: `General contractor serving ${area.name}, Tennessee. New home construction, remodeling, and land development in ${area.county} County. Free estimates for your project.`,
+    title: `General Contractor in ${area.name}, TN`,
+    description: `Licensed general contractor serving ${area.name}, Tennessee. We build new homes, remodel existing ones, and develop land in ${area.county} County. Call ${contact.phone} for a free estimate.`,
     keywords: [
       `general contractor ${area.name} TN`,
       `home builder ${area.name} Tennessee`,

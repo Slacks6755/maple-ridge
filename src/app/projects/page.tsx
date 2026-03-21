@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
 
 export const metadata: Metadata = {
-  title: 'Projects | Maple Ridge Construction Portfolio',
+  title: 'Our Projects',
   description: 'Construction projects by Maple Ridge Construction in Southeast Tennessee. Custom homes, renovations, and land development in McMinn, Bradley, Polk, and Monroe Counties.',
   robots: {
     index: false,

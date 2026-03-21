@@ -5,7 +5,7 @@ import CTASection from '@/components/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Custom Home Builder Southeast Tennessee | New Construction',
+  title: 'Custom Home Builder in Southeast Tennessee',
   description:
     'Custom home construction in Southeast Tennessee. Maple Ridge Construction builds new homes in McMinn, Bradley, Polk & Monroe Counties. Licensed general contractor — your plans, your land, built right.',
   keywords: [

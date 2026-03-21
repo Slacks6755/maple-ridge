@@ -5,8 +5,8 @@ import PageHero from '@/components/PageHero'
 import CTASection from '@/components/CTASection'
 
 export const metadata: Metadata = {
-  title: 'About Maple Ridge Construction | General Contractor Etowah, TN',
-  description: `Learn about Maple Ridge Construction, owned by ${contact.owner}. Licensed general contractor serving ${contact.address.locality}, ${contact.address.region} and Southeast Tennessee. Honest pricing, quality work.`,
+  title: 'Licensed General Contractor in Etowah, TN',
+  description: `Maple Ridge Construction is owned and operated by ${contact.owner} in ${contact.address.locality}, ${contact.address.region}. Licensed general contractor building homes, handling renovations, and developing land across Southeast Tennessee.`,
   keywords: [
     'about Maple Ridge Construction',
     'general contractor Etowah TN',

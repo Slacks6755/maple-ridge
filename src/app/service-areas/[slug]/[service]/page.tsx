@@ -102,8 +102,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${content.longName} in ${area.name}, TN | ${area.county} County`,
-    description: `${content.longName} services in ${area.name}, Tennessee. Licensed general contractor serving ${area.county} County. Call for a free estimate on your project.`,
+    title: `${content.longName} in ${area.name}, TN`,
+    description: `${content.longName} in ${area.name}, Tennessee. Maple Ridge Construction is a licensed general contractor serving ${area.county} County. Call (423) 506-2380 for a free estimate.`,
     keywords: [
       `${service.name.toLowerCase()} ${area.name} TN`,
       `${content.longName.toLowerCase()} ${area.county} County`,
