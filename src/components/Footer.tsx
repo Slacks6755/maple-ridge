@@ -119,9 +119,9 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4 sm:gap-6">
               <span className="hidden sm:inline">Licensed General Contractor &bull; Tennessee</span>
-              <Link href="/sitemap.xml" className="text-stone-500 hover:text-stone-400 transition-colors text-sm">
+              <a href="/sitemap.xml" className="text-stone-500 hover:text-stone-400 transition-colors text-sm">
                 Sitemap
-              </Link>
+              </a>
               <a
                 href="https://www.smbhelp.co"
                 target="_blank"
