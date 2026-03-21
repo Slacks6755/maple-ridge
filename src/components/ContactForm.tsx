@@ -1,23 +1,35 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
-import { MessageSquare, ArrowRight, CheckCircle } from 'lucide-react'
+import { MessageSquare, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const form = e.currentTarget
-    const data = new URLSearchParams(new FormData(form) as unknown as Record<string, string>)
+    setError(false)
+    setSubmitting(true)
 
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data.toString(),
-    })
+    try {
+      const form = e.currentTarget
+      const data = new URLSearchParams(new FormData(form) as unknown as Record<string, string>)
 
-    setSubmitted(true)
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString(),
+      })
+
+      if (!res.ok) throw new Error('Form submission failed')
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -28,7 +40,7 @@ export default function ContactForm() {
           Message Sent
         </h3>
         <p className="text-stone-600">
-          We&apos;ll be in touch soon.
+          We&apos;ll be in touch!
         </p>
       </div>
     )
@@ -42,6 +54,13 @@ export default function ContactForm() {
           Request a Free Estimate
         </h3>
       </div>
+
+      {error && (
+        <div className="flex items-center gap-2 p-3 mb-6 rounded-lg bg-red-50 text-red-700 text-sm">
+          <AlertCircle className="h-4 w-4 flex-shrink-0" />
+          Something went wrong. Please try again or give us a call.
+        </div>
+      )}
 
       <form
         name="contact"
@@ -57,6 +76,11 @@ export default function ContactForm() {
             Don&apos;t fill this out: <input name="bot-field" />
           </label>
         </p>
+        {/* Secondary honeypot — hidden from real users, bots fill it */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }}>
+          <label htmlFor="website">Website</label>
+          <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+        </div>
 
         <div>
           <label
@@ -92,6 +116,22 @@ export default function ContactForm() {
 
         <div>
           <label
+            htmlFor="email"
+            className="block text-sm font-medium text-stone-700 mb-2"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors"
+            placeholder="Optional — in case you prefer email"
+          />
+        </div>
+
+        <div>
+          <label
             htmlFor="message"
             className="block text-sm font-medium text-stone-700 mb-2"
           >
@@ -107,14 +147,14 @@ export default function ContactForm() {
           />
         </div>
 
-        <button type="submit" className="btn-primary w-full justify-center">
-          Send Message
-          <ArrowRight className="ml-2 h-5 w-5" />
+        <button
+          type="submit"
+          disabled={submitting}
+          className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {submitting ? 'Sending...' : 'Send Message'}
+          {!submitting && <ArrowRight className="ml-2 h-5 w-5" />}
         </button>
-
-        <p className="text-xs text-stone-500 text-center">
-          We&apos;ll be in touch.
-        </p>
       </form>
     </div>
   )

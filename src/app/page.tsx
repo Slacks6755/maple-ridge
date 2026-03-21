@@ -62,11 +62,14 @@ export default function HomePage() {
             </div>
 
             <div className="relative flex flex-col justify-center">
-              <div className="aspect-[4/3] bg-stone-800 rounded-2xl overflow-hidden">
+              <div className="aspect-[4/3] bg-stone-800 rounded-2xl overflow-hidden relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Home className="h-16 w-16 text-stone-700" />
+                </div>
                 <img
                   src="/hero.jpg"
                   alt="Pool house built by Maple Ridge Construction in Southeast Tennessee"
-                  className="w-full h-full object-cover"
+                  className="relative w-full h-full object-cover"
                 />
               </div>
             </div>

@@ -95,7 +95,7 @@ export default function AboutPage() {
             <span className="section-label">What We&apos;re About</span>
             <h2 className="section-title">The Short Version</h2>
             <p className="section-subtitle mx-auto">
-              How we try to run things around here.
+              How we run things around here.
             </p>
           </div>
 
@@ -125,8 +125,7 @@ export default function AboutPage() {
               <span className="section-label">The Paperwork</span>
               <h2 className="section-title">Credentials</h2>
               <p className="section-subtitle">
-                We have all the credentials you&apos;d expect from a legitimate contractor.
-                You&apos;re covered.
+                Licensed, insured, and up to code. You&apos;re covered.
               </p>
             </div>
 

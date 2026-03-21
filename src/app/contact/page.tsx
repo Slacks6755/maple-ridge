@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import { contact } from '@/data/contact'
 import { serviceAreas } from '@/data/service-areas'
 import PageHero from '@/components/PageHero'
-import CopyButton from '@/components/CopyButton'
+import { PhoneActions, EmailActions } from '@/components/ContactActions'
 import ContactForm from '@/components/ContactForm'
 
 export const metadata: Metadata = {
@@ -39,7 +39,7 @@ export default function ContactPage() {
               <h2 className="section-title">Contact Information</h2>
               <p className="section-subtitle">
                 Reach out by phone or email, or fill out the form and we&apos;ll be in
-                touch.
+                touch!
               </p>
 
               <div className="mt-10 space-y-6">
@@ -56,7 +56,7 @@ export default function ContactPage() {
                     >
                       {contact.phone}
                     </a>
-                    <CopyButton text={contact.phone} />
+                    <PhoneActions />
                   </div>
                 </div>
 
@@ -67,13 +67,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Email</h3>
-                    <a
-                      href={contact.emailHref}
-                      className="text-stone-700 hover:text-ridge-600 transition-colors"
-                    >
+                    <span className="text-stone-700">
                       {contact.email}
-                    </a>
-                    <CopyButton text={contact.email} />
+                    </span>
+                    <EmailActions />
                   </div>
                 </div>
 

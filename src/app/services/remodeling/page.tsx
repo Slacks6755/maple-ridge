@@ -212,7 +212,7 @@ export default function RemodelingPage() {
             <span className="section-label">How It Works</span>
             <h2 className="section-title">Our Remodeling Process</h2>
             <p className="section-subtitle mx-auto">
-              A structured approach that keeps your project on track and minimizes disruption.
+              Here&apos;s how it goes from start to finish.
             </p>
           </div>
 
@@ -260,7 +260,7 @@ export default function RemodelingPage() {
 
       <CTASection
         heading="Ready to Transform Your Home?"
-        description="Contact us to discuss your remodeling project. Free consultations and estimates."
+        description="Let's talk about what you want to change. Free estimates."
         primaryLabel="Request Quote"
       />
     </>
