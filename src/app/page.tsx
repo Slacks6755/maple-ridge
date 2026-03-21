@@ -61,7 +61,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative flex flex-col justify-center">
+            <div className="relative hidden lg:flex flex-col justify-center">
               <div className="aspect-[4/3] bg-stone-800 rounded-2xl overflow-hidden relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Home className="h-16 w-16 text-stone-700" />
