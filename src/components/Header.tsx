@@ -33,14 +33,14 @@ export default function Header() {
           <div className="flex justify-between items-center py-2 text-sm">
             <span className="hidden sm:block">Licensed General Contractor &bull; Southeast Tennessee</span>
             <div className="flex items-center gap-1">
-              <span className="text-ridge-200 mr-1 hidden sm:inline">{contact.phone}</span>
+              <span className="text-ridge-200 mr-1">{contact.phone}</span>
               <a
                 href={contact.phoneHref}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Call"
               >
                 <Phone className="h-3.5 w-3.5" />
-                <span className="sm:inline hidden">Call</span>
+                <span className="hidden sm:inline">Call</span>
               </a>
               <a
                 href={`sms:${contact.phoneRaw}`}
@@ -48,7 +48,7 @@ export default function Header() {
                 title="Text"
               >
                 <MessageSquare className="h-3.5 w-3.5" />
-                <span className="sm:inline hidden">Text</span>
+                <span className="hidden sm:inline">Text</span>
               </a>
               <button
                 onClick={copyPhone}
@@ -56,7 +56,7 @@ export default function Header() {
                 title="Copy number"
               >
                 {phoneCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                <span className="sm:inline hidden">{phoneCopied ? 'Copied' : 'Copy'}</span>
+                <span className="hidden sm:inline">{phoneCopied ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
           </div>
