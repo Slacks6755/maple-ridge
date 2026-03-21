@@ -42,7 +42,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Call"
               >
-                <Phone className="h-3.5 w-3.5" />
+                <Phone className="h-4 w-4" />
                 <span className="hidden min-[420px]:inline">Call</span>
               </a>
               <a
@@ -51,7 +51,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Text"
               >
-                <MessageSquare className="h-3.5 w-3.5" />
+                <MessageSquare className="h-4 w-4" />
                 <span className="hidden min-[420px]:inline">Text</span>
               </a>
               <button
@@ -59,7 +59,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
                 title="Copy number"
               >
-                {phoneCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                {phoneCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 <span className="hidden min-[420px]:inline">{phoneCopied ? 'Copied' : 'Copy'}</span>
               </button>
             </div>

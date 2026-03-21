@@ -60,7 +60,7 @@ export function EmailActions() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackEvent('click', 'contact', 'gmail_contact')}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-stone-200 text-stone-600 hover:border-ridge-300 hover:text-ridge-600 transition-colors"
+        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-stone-200 text-stone-600 hover:border-ridge-300 hover:text-ridge-600 transition-colors"
       >
         <ExternalLink className="h-3.5 w-3.5" />
         Gmail
