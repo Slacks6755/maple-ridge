@@ -43,7 +43,7 @@ export default function Header() {
                 title="Call"
               >
                 <Phone className="h-3.5 w-3.5" />
-                Call
+                <span className="hidden min-[420px]:inline">Call</span>
               </a>
               <a
                 href={`sms:${contact.phoneRaw}`}
@@ -52,7 +52,7 @@ export default function Header() {
                 title="Text"
               >
                 <MessageSquare className="h-3.5 w-3.5" />
-                Text
+                <span className="hidden min-[420px]:inline">Text</span>
               </a>
               <button
                 onClick={copyPhone}
@@ -60,7 +60,7 @@ export default function Header() {
                 title="Copy number"
               >
                 {phoneCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                {phoneCopied ? 'Copied' : 'Copy'}
+                <span className="hidden min-[420px]:inline">{phoneCopied ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
           </div>
