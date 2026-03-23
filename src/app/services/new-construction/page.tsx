@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     'custom home McMinn County',
     'new home construction Bradley County',
   ],
+  alternates: {
+    canonical: '/services/new-construction',
+  },
 }
 
 const features = [

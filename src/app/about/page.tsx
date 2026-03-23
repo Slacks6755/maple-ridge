@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     'Zack Newman contractor',
     'construction company Southeast Tennessee',
   ],
+  alternates: {
+    canonical: '/about',
+  },
 }
 
 const values = [

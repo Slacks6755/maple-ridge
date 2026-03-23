@@ -40,6 +40,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       `new construction ${area.name} TN`,
       `land development ${area.county} County TN`,
     ],
+    alternates: {
+      canonical: `/service-areas/${slug}`,
+    },
     openGraph: {
       title: `Maple Ridge Construction | ${area.name}, Tennessee`,
       description: `General contractor serving ${area.name} and ${area.county} County. Home construction, renovation, and land development services.`,

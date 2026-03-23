@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     'construction Polk County',
     'home building Monroe County',
   ],
+  alternates: {
+    canonical: '/service-areas',
+  },
 }
 
 export default function ServiceAreasPage() {

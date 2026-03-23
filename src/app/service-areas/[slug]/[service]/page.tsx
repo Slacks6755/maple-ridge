@@ -110,6 +110,9 @@ export async function generateMetadata({
       `general contractor ${area.name} Tennessee`,
       `${service.name.toLowerCase()} near ${area.name}`,
     ],
+    alternates: {
+      canonical: `/service-areas/${slug}/${serviceSlug}`,
+    },
     openGraph: {
       title: `${content.longName} in ${area.name}, TN | Maple Ridge Construction`,
       description: `${content.longName} services in ${area.name} and ${area.county} County. Quality work, honest pricing.`,

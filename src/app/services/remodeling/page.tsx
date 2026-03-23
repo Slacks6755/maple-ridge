@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     'kitchen remodel Bradley County',
     'whole home renovation Monroe County',
   ],
+  alternates: {
+    canonical: '/services/remodeling',
+  },
 }
 
 const subServices = [

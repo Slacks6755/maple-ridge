@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     'home builder contact Southeast TN',
     'construction company phone McMinn County',
   ],
+  alternates: {
+    canonical: '/contact',
+  },
 }
 
 export default function ContactPage() {

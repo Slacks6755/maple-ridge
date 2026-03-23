@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     'land development company Cleveland TN',
     'general contractor McMinn County',
   ],
+  alternates: {
+    canonical: '/services',
+  },
 }
 
 const icons: Record<string, typeof Home> = {

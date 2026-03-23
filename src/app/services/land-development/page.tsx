@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     'site development Bradley County',
     'utility installation Polk County',
   ],
+  alternates: {
+    canonical: '/services/land-development',
+  },
 }
 
 const subServices = [

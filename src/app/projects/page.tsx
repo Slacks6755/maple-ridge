@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   robots: {
     index: false,
   },
+  alternates: {
+    canonical: '/projects',
+  },
 }
 
 const projects = [

@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Home, Hammer, TreePine, MapPin, Phone, Shield, CheckCircle } from 'lucide-react'
 import { contact } from '@/data/contact'
 import { services } from '@/data/services'
 import { serviceAreas } from '@/data/service-areas'
 import CTASection from '@/components/CTASection'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 const serviceIcons: Record<string, React.ElementType> = {
   'new-construction': Home,
