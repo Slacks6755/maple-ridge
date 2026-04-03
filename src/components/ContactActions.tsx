@@ -45,7 +45,6 @@ export function PhoneActions() {
         <MessageSquare className="h-3.5 w-3.5" />
         Text
       </a>
-      <CopyBtn text={contact.phone} label="Copy" eventLabel="copy_phone_contact" />
     </div>
   )
 }
