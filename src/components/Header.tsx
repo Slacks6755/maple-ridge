@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Phone, MessageSquare, Copy, Check, ChevronDown } from 'lucide-react'
+import { Menu, X, Phone, MessageSquare, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
 import { trackEvent } from '@/lib/analytics'
 import { contact } from '@/data/contact'
@@ -18,15 +18,6 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [areasOpen, setAreasOpen] = useState(false)
-  const [phoneCopied, setPhoneCopied] = useState(false)
-
-  const copyPhone = async () => {
-    await navigator.clipboard.writeText(contact.phone)
-    setPhoneCopied(true)
-    trackEvent('click', 'contact', 'copy_phone_header')
-    setTimeout(() => setPhoneCopied(false), 2000)
-  }
-
   return (
     <header className="bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-stone-100">
       {/* Top bar with phone */}
@@ -54,14 +45,6 @@ export default function Header() {
                 <MessageSquare className="h-4 w-4" />
                 <span className="hidden min-[420px]:inline">Text</span>
               </a>
-              <button
-                onClick={copyPhone}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium hover:bg-white/10 transition-colors"
-                title="Copy number"
-              >
-                {phoneCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                <span className="hidden min-[420px]:inline">{phoneCopied ? 'Copied' : 'Copy'}</span>
-              </button>
             </div>
           </div>
         </div>

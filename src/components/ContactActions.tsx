@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, MessageSquare, Copy, Check, Mail, ExternalLink } from 'lucide-react'
+import { Phone, MessageSquare, Copy, Check, ExternalLink } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 import { contact } from '@/data/contact'
 
@@ -64,14 +64,6 @@ export function EmailActions() {
       >
         <ExternalLink className="h-3.5 w-3.5" />
         Gmail
-      </a>
-      <a
-        href={contact.emailHref}
-        onClick={() => trackEvent('click', 'contact', 'mailto_contact')}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-stone-200 text-stone-600 hover:border-ridge-300 hover:text-ridge-600 transition-colors"
-      >
-        <Mail className="h-3.5 w-3.5" />
-        Mail App
       </a>
       <CopyBtn text={contact.email} label="Copy" eventLabel="copy_email_contact" />
     </div>
