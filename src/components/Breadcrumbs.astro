@@ -1,0 +1,45 @@
+---
+export interface BreadcrumbItem {
+  name: string
+  href?: string
+}
+
+interface Props {
+  items: BreadcrumbItem[]
+}
+
+const { items } = Astro.props
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.mapleridgedev.com'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    ...(item.href ? { item: `${siteUrl}${item.href}` } : {}),
+  })),
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<nav aria-label="Breadcrumb" class="bg-stone-900 border-t border-stone-800">
+  <div class="container-wide section-padding py-3">
+    <ol class="flex flex-wrap items-center gap-1.5 text-sm text-stone-400">
+      {items.map((item, i) => (
+        <li class="flex items-center gap-1.5">
+          {i > 0 && <span class="text-stone-600">/</span>}
+          {item.href ? (
+            <a href={item.href} class="hover:text-ridge-400 transition-colors">
+              {item.name}
+            </a>
+          ) : (
+            <span class="text-stone-300">{item.name}</span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>

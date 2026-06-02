@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon/components'
+import { contact } from '../data/contact'
+
+const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(contact.email)}&su=${encodeURIComponent('Project Inquiry')}`
+---
+
+<div class="flex flex-wrap gap-2 mt-3">
+  <a
+    href={gmailUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-track="gmail_contact"
+    class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-stone-200 text-stone-600 hover:border-ridge-300 hover:text-ridge-600 transition-colors"
+  >
+    <Icon name="lucide:external-link" class="h-3.5 w-3.5" />
+    Gmail
+  </a>
+  <button
+    type="button"
+    data-copy={contact.email}
+    data-track="copy_email_contact"
+    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-stone-200 text-stone-600 hover:border-ridge-300 hover:text-ridge-600 transition-colors"
+  >
+    <Icon name="lucide:copy" class="h-3.5 w-3.5" data-icon-default />
+    <Icon name="lucide:check" class="h-3.5 w-3.5 hidden" data-icon-copied />
+    <span data-label-default>Copy</span>
+    <span class="hidden" data-label-copied>Copied</span>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy
+      if (!text) return
+      try {
+        await navigator.clipboard.writeText(text)
+      } catch {
+        return
+      }
+
+      const iconDefault = btn.querySelector('[data-icon-default]')
+      const iconCopied = btn.querySelector('[data-icon-copied]')
+      const labelDefault = btn.querySelector('[data-label-default]')
+      const labelCopied = btn.querySelector('[data-label-copied]')
+
+      iconDefault?.classList.add('hidden')
+      iconCopied?.classList.remove('hidden')
+      labelDefault?.classList.add('hidden')
+      labelCopied?.classList.remove('hidden')
+
+      setTimeout(() => {
+        iconDefault?.classList.remove('hidden')
+        iconCopied?.classList.add('hidden')
+        labelDefault?.classList.remove('hidden')
+        labelCopied?.classList.add('hidden')
+      }, 2000)
+    })
+  })
+</script>

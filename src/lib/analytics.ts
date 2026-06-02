@@ -1,4 +1,9 @@
-/** Send a Google Analytics event. Safe to call even if GA isn't loaded yet. */
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
+
 export function trackEvent(action: string, category: string, label?: string) {
   if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
     window.gtag('event', action, {
@@ -7,3 +12,5 @@ export function trackEvent(action: string, category: string, label?: string) {
     })
   }
 }
+
+export {}

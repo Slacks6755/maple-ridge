@@ -1,29 +1,20 @@
 {
-  "name": "maple-ridge",
-  "version": "0.1.0",
+  "name": "maple-ridge-astro",
+  "type": "module",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "convert-photos": "node scripts/convert-photos.mjs"
   },
   "dependencies": {
-    "lucide-react": "^0.460.0",
-    "next": "^15.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.8",
-    "@types/node": "^22.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "autoprefixer": "^10.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "^15.0.0",
-    "postcss": "^8.0.0",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.0.0"
+    "@astrojs/tailwind": "^6.0.2",
+    "@iconify-json/lucide": "^1.2.74",
+    "astro": "^5.14.0",
+    "astro-icon": "^1.1.5",
+    "tailwindcss": "^3.4.18"
   }
 }

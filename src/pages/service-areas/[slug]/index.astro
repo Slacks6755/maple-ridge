@@ -1,0 +1,145 @@
+---
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import PageHero from '../../../components/PageHero.astro'
+import CTASection from '../../../components/CTASection.astro'
+import Breadcrumbs from '../../../components/Breadcrumbs.astro'
+import { serviceAreas, serviceAreasBySlug } from '../../../data/service-areas'
+import { services } from '../../../data/services'
+import { contact } from '../../../data/contact'
+
+export function getStaticPaths() {
+  return serviceAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }))
+}
+
+const { area } = Astro.props
+const { slug } = Astro.params
+
+const serviceIcons: Record<string, string> = {
+  'new-construction': 'lucide:home',
+  remodeling: 'lucide:hammer',
+  'land-development': 'lucide:tree-pine',
+}
+
+const otherAreas = serviceAreas.filter((a) => a.slug !== slug).slice(0, 4)
+
+const title = `${area.heroTitle} | Maple Ridge Construction`
+const description = `${area.description} Call ${contact.phone} for a free estimate.`
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: area.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+}
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={`${contact.url}/service-areas/${slug}`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <PageHero
+    label={`${area.county} County, Tennessee`}
+    title={area.heroTitle}
+    description={area.description}
+  />
+  <Breadcrumbs items={[
+    { name: 'Home', href: '/' },
+    { name: 'Service Areas', href: '/service-areas' },
+    { name: `${area.name}, TN` },
+  ]} />
+
+  <section class="py-20 lg:py-28 bg-stone-50">
+    <div class="container-wide section-padding">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="section-label">Our Services in {area.name}</span>
+          <h2 class="section-title">Construction Services in {area.county} County</h2>
+          <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
+            <p>{area.localContent}</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          {services.map((service) => {
+            const iconName = serviceIcons[service.slug] || 'lucide:home'
+            return (
+              <a
+                href={`/services/${service.slug}`}
+                class="card-hover flex gap-5 p-6 group"
+              >
+                <div class="flex-shrink-0 w-14 h-14 bg-ridge-100 rounded-xl flex items-center justify-center group-hover:bg-ridge-500 transition-colors">
+                  <Icon name={iconName} class="h-7 w-7 text-ridge-600 group-hover:text-white transition-colors" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-stone-900 mb-1 group-hover:text-ridge-700 transition-colors">
+                    {service.name}
+                  </h3>
+                  <p class="text-stone-600 text-sm">{service.description}</p>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="section-label">Working in {area.name}</span>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {area.faqs.map((faq) => (
+          <div class="border-b border-stone-200 py-6 first:pt-0 last:border-0">
+            <h3 class="font-semibold text-stone-900 mb-3">{faq.question}</h3>
+            <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-stone-100">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="section-label">More Service Areas</span>
+        <h2 class="section-title">Also Serving Southeast Tennessee</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {otherAreas.map((otherArea) => (
+          <a href={`/service-areas/${otherArea.slug}`} class="card-hover p-6 text-center group">
+            <Icon name="lucide:map-pin" class="h-6 w-6 text-ridge-400 mx-auto mb-3 group-hover:text-ridge-600 transition-colors" />
+            <h3 class="font-semibold text-stone-900 group-hover:text-ridge-700 transition-colors">
+              {otherArea.name}
+            </h3>
+            <p class="text-sm text-stone-500">{otherArea.county} County</p>
+          </a>
+        ))}
+      </div>
+
+      <p class="text-center text-stone-500 mt-8">
+        <a href="/service-areas" class="text-ridge-600 hover:text-ridge-700 font-medium">View all service areas</a>{' '}
+        or <a href="/contact" class="text-ridge-600 hover:text-ridge-700 font-medium">contact us</a> to see if we serve your area.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading={`Working in ${area.name}? Let's talk.`}
+    description={`Call or send a note about your project. We'll come look at it and tell you what it'll take.`}
+  />
+</BaseLayout>

@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHero from '../../components/PageHero.astro'
+import CTASection from '../../components/CTASection.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import { contact } from '../../data/contact'
+
+const title = 'Custom Home Builder in Southeast Tennessee'
+const description =
+  'Custom home construction in Southeast Tennessee. Maple Ridge Construction builds new homes in McMinn, Bradley, Polk & Monroe Counties. Licensed general contractor. Your plans, your land, built right.'
+
+const features = [
+  { title: 'Your Floor Plan', description: "We build what you want, not cookie-cutter plans. Tell us how you live and we'll design around that." },
+  { title: 'Energy Efficient', description: 'Good insulation, quality windows, proper sealing. It makes a real difference on your utility bills.' },
+  { title: 'Quality Materials', description: 'We use materials that last. No cutting corners with cheap stuff that falls apart in a few years.' },
+  { title: 'Built Right', description: "Every phase gets inspected. We build to code because that's the minimum, and we go beyond where it matters." },
+  { title: 'Skilled Crews', description: "Our people know what they're doing. Clean work, attention to detail, and pride in the finished product." },
+  { title: 'No Surprises', description: 'We keep you updated on progress and let you know if anything changes. No disappearing for weeks.' },
+]
+
+const process = [
+  { step: '01', title: "Let's Talk", description: 'We sit down and figure out what you want to build, what you can spend, and when you need it done. Bring ideas, plans, Pinterest boards, whatever you have.' },
+  { step: '02', title: 'Design & Selections', description: 'We nail down the floor plan, pick out materials, and make all the decisions before we break ground. Changes are easier now than later.' },
+  { step: '03', title: 'Site Work', description: "If your lot needs prep, we handle it. Clearing, grading, utilities, foundation. If it's ready, we move straight to building." },
+  { step: '04', title: 'Build', description: 'Your home goes up. We keep you in the loop with regular updates, and you can visit the site whenever you want.' },
+  { step: '05', title: 'Walkthrough & Keys', description: "We go through everything together, make sure you're happy, and hand over the keys." },
+]
+
+const faqs = [
+  { question: 'How long does it take to build?', answer: "It depends on the size and complexity of the home. Weather, material lead times, and scope changes all play a role. We'll give you a realistic timeline upfront and keep you posted as things progress." },
+  { question: 'Do I need to have land already?', answer: 'No. We can build on your lot, or help you find one. If your land needs clearing and grading, we do that too.' },
+  { question: 'Can I change things once you start building?', answer: "Earlier is always better, but yes. We'll tell you how it affects the price and timeline before we make any changes." },
+  { question: "What if something's wrong after move-in?", answer: "Call us. If we built it, we'll come look at it. Appliances and systems come with their own manufacturer warranties." },
+]
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+}
+---
+
+<BaseLayout title={title} description={description} canonical={`${contact.url}/services/new-construction`}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <PageHero
+    label="Custom Home Building"
+    title="New Home Construction"
+    description="Want to build new? We handle custom homes from scratch. Your plans, your land, your choices. We just make sure it gets built right."
+    ctaLabel="Start Your Build"
+  />
+  <Breadcrumbs items={[
+    { name: 'Home', href: '/' },
+    { name: 'New Construction' },
+  ]} />
+
+  <section class="py-20 lg:py-28 bg-stone-50">
+    <div class="container-wide section-padding">
+      <div class="max-w-3xl mx-auto">
+        <span class="section-label">Custom Home Building</span>
+        <h2 class="section-title">Built How You Want It</h2>
+        <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
+          <p>
+            Building a house is a big deal. You&apos;re spending real money and you want it done right.
+            We get that, and we take it seriously.
+          </p>
+          <p>
+            We build custom homes across Southeast Tennessee. McMinn, Bradley, Polk, and Monroe Counties.
+            Farmhouses in the country, traditional homes in town, whatever fits your life and your land.
+          </p>
+          <p>
+            We use good materials, build tight and energy-efficient, and keep you in the loop the whole time.
+            When we hand you the keys, you&apos;ll have a house you&apos;re proud of.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">Our Services</span>
+        <h2 class="section-title">Complete Home Building Services</h2>
+        <p class="section-subtitle mx-auto">
+          From planning through completion, we handle every aspect of your new home construction.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+        {features.map((feature, index) => (
+          <div class="border-t-2 border-ridge-500 pt-5">
+            <span class="text-sm font-mono text-stone-400 mb-2 block">0{index + 1}</span>
+            <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{feature.title}</h3>
+            <p class="text-stone-600 leading-relaxed">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-ridge-50">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">How It Works</span>
+        <h2 class="section-title">From Plans to Keys</h2>
+        <p class="section-subtitle mx-auto">Here&apos;s what building with us looks like.</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        {process.map((step, index) => (
+          <div class="flex gap-6 mb-8 last:mb-0">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-ridge-600 text-white rounded-full flex items-center justify-center font-display text-xl font-bold">
+                {step.step}
+              </div>
+              {index < process.length - 1 && <div class="w-0.5 h-16 bg-ridge-200 mx-auto mt-2"></div>}
+            </div>
+            <div class="pt-3">
+              <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{step.title}</h3>
+              <p class="text-stone-600 leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {faqs.map((faq) => (
+          <div class="border-b border-stone-200 py-6 first:pt-0 last:border-0">
+            <h3 class="font-semibold text-stone-900 mb-3">{faq.question}</h3>
+            <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Ready to Build Your Home?"
+    description="Let's talk about what you have in mind. Free consultations and estimates."
+    primaryLabel="Get Free Estimate"
+  />
+</BaseLayout>

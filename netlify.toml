@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 # Redirect non-www to www (prevents duplicate content in search engines)
 [[redirects]]
@@ -9,5 +12,14 @@
   status = 301
   force = true
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Old city+service combo URLs collapse to the city page
+[[redirects]]
+  from = "/service-areas/:area/:service"
+  to = "/service-areas/:area"
+  status = 301
+
+# Old services hub page (removed) goes home
+[[redirects]]
+  from = "/services"
+  to = "/"
+  status = 301

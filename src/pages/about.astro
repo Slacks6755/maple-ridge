@@ -1,0 +1,88 @@
+---
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import CTASection from '../components/CTASection.astro'
+import { contact } from '../data/contact'
+
+const title = 'About Maple Ridge Construction'
+const description = `Maple Ridge Construction is owned and operated by ${contact.owner} in ${contact.address.locality}, ${contact.address.region}. Licensed general contractor building homes, handling renovations, and developing land across Southeast Tennessee.`
+
+const credentials = [
+  'Licensed General Contractor, State of Tennessee',
+  'General liability and workers comp insurance',
+  'Based in Etowah, working across McMinn, Bradley, Polk, and Monroe Counties',
+]
+---
+
+<BaseLayout title={title} description={description} canonical={`${contact.url}/about`}>
+  <PageHero
+    label="About"
+    title="Who we are"
+    description="A general contractor based in Etowah. New construction, remodels, and land development across Southeast Tennessee."
+  />
+
+  <section class="py-20 lg:py-28 bg-stone-50">
+    <div class="container-wide section-padding">
+      <div class="max-w-2xl">
+        <span class="section-label">The story</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-stone-900 mb-8">
+          How we got here
+        </h2>
+
+        <div class="space-y-5 text-lg text-stone-700 leading-relaxed font-display">
+          <p>
+            {contact.owner} grew up in this part of Tennessee. He studied civil engineering at
+            UT, spent a few years at Kimley-Horn working on bigger projects, and then came back
+            home to do construction the way he'd always wanted to.
+          </p>
+          <p>
+            Maple Ridge stays small on purpose. {contact.owner} runs every job. The crews we
+            use are people we've worked with for years. That keeps the work consistent and
+            keeps us honest, because we see our clients around town.
+          </p>
+          <p>
+            We tell you what things cost and stick to it. We use materials that hold up. We
+            clean up after ourselves and we show up when we say we will. That's the whole
+            playbook.
+          </p>
+        </div>
+
+        <div class="mt-10 flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-stone-200">
+          <div>
+            <p class="font-display text-xl text-stone-900">{contact.owner}</p>
+            <p class="text-sm text-stone-500">Owner</p>
+          </div>
+          <a href={contact.phoneHref} class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800">
+            <Icon name="lucide:phone" class="h-4 w-4" />
+            {contact.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-white border-t border-stone-100">
+    <div class="container-wide section-padding">
+      <div class="max-w-3xl">
+        <span class="section-label">The paperwork</span>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-stone-900 mb-8">
+          Licensed, insured, local
+        </h2>
+        <ul class="space-y-3">
+          {credentials.map((credential) => (
+            <li class="flex items-start gap-3 text-stone-700">
+              <Icon name="lucide:check" class="h-5 w-5 text-ridge-600 flex-shrink-0 mt-1" />
+              <span>{credential}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Got a project to talk through?"
+    description="Call or send a note. We'll come look at it and tell you what we think."
+  />
+</BaseLayout>

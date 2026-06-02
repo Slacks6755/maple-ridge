@@ -1,0 +1,98 @@
+---
+import '../styles/globals.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import LocalBusinessSchema from '../components/LocalBusinessSchema.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  canonical?: string
+  ogImage?: string
+  noindex?: boolean
+}
+
+const {
+  title = 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
+  description = 'Licensed General Contractor in Southeast Tennessee. New home construction, remodeling, and land development in McMinn, Bradley, Polk & Monroe Counties. Call (423) 506-2380 for a free estimate.',
+  canonical,
+  ogImage = '/og-image.jpg',
+  noindex = false,
+} = Astro.props
+
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toString()
+const GA_ID = 'G-NEE25MJKMQ'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#547454" />
+    <meta name="geo.region" content="US-TN" />
+    <meta name="geo.placename" content="Etowah, Tennessee" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Maple Ridge Construction & Development" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    />
+
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script is:inline define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || []
+      function gtag(){ dataLayer.push(arguments) }
+      gtag('js', new Date())
+      gtag('config', GA_ID)
+    </script>
+
+    <style is:global>
+      :root {
+        --font-display: 'Source Serif 4', Georgia, serif;
+        --font-body: 'DM Sans', system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="font-body min-h-screen flex flex-col">
+    <LocalBusinessSchema />
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { trackEvent } from '../lib/analytics'
+      document.addEventListener('click', (e) => {
+        const target = (e.target as Element | null)?.closest<HTMLElement>('[data-track]')
+        if (!target) return
+        const label = target.dataset.track
+        if (label) trackEvent('click', 'contact', label)
+      })
+    </script>
+  </body>
+</html>

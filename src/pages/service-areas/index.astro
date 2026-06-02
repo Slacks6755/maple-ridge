@@ -1,0 +1,147 @@
+---
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHero from '../../components/PageHero.astro'
+import CTASection from '../../components/CTASection.astro'
+import { serviceAreas, counties } from '../../data/service-areas'
+import { contact } from '../../data/contact'
+
+const title = 'Service Areas | General Contractor in Southeast Tennessee'
+const description =
+  'Maple Ridge Construction serves McMinn, Bradley, Polk, and Monroe Counties in Southeast Tennessee. Construction in Etowah, Athens, Cleveland, Madisonville, and Sweetwater.'
+
+const faqs = [
+  {
+    question: 'Do you charge for estimates?',
+    answer: 'No. We come look at your project, talk it through, and give you a real number, all at no cost. You don\'t pay us until there\'s a job to do.',
+  },
+  {
+    question: 'How do I know if you serve my area?',
+    answer: 'If you\'re in McMinn, Bradley, Monroe, or Polk County, you\'re almost certainly in range. If you\'re on the edge of that or just outside it, call and ask. We travel for the right job.',
+  },
+  {
+    question: 'Who pulls the permits, me or you?',
+    answer: 'We do. Every job includes pulling the permits and handling inspections with the city or county. That paperwork never lands on you.',
+  },
+  {
+    question: 'Do you take small jobs, or only big builds?',
+    answer: 'Both. A single room addition and a full custom home both get our attention. Call and we\'ll tell you honestly whether we\'re the right fit for the work.',
+  },
+  {
+    question: 'How soon can you start?',
+    answer: 'It depends on what\'s already on our plate, since we don\'t overbook just to take a deposit and disappear. Once we\'ve seen the job, we\'ll give you a real start window.',
+  },
+  {
+    question: 'What if my budget won\'t cover everything?',
+    answer: 'We\'ll give you a straight price and help you figure out what\'s worth doing now and what can wait. We\'d rather phase a project than cut corners to hit a number.',
+  },
+]
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+}
+---
+
+<BaseLayout title={title} description={description} canonical={`${contact.url}/service-areas`}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <PageHero
+    label="Where We Work"
+    title="Serving Southeast Tennessee"
+    description="We work across four counties in Southeast Tennessee. McMinn, Bradley, Polk, and Monroe. Mostly out of Etowah, Athens, Cleveland, Madisonville, and Sweetwater, but we'll travel for the right job."
+  />
+
+  <section class="py-20 lg:py-28 bg-stone-50">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">Our Communities</span>
+        <h2 class="section-title">Primary Service Areas</h2>
+        <p class="section-subtitle mx-auto">
+          Click on a location to learn more about our services in that area.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {serviceAreas.map((area) => (
+          <a href={`/service-areas/${area.slug}`} class="card-hover p-6 group">
+            <div class="flex items-center gap-3 mb-3">
+              <Icon name="lucide:map-pin" class="h-5 w-5 text-ridge-500 group-hover:text-ridge-600 transition-colors" />
+              <span class="text-sm text-stone-500">{area.county} County</span>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-stone-900 mb-2 group-hover:text-ridge-700 transition-colors">
+              {area.name}, TN
+            </h3>
+            <p class="text-stone-600 text-sm mb-4">{area.description}</p>
+            <span class="inline-flex items-center text-ridge-600 font-medium text-sm group-hover:text-ridge-700">
+              Learn More
+              <Icon name="lucide:arrow-right" class="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">Towns We Work In</span>
+        <h2 class="section-title">Four Counties</h2>
+        <p class="section-subtitle mx-auto">
+          Not on the list? Call anyway. If we can get to you, we'll come look.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {counties.map((county) => (
+          <div class="card p-6">
+            <h3 class="font-display text-lg font-semibold text-stone-900 mb-4">{county.name}</h3>
+            <ul class="space-y-2">
+              {county.cities.map((city) => (
+                <li class="flex items-center gap-2 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 bg-ridge-400 rounded-full"></div>
+                  {city}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-stone-500 mt-12">
+        Don&apos;t see your community listed?{' '}
+        <a href="/contact" class="text-ridge-600 hover:text-ridge-700 font-medium">Contact us</a>.
+        We may still serve your area.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-stone-50 border-t border-stone-100">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="section-label">Before You Call</span>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {faqs.map((faq) => (
+          <div class="border-b border-stone-200 py-6 first:pt-0 last:border-0">
+            <h3 class="font-semibold text-stone-900 mb-3">{faq.question}</h3>
+            <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Got something to build?"
+    description="Call or send a note. If we work in your area, we'll come look at it."
+  />
+</BaseLayout>

@@ -1,0 +1,205 @@
+---
+import { Picture } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import CTASection from '../components/CTASection.astro'
+import { contact } from '../data/contact'
+import { projects } from '../data/projects'
+import { getProjectPhotos } from '../lib/projects'
+
+const title = 'Projects'
+const description = 'A few jobs from across Southeast Tennessee. New construction, remodels, and the occasional pavilion.'
+
+const sortedProjects = [...projects].sort((a, b) => a.order - b.order)
+
+const projectsWithPhotos = sortedProjects.map((project) => {
+  if (project.hasBeforeAfter) {
+    return {
+      project,
+      after: getProjectPhotos(project.slug, 'after', project.featuredPhotos?.after),
+      before: getProjectPhotos(project.slug, 'before', project.featuredPhotos?.before),
+      single: [] as ReturnType<typeof getProjectPhotos>,
+    }
+  }
+  return {
+    project,
+    after: [] as ReturnType<typeof getProjectPhotos>,
+    before: [] as ReturnType<typeof getProjectPhotos>,
+    single: getProjectPhotos(project.slug, undefined, project.featuredPhotos?.single),
+  }
+})
+
+const galleryWidths = [400, 800]
+const gallerySizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
+
+// Cap portrait photos so they aren't comically tall in the masonry grid.
+// Landscape photos render at natural aspect (uncropped). Portraits get cropped to 3:4.
+function imgClass(photo: { width: number; height: number }): string {
+  const portrait = photo.height > photo.width
+  return portrait
+    ? 'block w-full aspect-[3/4] object-cover object-center'
+    : 'block w-full h-auto'
+}
+---
+
+<BaseLayout title={title} description={description} canonical={`${contact.url}/projects`}>
+  <PageHero
+    label="Our Work"
+    title="Recent Projects"
+    description={description}
+    showCTA={false}
+  />
+
+  <section class="py-16 lg:py-20 bg-stone-50">
+    <div class="container-wide section-padding space-y-20 lg:space-y-28">
+      {projectsWithPhotos.map(({ project, after, before, single }) => (
+        <article class="scroll-mt-24" id={project.slug}>
+          <header class="mb-6 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-3 mb-3 text-sm">
+              <span class="inline-block bg-ridge-600 text-white font-medium px-3 py-1 rounded-full">
+                {project.category}
+              </span>
+              <span class="flex items-center gap-1.5 text-stone-500">
+                <Icon name="lucide:map-pin" class="h-4 w-4" />
+                {project.location}
+              </span>
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+              {project.title}
+            </h2>
+            <p class="text-lg text-stone-600 leading-relaxed">{project.description}</p>
+          </header>
+
+          {project.hasBeforeAfter ? (
+            <div data-tabs={project.slug}>
+              <div
+                role="tablist"
+                aria-label={`${project.title} photos`}
+                class="inline-flex items-center gap-1 p-1 bg-stone-200/60 rounded-lg mb-6"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls={`${project.slug}-after`}
+                  id={`${project.slug}-after-tab`}
+                  data-panel="after"
+                  class="px-4 py-2 text-sm font-medium rounded-md text-stone-600 hover:text-stone-900 transition-colors aria-selected:bg-white aria-selected:text-stone-900 aria-selected:shadow-sm"
+                >
+                  After
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls={`${project.slug}-before`}
+                  id={`${project.slug}-before-tab`}
+                  data-panel="before"
+                  class="px-4 py-2 text-sm font-medium rounded-md text-stone-600 hover:text-stone-900 transition-colors aria-selected:bg-white aria-selected:text-stone-900 aria-selected:shadow-sm"
+                >
+                  Before
+                </button>
+              </div>
+
+              <div
+                role="tabpanel"
+                id={`${project.slug}-after`}
+                aria-labelledby={`${project.slug}-after-tab`}
+                data-panel="after"
+              >
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+                  {after.map((photo, i) => (
+                    <div class="mb-3 break-inside-avoid overflow-hidden rounded-lg bg-stone-200">
+                      <Picture
+                        src={photo}
+                        formats={['avif']}
+                        fallbackFormat="webp"
+                        alt={`${project.title} after, photo ${i + 1}`}
+                        widths={galleryWidths}
+                        sizes={gallerySizes}
+                        loading="lazy"
+                        decoding="async"
+                        class={imgClass(photo)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                role="tabpanel"
+                id={`${project.slug}-before`}
+                aria-labelledby={`${project.slug}-before-tab`}
+                data-panel="before"
+                hidden
+              >
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+                  {before.map((photo, i) => (
+                    <div class="mb-3 break-inside-avoid overflow-hidden rounded-lg bg-stone-200">
+                      <Picture
+                        src={photo}
+                        formats={['avif']}
+                        fallbackFormat="webp"
+                        alt={`${project.title} before, photo ${i + 1}`}
+                        widths={galleryWidths}
+                        sizes={gallerySizes}
+                        loading="lazy"
+                        decoding="async"
+                        class={imgClass(photo)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+              {single.map((photo, i) => (
+                <div class="mb-3 break-inside-avoid overflow-hidden rounded-lg bg-stone-200">
+                  <Picture
+                    src={photo}
+                    formats={['avif']}
+                    fallbackFormat="webp"
+                    alt={`${project.title}, photo ${i + 1}`}
+                    widths={galleryWidths}
+                    sizes={gallerySizes}
+                    loading="lazy"
+                    decoding="async"
+                    class={imgClass(photo)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    heading="Got something like this in mind?"
+    description="Tell us about your project. We'll come look and give you a real number."
+  />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((group) => {
+    const tabs = group.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    const panels = group.querySelectorAll<HTMLElement>('[role="tabpanel"]')
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel
+        tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)))
+        panels.forEach((p) => {
+          if (p.dataset.panel === target) {
+            p.removeAttribute('hidden')
+          } else {
+            p.setAttribute('hidden', '')
+          }
+        })
+      })
+    })
+  })
+</script>
