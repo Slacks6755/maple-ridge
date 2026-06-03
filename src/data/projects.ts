@@ -50,6 +50,7 @@ export const projects: Project[] = [
     order: 2,
     featuredPhotos: {
       single: [
+        'IMG_1532.webp',
         'IMG_1479.webp',
         'IMG_1524.webp',
         'IMG_1535.webp',
@@ -57,7 +58,6 @@ export const projects: Project[] = [
         'IMG_1547.webp',
         'IMG_1467.webp',
         'IMG_1517.webp',
-        'IMG_1532.webp',
       ],
     },
   },

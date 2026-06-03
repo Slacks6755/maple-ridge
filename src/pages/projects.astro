@@ -35,11 +35,15 @@ const gallerySizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
 
 // Cap portrait photos so they aren't comically tall in the masonry grid.
 // Landscape photos render at natural aspect (uncropped). Portraits get cropped to 3:4.
-function imgClass(photo: { width: number; height: number }): string {
+// The pool house roof shot is extra tall (9:16), so cap it to a square anchored
+// at the top — keeps the roof/trusses, drops the empty concrete foreground.
+function imgClass(photo: { src: string; width: number; height: number }): string {
   const portrait = photo.height > photo.width
-  return portrait
-    ? 'block w-full aspect-[3/4] object-cover object-center'
-    : 'block w-full h-auto'
+  if (!portrait) return 'block w-full h-auto'
+  if (photo.src.includes('IMG_1517')) {
+    return 'block w-full aspect-square object-cover object-top'
+  }
+  return 'block w-full aspect-[3/4] object-cover object-center'
 }
 ---
 
