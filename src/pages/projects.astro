@@ -81,17 +81,6 @@ function imgClass(photo: { width: number; height: number }): string {
                 <button
                   type="button"
                   role="tab"
-                  aria-selected="true"
-                  aria-controls={`${project.slug}-after`}
-                  id={`${project.slug}-after-tab`}
-                  data-panel="after"
-                  class="px-4 py-2 text-sm font-medium rounded-md text-stone-600 hover:text-stone-900 transition-colors aria-selected:bg-white aria-selected:text-stone-900 aria-selected:shadow-sm"
-                >
-                  After
-                </button>
-                <button
-                  type="button"
-                  role="tab"
                   aria-selected="false"
                   aria-controls={`${project.slug}-before`}
                   id={`${project.slug}-before-tab`}
@@ -99,6 +88,17 @@ function imgClass(photo: { width: number; height: number }): string {
                   class="px-4 py-2 text-sm font-medium rounded-md text-stone-600 hover:text-stone-900 transition-colors aria-selected:bg-white aria-selected:text-stone-900 aria-selected:shadow-sm"
                 >
                   Before
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls={`${project.slug}-after`}
+                  id={`${project.slug}-after-tab`}
+                  data-panel="after"
+                  class="px-4 py-2 text-sm font-medium rounded-md text-stone-600 hover:text-stone-900 transition-colors aria-selected:bg-white aria-selected:text-stone-900 aria-selected:shadow-sm"
+                >
+                  After
                 </button>
               </div>
 
