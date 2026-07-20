@@ -21,6 +21,8 @@ export const contact = {
     closes: '17:00',
   },
   googleBusinessUrl: 'https://share.google/nQlj2SOz2xrKhZWZv',
+  // Page is titled "Maple Ridge Construction and Development | Etowah TN" — confirm with Zack it's his
+  facebookUrl: 'https://www.facebook.com/caltenncustoms/',
   url: 'https://www.mapleridgedev.com',
   owner: 'Zack Newman',
 } as const

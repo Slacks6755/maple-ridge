@@ -43,7 +43,7 @@ const faqJsonLd = {
 <BaseLayout
   title={title}
   description={description}
-  canonical={`${contact.url}/service-areas/${slug}`}
+ 
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
@@ -54,7 +54,7 @@ const faqJsonLd = {
   />
   <Breadcrumbs items={[
     { name: 'Home', href: '/' },
-    { name: 'Service Areas', href: '/service-areas' },
+    { name: 'Service Areas', href: '/service-areas/' },
     { name: `${area.name}, TN` },
   ]} />
 
@@ -74,7 +74,7 @@ const faqJsonLd = {
             const iconName = serviceIcons[service.slug] || 'lucide:home'
             return (
               <a
-                href={`/services/${service.slug}`}
+                href={`/services/${service.slug}/`}
                 class="card-hover flex gap-5 p-6 group"
               >
                 <div class="flex-shrink-0 w-14 h-14 bg-ridge-100 rounded-xl flex items-center justify-center group-hover:bg-ridge-500 transition-colors">
@@ -121,7 +121,7 @@ const faqJsonLd = {
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {otherAreas.map((otherArea) => (
-          <a href={`/service-areas/${otherArea.slug}`} class="card-hover p-6 text-center group">
+          <a href={`/service-areas/${otherArea.slug}/`} class="card-hover p-6 text-center group">
             <Icon name="lucide:map-pin" class="h-6 w-6 text-ridge-400 mx-auto mb-3 group-hover:text-ridge-600 transition-colors" />
             <h3 class="font-semibold text-stone-900 group-hover:text-ridge-700 transition-colors">
               {otherArea.name}
@@ -132,8 +132,8 @@ const faqJsonLd = {
       </div>
 
       <p class="text-center text-stone-500 mt-8">
-        <a href="/service-areas" class="text-ridge-600 hover:text-ridge-700 font-medium">View all service areas</a>{' '}
-        or <a href="/contact" class="text-ridge-600 hover:text-ridge-700 font-medium">contact us</a> to see if we serve your area.
+        <a href="/service-areas/" class="text-ridge-600 hover:text-ridge-700 font-medium">View all service areas</a>{' '}
+        or <a href="/contact/" class="text-ridge-600 hover:text-ridge-700 font-medium">contact us</a> to see if we serve your area.
       </p>
     </div>
   </section>

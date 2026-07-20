@@ -6,18 +6,19 @@ import { services } from '../data/services'
 import { serviceAreas } from '../data/service-areas'
 
 const mainLinks = [
-  { name: 'Projects', href: '/projects' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Projects', href: '/projects/' },
+  { name: 'About', href: '/about/' },
+  { name: 'Contact', href: '/contact/' },
 ]
 ---
 
 <header class="bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-stone-100">
-  <div class="bg-ridge-700 text-white">
+  <!-- Desktop-only strip; on mobile FloatingContact covers call/text -->
+  <div class="hidden lg:block bg-ridge-700 text-white">
     <div class="container-wide section-padding">
       <div class="flex justify-between items-center py-2 text-sm">
-        <span class="hidden lg:block">Licensed General Contractor &bull; Southeast Tennessee</span>
-        <div class="flex items-center gap-1 max-lg:ml-auto">
+        <span>Licensed General Contractor &bull; Southeast Tennessee</span>
+        <div class="flex items-center gap-1">
           <span class="text-ridge-200 mr-1">{contact.phone}</span>
           <a
             href={contact.phoneHref}
@@ -26,7 +27,7 @@ const mainLinks = [
             title="Call"
           >
             <Icon name="lucide:phone" class="h-4 w-4" />
-            <span class="hidden min-[420px]:inline">Call</span>
+            <span>Call</span>
           </a>
           <a
             href={`sms:${contact.phoneRaw}`}
@@ -35,7 +36,7 @@ const mainLinks = [
             title="Text"
           >
             <Icon name="lucide:message-square" class="h-4 w-4" />
-            <span class="hidden min-[420px]:inline">Text</span>
+            <span>Text</span>
           </a>
         </div>
       </div>
@@ -90,7 +91,7 @@ const mainLinks = [
             <div class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden">
               {serviceAreas.map((area) => (
                 <a
-                  href={`/service-areas/${area.slug}`}
+                  href={`/service-areas/${area.slug}/`}
                   class="block px-4 py-2.5 hover:bg-ridge-50 transition-colors text-stone-700 hover:text-ridge-700 border-b border-stone-50 last:border-0"
                 >
                   {area.name}, TN
@@ -109,7 +110,7 @@ const mainLinks = [
           </a>
         ))}
 
-        <a href="/contact" class="btn-primary">Get a Quote</a>
+        <a href="/contact/" class="btn-primary">Get a Quote</a>
       </div>
 
       <button
@@ -145,7 +146,7 @@ const mainLinks = [
         <div class="grid grid-cols-2 gap-x-2">
           {serviceAreas.map((area) => (
             <a
-              href={`/service-areas/${area.slug}`}
+              href={`/service-areas/${area.slug}/`}
               class="block px-2 py-2 text-stone-700 hover:text-ridge-600 font-medium text-sm"
             >
               {area.name}
@@ -166,7 +167,7 @@ const mainLinks = [
       </div>
 
       <div class="pt-4 border-t border-stone-100 mt-2 space-y-3">
-        <a href="/contact" class="btn-primary w-full">Get a Free Quote</a>
+        <a href="/contact/" class="btn-primary w-full">Get a Free Quote</a>
         <a href={contact.phoneHref} class="flex items-center justify-center gap-2 text-stone-700 font-medium py-2">
           <Icon name="lucide:phone" class="h-4 w-4" />
           {contact.phone}

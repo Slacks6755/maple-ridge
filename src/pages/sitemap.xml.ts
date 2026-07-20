@@ -3,49 +3,25 @@ import { serviceAreas } from '../data/service-areas'
 
 const baseUrl = 'https://www.mapleridgedev.com'
 
-interface Entry {
-  loc: string
-  changefreq: 'weekly' | 'monthly'
-  priority: number
-}
-
-function buildEntries(): Entry[] {
-  const staticEntries: Entry[] = [
-    { loc: baseUrl, changefreq: 'weekly', priority: 1.0 },
-    { loc: `${baseUrl}/about`, changefreq: 'monthly', priority: 0.8 },
-    { loc: `${baseUrl}/contact`, changefreq: 'monthly', priority: 0.9 },
-    { loc: `${baseUrl}/services/new-construction`, changefreq: 'monthly', priority: 0.9 },
-    { loc: `${baseUrl}/services/remodeling`, changefreq: 'monthly', priority: 0.9 },
-    { loc: `${baseUrl}/services/land-development`, changefreq: 'monthly', priority: 0.9 },
-    { loc: `${baseUrl}/service-areas`, changefreq: 'monthly', priority: 0.8 },
-    { loc: `${baseUrl}/projects`, changefreq: 'monthly', priority: 0.8 },
-  ]
-
-  const areaEntries: Entry[] = serviceAreas.map((area) => ({
-    loc: `${baseUrl}/service-areas/${area.slug}`,
-    changefreq: 'monthly',
-    priority: 0.8,
-  }))
-
-  return [...staticEntries, ...areaEntries]
-}
+// URLs must match the served (canonical) form exactly: trailing slash.
+// Netlify 301s the no-slash form, and a sitemap full of redirects makes
+// Search Console flag every page.
+const paths = [
+  '/',
+  '/about/',
+  '/contact/',
+  '/projects/',
+  '/services/new-construction/',
+  '/services/remodeling/',
+  '/services/land-development/',
+  '/service-areas/',
+  ...serviceAreas.map((area) => `/service-areas/${area.slug}/`),
+]
 
 export const GET: APIRoute = () => {
-  const lastmod = new Date().toISOString()
-  const entries = buildEntries()
-
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries
-  .map(
-    (e) => `  <url>
-    <loc>${e.loc}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${e.changefreq}</changefreq>
-    <priority>${e.priority.toFixed(1)}</priority>
-  </url>`
-  )
-  .join('\n')}
+${paths.map((p) => `  <url><loc>${baseUrl}${p}</loc></url>`).join('\n')}
 </urlset>
 `
 

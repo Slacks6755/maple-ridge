@@ -10,19 +10,19 @@ export const services: Service[] = [
     name: 'New Construction',
     slug: 'new-construction',
     description: 'Custom homes on your land, built your way',
-    href: '/services/new-construction',
+    href: '/services/new-construction/',
   },
   {
     name: 'Home Remodeling',
     slug: 'remodeling',
     description: 'Kitchens, bathrooms, additions, and whole-home renovations',
-    href: '/services/remodeling',
+    href: '/services/remodeling/',
   },
   {
     name: 'Land Development',
     slug: 'land-development',
     description: 'Clearing, grading, driveways, and utilities',
-    href: '/services/land-development',
+    href: '/services/land-development/',
   },
 ]
 

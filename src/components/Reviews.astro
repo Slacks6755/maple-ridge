@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components'
+import { contact } from '../data/contact'
+import { reviews } from '../data/reviews'
+---
+
+{
+  reviews.length > 0 && (
+    <section class="py-24 bg-stone-50">
+      <div class="container-wide section-padding">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-display font-bold text-stone-900 mb-4">What clients say</h2>
+          <p class="text-stone-600">Real reviews from Google</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {reviews.map((review) => (
+            <figure class="card p-8 flex flex-col">
+              <div class="flex gap-0.5 mb-4" aria-label={`${review.rating} out of 5 stars`}>
+                {Array.from({ length: review.rating }, () => (
+                  <Icon name="lucide:star" class="h-4 w-4 text-amber-400 fill-current" />
+                ))}
+              </div>
+              <blockquote class="text-stone-700 leading-relaxed flex-1">
+                &ldquo;{review.text}&rdquo;
+              </blockquote>
+              <figcaption class="mt-6 pt-4 border-t border-stone-100 text-sm">
+                <span class="font-medium text-stone-900">{review.name}</span>
+                {review.location && <span class="text-stone-500"> &middot; {review.location}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href={contact.googleBusinessUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800"
+          >
+            Read all our reviews on Google
+            <Icon name="lucide:arrow-right" class="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}

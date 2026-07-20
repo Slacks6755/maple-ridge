@@ -4,7 +4,6 @@ import { Icon } from 'astro-icon/components'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHero from '../components/PageHero.astro'
 import CTASection from '../components/CTASection.astro'
-import { contact } from '../data/contact'
 import { projects } from '../data/projects'
 import { getProjectPhotos } from '../lib/projects'
 
@@ -47,7 +46,7 @@ function imgClass(photo: { src: string; width: number; height: number }): string
 }
 ---
 
-<BaseLayout title={title} description={description} canonical={`${contact.url}/projects`}>
+<BaseLayout title={title} description={description}>
   <PageHero
     label="Our Work"
     title="Recent Projects"

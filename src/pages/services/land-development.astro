@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/PageHero.astro'
 import CTASection from '../../components/CTASection.astro'
 import Breadcrumbs from '../../components/Breadcrumbs.astro'
-import { contact } from '../../data/contact'
 
 const title = 'Land Development & Site Prep in Southeast TN'
 const description =
@@ -50,7 +49,7 @@ const faqJsonLd = {
 }
 ---
 
-<BaseLayout title={title} description={description} canonical={`${contact.url}/services/land-development`}>
+<BaseLayout title={title} description={description}>
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
   <PageHero

@@ -5,10 +5,12 @@ import { serviceAreas } from '../data/service-areas'
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'GeneralContractor',
+  '@id': `${contact.url}/#business`,
   name: 'Maple Ridge Construction & Development',
   description:
     'Licensed General Contractor serving Southeast Tennessee. New construction homes, complete home remodels, and land development.',
-  url: contact.url,
+  url: `${contact.url}/`,
+  image: `${contact.url}/og-image.jpg`,
   telephone: contact.phoneRaw,
   email: contact.email,
   address: {
@@ -19,7 +21,7 @@ const schema = {
     postalCode: contact.address.postalCode,
     addressCountry: contact.address.country,
   },
-  sameAs: [contact.googleBusinessUrl],
+  sameAs: [contact.googleBusinessUrl, contact.facebookUrl],
   hasMap: contact.googleBusinessUrl,
   areaServed: serviceAreas.map((area) => ({
     '@type': 'City',

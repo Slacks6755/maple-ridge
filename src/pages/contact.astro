@@ -12,7 +12,7 @@ const title = 'Get a Free Estimate in Etowah, TN'
 const description = `Contact Maple Ridge Construction for a free estimate. Licensed general contractor serving Etowah and Southeast Tennessee. Call ${contact.phone} or email ${contact.email}.`
 ---
 
-<BaseLayout title={title} description={description} canonical={`${contact.url}/contact`}>
+<BaseLayout title={title} description={description}>
   <PageHero
     label="Contact Us"
     title="Let's Talk About Your Project"
@@ -81,7 +81,7 @@ const description = `Contact Maple Ridge Construction for a free estimate. Licen
             <div class="grid grid-cols-2 gap-2">
               {serviceAreas.map((area) => (
                 <a
-                  href={`/service-areas/${area.slug}`}
+                  href={`/service-areas/${area.slug}/`}
                   class="text-sm text-stone-600 hover:text-ridge-600"
                 >
                   {area.name}, {contact.address.region}
@@ -113,6 +113,17 @@ const description = `Contact Maple Ridge Construction for a free estimate. Licen
             title="Map of Maple Ridge Construction service area in Southeast Tennessee"
           ></iframe>
         </div>
+        <p class="text-center mt-6">
+          <a
+            href={contact.googleBusinessUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800"
+          >
+            <Icon name="lucide:map-pin" class="h-4 w-4" />
+            Find us on Google
+          </a>
+        </p>
       </div>
     </div>
   </section>

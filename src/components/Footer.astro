@@ -64,7 +64,7 @@ const currentYear = new Date().getFullYear()
           {serviceAreas.map((area) => (
             <li>
               <a
-                href={`/service-areas/${area.slug}`}
+                href={`/service-areas/${area.slug}/`}
                 class="text-stone-400 hover:text-white transition-colors text-sm"
               >
                 {area.name}
@@ -81,17 +81,17 @@ const currentYear = new Date().getFullYear()
         <h3 class="font-display font-semibold text-white mb-6">Company</h3>
         <ul class="space-y-3">
           <li>
-            <a href="/projects" class="text-stone-400 hover:text-white transition-colors text-sm">
+            <a href="/projects/" class="text-stone-400 hover:text-white transition-colors text-sm">
               Projects
             </a>
           </li>
           <li>
-            <a href="/about" class="text-stone-400 hover:text-white transition-colors text-sm">
+            <a href="/about/" class="text-stone-400 hover:text-white transition-colors text-sm">
               About Us
             </a>
           </li>
           <li>
-            <a href="/contact" class="text-stone-400 hover:text-white transition-colors text-sm">
+            <a href="/contact/" class="text-stone-400 hover:text-white transition-colors text-sm">
               Contact
             </a>
           </li>
@@ -99,7 +99,7 @@ const currentYear = new Date().getFullYear()
         <div class="mt-8 p-4 bg-stone-800 rounded-lg">
           <p class="text-sm text-stone-400 mb-3">Ready to start your project?</p>
           <a
-            href="/contact"
+            href="/contact/"
             class="btn-primary w-full text-center text-sm"
           >
             Get a Free Quote
@@ -117,6 +117,14 @@ const currentYear = new Date().getFullYear()
         </p>
         <div class="flex items-center gap-4 sm:gap-6">
           <span class="hidden sm:inline">Licensed General Contractor &bull; Tennessee</span>
+          <a
+            href={contact.googleBusinessUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-stone-500 hover:text-stone-400 transition-colors text-sm"
+          >
+            Find us on Google
+          </a>
           <a href="/sitemap.xml" class="text-stone-500 hover:text-stone-400 transition-colors text-sm">
             Sitemap
           </a>

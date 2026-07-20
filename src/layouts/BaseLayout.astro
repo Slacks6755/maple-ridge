@@ -2,12 +2,12 @@
 import '../styles/globals.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import FloatingContact from '../components/FloatingContact.astro'
 import LocalBusinessSchema from '../components/LocalBusinessSchema.astro'
 
 interface Props {
   title?: string
   description?: string
-  canonical?: string
   ogImage?: string
   noindex?: boolean
 }
@@ -15,12 +15,14 @@ interface Props {
 const {
   title = 'General Contractor in Southeast Tennessee | Maple Ridge Construction',
   description = 'Licensed General Contractor in Southeast Tennessee. New home construction, remodeling, and land development in McMinn, Bradley, Polk & Monroe Counties. Call (423) 506-2380 for a free estimate.',
-  canonical,
   ogImage = '/og-image.jpg',
   noindex = false,
 } = Astro.props
 
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toString()
+const canonicalPath = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`
+const canonicalUrl = new URL(canonicalPath, Astro.site).toString()
 const GA_ID = 'G-NEE25MJKMQ'
 ---
 
@@ -84,6 +86,7 @@ const GA_ID = 'G-NEE25MJKMQ'
       <slot />
     </main>
     <Footer />
+    <FloatingContact />
 
     <script>
       import { trackEvent } from '../lib/analytics'
