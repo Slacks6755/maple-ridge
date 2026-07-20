@@ -13,10 +13,9 @@
   force = true
 
 # Old city+service combo URLs collapse to the city page
-# (trailing slash on the target avoids a second redirect hop)
 [[redirects]]
   from = "/service-areas/:area/:service"
-  to = "/service-areas/:area/"
+  to = "/service-areas/:area"
   status = 301
 
 # Old services hub page (removed) goes home

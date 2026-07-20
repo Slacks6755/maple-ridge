@@ -19,9 +19,9 @@ const {
   noindex = false,
 } = Astro.props
 
-const canonicalPath = Astro.url.pathname.endsWith('/')
-  ? Astro.url.pathname
-  : `${Astro.url.pathname}/`
+// With build.format 'file', build-time pathnames look like /about.html —
+// canonical must be the served no-slash form: /about
+const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/'
 const canonicalUrl = new URL(canonicalPath, Astro.site).toString()
 const GA_ID = 'G-NEE25MJKMQ'
 ---

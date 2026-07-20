@@ -13,26 +13,26 @@
 
 ## Services
 
-- [New Home Construction](https://www.mapleridgedev.com/services/new-construction/): Custom homes built on your land, from floor plan and site work through final walkthrough.
-- [Home Remodeling](https://www.mapleridgedev.com/services/remodeling/): Kitchens, bathrooms, room additions, whole-home renovations, interior updates, and system upgrades (electrical, plumbing, HVAC).
-- [Land Development](https://www.mapleridgedev.com/services/land-development/): Site clearing, grading and dirt work, drainage, utility installation, septic/well coordination, and driveway construction.
+- [New Home Construction](https://www.mapleridgedev.com/services/new-construction): Custom homes built on your land, from floor plan and site work through final walkthrough.
+- [Home Remodeling](https://www.mapleridgedev.com/services/remodeling): Kitchens, bathrooms, room additions, whole-home renovations, interior updates, and system upgrades (electrical, plumbing, HVAC).
+- [Land Development](https://www.mapleridgedev.com/services/land-development): Site clearing, grading and dirt work, drainage, utility installation, septic/well coordination, and driveway construction.
 
 ## Service Areas
 
 Maple Ridge serves four counties in Southeast Tennessee. Dedicated pages cover the primary cities:
 
-- [Etowah, TN](https://www.mapleridgedev.com/service-areas/etowah/) — McMinn County (home base)
-- [Athens, TN](https://www.mapleridgedev.com/service-areas/athens/) — McMinn County
-- [Cleveland, TN](https://www.mapleridgedev.com/service-areas/cleveland/) — Bradley County
-- [Madisonville, TN](https://www.mapleridgedev.com/service-areas/madisonville/) — Monroe County
-- [Sweetwater, TN](https://www.mapleridgedev.com/service-areas/sweetwater/) — Monroe County
+- [Etowah, TN](https://www.mapleridgedev.com/service-areas/etowah) — McMinn County (home base)
+- [Athens, TN](https://www.mapleridgedev.com/service-areas/athens) — McMinn County
+- [Cleveland, TN](https://www.mapleridgedev.com/service-areas/cleveland) — Bradley County
+- [Madisonville, TN](https://www.mapleridgedev.com/service-areas/madisonville) — Monroe County
+- [Sweetwater, TN](https://www.mapleridgedev.com/service-areas/sweetwater) — Monroe County
 
 Also serves surrounding communities across McMinn, Bradley, Polk, and Monroe Counties (including Niota, Calhoun, Englewood, Riceville, Charleston, McDonald, Benton, Ducktown, Copperhill, Delano, Tellico Plains, and Vonore).
 
 ## Pages
 
 - [Home](https://www.mapleridgedev.com/)
-- [About](https://www.mapleridgedev.com/about/)
-- [Projects](https://www.mapleridgedev.com/projects/): Photo portfolio of completed builds and remodels, with before/after where applicable.
-- [Service Areas](https://www.mapleridgedev.com/service-areas/)
-- [Contact](https://www.mapleridgedev.com/contact/)
+- [About](https://www.mapleridgedev.com/about)
+- [Projects](https://www.mapleridgedev.com/projects): Photo portfolio of completed builds and remodels, with before/after where applicable.
+- [Service Areas](https://www.mapleridgedev.com/service-areas)
+- [Contact](https://www.mapleridgedev.com/contact)

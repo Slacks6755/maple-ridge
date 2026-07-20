@@ -43,7 +43,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
 
           <div class="mt-10 flex flex-col sm:flex-row gap-4">
             <a
-              href="/contact/"
+              href="/contact"
               class="group inline-flex items-center justify-center gap-3 bg-ridge-500 hover:bg-ridge-600 text-white px-8 py-4 rounded-lg font-medium transition-colors"
             >
               Get a free quote
@@ -171,7 +171,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
               <Icon name="lucide:phone" class="h-4 w-4" />
               {contact.phone}
             </a>
-            <a href="/about/" class="inline-flex items-center gap-2 text-stone-600 font-medium hover:text-ridge-700">
+            <a href="/about" class="inline-flex items-center gap-2 text-stone-600 font-medium hover:text-ridge-700">
               More about us
               <Icon name="lucide:arrow-right" class="h-4 w-4" />
             </a>
@@ -193,7 +193,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
       <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
         {serviceAreas.map((area) => (
           <a
-            href={`/service-areas/${area.slug}/`}
+            href={`/service-areas/${area.slug}`}
             class="inline-flex items-center gap-2 bg-white border border-stone-200 px-5 py-2.5 rounded-full text-stone-700 hover:border-ridge-300 hover:text-ridge-700 transition-colors"
           >
             <Icon name="lucide:map-pin" class="h-4 w-4 text-ridge-500" />

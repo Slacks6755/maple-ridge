@@ -6,9 +6,9 @@ import { services } from '../data/services'
 import { serviceAreas } from '../data/service-areas'
 
 const mainLinks = [
-  { name: 'Projects', href: '/projects/' },
-  { name: 'About', href: '/about/' },
-  { name: 'Contact', href: '/contact/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ]
 ---
 
@@ -91,7 +91,7 @@ const mainLinks = [
             <div class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden">
               {serviceAreas.map((area) => (
                 <a
-                  href={`/service-areas/${area.slug}/`}
+                  href={`/service-areas/${area.slug}`}
                   class="block px-4 py-2.5 hover:bg-ridge-50 transition-colors text-stone-700 hover:text-ridge-700 border-b border-stone-50 last:border-0"
                 >
                   {area.name}, TN
@@ -110,7 +110,7 @@ const mainLinks = [
           </a>
         ))}
 
-        <a href="/contact/" class="btn-primary">Get a Quote</a>
+        <a href="/contact" class="btn-primary">Get a Quote</a>
       </div>
 
       <button
@@ -146,7 +146,7 @@ const mainLinks = [
         <div class="grid grid-cols-2 gap-x-2">
           {serviceAreas.map((area) => (
             <a
-              href={`/service-areas/${area.slug}/`}
+              href={`/service-areas/${area.slug}`}
               class="block px-2 py-2 text-stone-700 hover:text-ridge-600 font-medium text-sm"
             >
               {area.name}
@@ -167,7 +167,7 @@ const mainLinks = [
       </div>
 
       <div class="pt-4 border-t border-stone-100 mt-2 space-y-3">
-        <a href="/contact/" class="btn-primary w-full">Get a Free Quote</a>
+        <a href="/contact" class="btn-primary w-full">Get a Free Quote</a>
         <a href={contact.phoneHref} class="flex items-center justify-center gap-2 text-stone-700 font-medium py-2">
           <Icon name="lucide:phone" class="h-4 w-4" />
           {contact.phone}

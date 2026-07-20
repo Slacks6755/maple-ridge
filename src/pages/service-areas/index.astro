@@ -68,7 +68,7 @@ const faqJsonLd = {
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {serviceAreas.map((area) => (
-          <a href={`/service-areas/${area.slug}/`} class="card-hover p-6 group">
+          <a href={`/service-areas/${area.slug}`} class="card-hover p-6 group">
             <div class="flex items-center gap-3 mb-3">
               <Icon name="lucide:map-pin" class="h-5 w-5 text-ridge-500 group-hover:text-ridge-600 transition-colors" />
               <span class="text-sm text-stone-500">{area.county} County</span>
@@ -115,7 +115,7 @@ const faqJsonLd = {
 
       <p class="text-center text-stone-500 mt-12">
         Don&apos;t see your community listed?{' '}
-        <a href="/contact/" class="text-ridge-600 hover:text-ridge-700 font-medium">Contact us</a>.
+        <a href="/contact" class="text-ridge-600 hover:text-ridge-700 font-medium">Contact us</a>.
         We may still serve your area.
       </p>
     </div>

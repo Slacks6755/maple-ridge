@@ -3,19 +3,19 @@ import { serviceAreas } from '../data/service-areas'
 
 const baseUrl = 'https://www.mapleridgedev.com'
 
-// URLs must match the served (canonical) form exactly: trailing slash.
-// Netlify 301s the no-slash form, and a sitemap full of redirects makes
+// URLs must match the served (canonical) form exactly: no trailing slash.
+// Netlify 301s the slash form, and a sitemap full of redirects makes
 // Search Console flag every page.
 const paths = [
   '/',
-  '/about/',
-  '/contact/',
-  '/projects/',
-  '/services/new-construction/',
-  '/services/remodeling/',
-  '/services/land-development/',
-  '/service-areas/',
-  ...serviceAreas.map((area) => `/service-areas/${area.slug}/`),
+  '/about',
+  '/contact',
+  '/projects',
+  '/services/new-construction',
+  '/services/remodeling',
+  '/services/land-development',
+  '/service-areas',
+  ...serviceAreas.map((area) => `/service-areas/${area.slug}`),
 ]
 
 export const GET: APIRoute = () => {
