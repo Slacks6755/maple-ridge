@@ -1,6 +1,5 @@
 ---
 import { Picture } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHero from '../components/PageHero.astro'
 import CTASection from '../components/CTASection.astro'
@@ -54,21 +53,17 @@ function imgClass(photo: { src: string; width: number; height: number }): string
     showCTA={false}
   />
 
-  <section class="py-16 lg:py-20 bg-stone-50">
+  <section class="py-16 lg:py-20">
     <div class="container-wide section-padding space-y-20 lg:space-y-28">
       {projectsWithPhotos.map(({ project, after, before, single }) => (
-        <article class="scroll-mt-24" id={project.slug}>
+        <article class="scroll-mt-24 border-t border-stone-300 pt-8" id={project.slug}>
           <header class="mb-6 max-w-3xl">
-            <div class="flex flex-wrap items-center gap-3 mb-3 text-sm">
-              <span class="inline-block bg-ridge-600 text-white font-medium px-3 py-1 rounded-full">
-                {project.category}
-              </span>
-              <span class="flex items-center gap-1.5 text-stone-500">
-                <Icon name="lucide:map-pin" class="h-4 w-4" />
-                {project.location}
-              </span>
-            </div>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+              <span class="text-ridge-700">{project.category}</span>
+              <span class="mx-2 text-stone-400" aria-hidden="true">&middot;</span>
+              <span class="text-stone-500">{project.location}</span>
+            </p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight mb-3">
               {project.title}
             </h2>
             <p class="text-lg text-stone-600 leading-relaxed">{project.description}</p>

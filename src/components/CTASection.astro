@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components'
 import { contact } from '../data/contact'
 
 interface Props {
@@ -12,36 +11,38 @@ interface Props {
 const {
   heading,
   description,
-  primaryLabel = 'Request Free Quote',
+  primaryLabel = 'Get a free quote',
   primaryHref = '/contact',
 } = Astro.props
 ---
 
-<section class="py-20 lg:py-24 bg-ridge-700 text-white">
+<section class="py-20 lg:py-24 bg-ridge-800 text-white texture-overlay">
   <div class="container-wide section-padding">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-6">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-5">
         {heading}
       </h2>
-      <p class="text-xl text-ridge-200 mb-10">
+      <p class="text-lg sm:text-xl text-ridge-200 mb-10">
         {description}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href={primaryHref}
-          class="inline-flex items-center justify-center gap-2 bg-white text-ridge-700 hover:bg-stone-100 px-8 py-4 rounded-lg font-medium transition-colors"
+          class="inline-flex items-center justify-center bg-white text-ridge-800 hover:bg-earth-100 px-8 py-4 rounded-sm font-medium transition-colors"
         >
           {primaryLabel}
-          <Icon name="lucide:arrow-right" class="h-5 w-5" />
         </a>
         <a
           href={contact.phoneHref}
-          class="inline-flex items-center justify-center gap-2 bg-ridge-600 text-white hover:bg-ridge-500 px-8 py-4 rounded-lg font-medium transition-colors border border-ridge-500"
+          data-track="call_cta_section"
+          class="inline-flex items-center justify-center bg-transparent text-white hover:bg-white/10 px-8 py-4 rounded-sm font-medium transition-colors border border-white/25"
         >
-          <Icon name="lucide:phone" class="h-5 w-5" />
-          {contact.phone}
+          <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
         </a>
       </div>
+      <p class="mt-8 text-sm text-ridge-300 lg:hidden">
+        Or text us at <a href={`sms:${contact.phoneRaw}`} data-track="text_cta_section" class="text-link-dark">{contact.phone}</a>
+      </p>
     </div>
   </div>
 </section>

@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
 import PageHero from '../../../components/PageHero.astro'
 import CTASection from '../../../components/CTASection.astro'
@@ -17,12 +16,6 @@ export function getStaticPaths() {
 
 const { area } = Astro.props
 const { slug } = Astro.params
-
-const serviceIcons: Record<string, string> = {
-  'new-construction': 'lucide:home',
-  remodeling: 'lucide:hammer',
-  'land-development': 'lucide:tree-pine',
-}
 
 const otherAreas = serviceAreas.filter((a) => a.slug !== slug).slice(0, 4)
 
@@ -58,37 +51,33 @@ const faqJsonLd = {
     { name: `${area.name}, TN` },
   ]} />
 
-  <section class="py-20 lg:py-28 bg-stone-50">
+  <section class="py-20 lg:py-28">
     <div class="container-wide section-padding">
       <div class="grid lg:grid-cols-2 gap-16 items-start">
         <div>
-          <span class="section-label">Our Services in {area.name}</span>
-          <h2 class="section-title">Construction Services in {area.county} County</h2>
+          <span class="section-label">Our services in {area.name}</span>
+          <h2 class="section-title">Construction services in {area.county} County</h2>
           <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
             <p>{area.localContent}</p>
           </div>
         </div>
 
-        <div class="space-y-6">
-          {services.map((service) => {
-            const iconName = serviceIcons[service.slug] || 'lucide:home'
-            return (
-              <a
-                href={`/services/${service.slug}`}
-                class="card-hover flex gap-5 p-6 group"
-              >
-                <div class="flex-shrink-0 w-14 h-14 bg-ridge-100 rounded-xl flex items-center justify-center group-hover:bg-ridge-500 transition-colors">
-                  <Icon name={iconName} class="h-7 w-7 text-ridge-600 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <h3 class="font-semibold text-stone-900 mb-1 group-hover:text-ridge-700 transition-colors">
-                    {service.name}
-                  </h3>
-                  <p class="text-stone-600 text-sm">{service.description}</p>
-                </div>
-              </a>
-            )
-          })}
+        <div>
+          {services.map((service, index) => (
+            <a
+              href={`/services/${service.slug}`}
+              class="group flex gap-6 border-t border-stone-300 py-6 last:pb-0"
+            >
+              <span class="font-display text-lg text-stone-400 flex-shrink-0 w-8 pt-0.5" aria-hidden="true">0{index + 1}</span>
+              <div>
+                <h3 class="font-display text-xl font-semibold text-stone-900 mb-1 group-hover:text-ridge-800 transition-colors">
+                  {service.name}
+                </h3>
+                <p class="text-stone-600 text-sm leading-relaxed mb-3">{service.description}</p>
+                <span class="text-link text-sm">Learn more</span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -98,7 +87,7 @@ const faqJsonLd = {
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-12">
         <span class="section-label">Working in {area.name}</span>
-        <h2 class="section-title">Common Questions</h2>
+        <h2 class="section-title">Common questions</h2>
       </div>
 
       <div class="max-w-3xl mx-auto">
@@ -112,18 +101,17 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <section class="py-16 lg:py-20 bg-stone-100">
+  <section class="py-16 lg:py-20 border-t border-stone-200">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="section-label">More Service Areas</span>
-        <h2 class="section-title">Also Serving Southeast Tennessee</h2>
+        <span class="section-label">More service areas</span>
+        <h2 class="section-title">Also serving Southeast Tennessee</h2>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10 max-w-4xl mx-auto">
         {otherAreas.map((otherArea) => (
-          <a href={`/service-areas/${otherArea.slug}`} class="card-hover p-6 text-center group">
-            <Icon name="lucide:map-pin" class="h-6 w-6 text-ridge-400 mx-auto mb-3 group-hover:text-ridge-600 transition-colors" />
-            <h3 class="font-semibold text-stone-900 group-hover:text-ridge-700 transition-colors">
+          <a href={`/service-areas/${otherArea.slug}`} class="group block border-t border-stone-300 pt-4">
+            <h3 class="font-display text-lg font-semibold text-stone-900 group-hover:text-ridge-800 transition-colors">
               {otherArea.name}
             </h3>
             <p class="text-sm text-stone-500">{otherArea.county} County</p>
@@ -131,9 +119,9 @@ const faqJsonLd = {
         ))}
       </div>
 
-      <p class="text-center text-stone-500 mt-8">
-        <a href="/service-areas" class="text-ridge-600 hover:text-ridge-700 font-medium">View all service areas</a>{' '}
-        or <a href="/contact" class="text-ridge-600 hover:text-ridge-700 font-medium">contact us</a> to see if we serve your area.
+      <p class="text-center text-stone-500 mt-10">
+        <a href="/service-areas" class="text-link">View all service areas</a>{' '}
+        or <a href="/contact" class="text-link">contact us</a> to see if we serve your area.
       </p>
     </div>
   </section>

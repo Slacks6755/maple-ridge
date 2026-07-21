@@ -12,18 +12,18 @@ import { contact } from '../data/contact'
     href={`sms:${contact.phoneRaw}`}
     data-track="text_floating"
     aria-label={`Text ${contact.phone}`}
-    class="inline-flex items-center gap-2 rounded-full bg-white text-stone-800 border border-stone-200 shadow-lg px-4 py-2.5 text-sm font-medium active:scale-95 transition-transform"
+    class="inline-flex items-center gap-2 rounded-full bg-white text-stone-800 border border-stone-200 shadow-lg px-5 py-3 text-sm font-medium active:scale-95 transition-transform"
   >
-    <Icon name="lucide:message-square" class="h-4 w-4 text-ridge-600" />
+    <Icon name="lucide:message-square" class="h-[1.125rem] w-[1.125rem] text-ridge-600" />
     Text
   </a>
   <a
     href={contact.phoneHref}
     data-track="call_floating"
     aria-label={`Call ${contact.phone}`}
-    class="inline-flex items-center gap-2 rounded-full bg-ridge-600 text-white shadow-lg px-4 py-2.5 text-sm font-medium active:scale-95 transition-transform"
+    class="inline-flex items-center gap-2 rounded-full bg-ridge-600 text-white shadow-lg px-5 py-3 text-sm font-medium active:scale-95 transition-transform"
   >
-    <Icon name="lucide:phone" class="h-4 w-4" />
+    <Icon name="lucide:phone" class="h-[1.125rem] w-[1.125rem]" />
     Call
   </a>
 </div>

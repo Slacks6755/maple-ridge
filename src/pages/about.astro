@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHero from '../components/PageHero.astro'
 import CTASection from '../components/CTASection.astro'
@@ -22,7 +21,7 @@ const credentials = [
     description="A general contractor based in Etowah. New construction, remodels, and land development across Southeast Tennessee."
   />
 
-  <section class="py-20 lg:py-28 bg-stone-50">
+  <section class="py-20 lg:py-28">
     <div class="container-wide section-padding">
       <div class="max-w-2xl">
         <span class="section-label">The story</span>
@@ -48,13 +47,12 @@ const credentials = [
           </p>
         </div>
 
-        <div class="mt-10 flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-stone-200">
+        <div class="mt-10 flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-stone-300">
           <div>
             <p class="font-display text-xl text-stone-900">{contact.owner}</p>
             <p class="text-sm text-stone-500">Owner</p>
           </div>
-          <a href={contact.phoneHref} class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800">
-            <Icon name="lucide:phone" class="h-4 w-4" />
+          <a href={contact.phoneHref} data-track="call_about" class="text-link">
             {contact.phone}
           </a>
         </div>
@@ -62,18 +60,17 @@ const credentials = [
     </div>
   </section>
 
-  <section class="py-16 lg:py-20 bg-white border-t border-stone-100">
+  <section class="py-16 lg:py-20 bg-white border-t border-stone-200">
     <div class="container-wide section-padding">
       <div class="max-w-3xl">
         <span class="section-label">The paperwork</span>
-        <h2 class="font-display text-2xl sm:text-3xl font-bold text-stone-900 mb-8">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight mb-8">
           Licensed, insured, local
         </h2>
-        <ul class="space-y-3">
+        <ul class="border-t border-stone-300">
           {credentials.map((credential) => (
-            <li class="flex items-start gap-3 text-stone-700">
-              <Icon name="lucide:check" class="h-5 w-5 text-ridge-600 flex-shrink-0 mt-1" />
-              <span>{credential}</span>
+            <li class="py-4 border-b border-stone-200 text-stone-700">
+              {credential}
             </li>
           ))}
         </ul>

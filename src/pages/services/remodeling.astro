@@ -9,20 +9,20 @@ const description =
   'Complete home remodeling services in Southeast Tennessee. Kitchen renovations, bathroom remodels, room additions, and whole-home renovations by a licensed general contractor. Serving Etowah, Athens, Cleveland and surrounding areas.'
 
 const subServices = [
-  { title: 'Kitchen Renovations', description: 'Kitchens get the most use and show their age fastest. We do everything from cabinet refacing to complete gut-and-rebuild jobs.', features: ['Custom cabinetry', 'Countertops', 'Appliance install', 'Lighting', 'Flooring'] },
-  { title: 'Bathroom Remodels', description: 'Outdated bathroom? We handle tile, fixtures, vanities, showers. The whole thing. Make it work better and look better.', features: ['Walk-in showers', 'Soaking tubs', 'Custom vanities', 'Tile work', 'Ventilation'] },
-  { title: 'Room Additions', description: 'Need more space? We can add on. Bedrooms, offices, in-law suites. We handle permits and make it look like it was always there.', features: ['Bedrooms', 'Sunrooms', 'Home offices', 'In-law suites', 'Garage conversions'] },
-  { title: 'Whole-Home Renovation', description: 'Sometimes you love the bones but hate everything else. We can gut it and start fresh while keeping what matters.', features: ['Full remodels', 'Open concept', 'Historical restoration', 'Modern updates', 'Structural changes'] },
-  { title: 'Interior Updates', description: 'Not ready for a full remodel? Fresh paint, new trim, updated fixtures. Small changes that make a big difference.', features: ['Drywall & paint', 'Trim & molding', 'Built-ins', 'Fireplace updates', 'Ceiling work'] },
-  { title: 'System Upgrades', description: "Old wiring, outdated plumbing, or HVAC that's on its last legs? We update the stuff behind the walls too.", features: ['Electrical', 'Plumbing', 'HVAC', 'Insulation', 'Smart home'] },
+  { title: 'Kitchen renovations', description: 'Kitchens get the most use and show their age fastest. We do everything from cabinet refacing to complete gut-and-rebuild jobs.', features: ['Custom cabinetry', 'Countertops', 'Appliance install', 'Lighting', 'Flooring'] },
+  { title: 'Bathroom remodels', description: 'Outdated bathroom? We handle tile, fixtures, vanities, showers. The whole thing. Make it work better and look better.', features: ['Walk-in showers', 'Soaking tubs', 'Custom vanities', 'Tile work', 'Ventilation'] },
+  { title: 'Room additions', description: 'Need more space? We can add on. Bedrooms, offices, in-law suites. We handle permits and make it look like it was always there.', features: ['Bedrooms', 'Sunrooms', 'Home offices', 'In-law suites', 'Garage conversions'] },
+  { title: 'Whole-home renovation', description: 'Sometimes you love the bones but hate everything else. We can gut it and start fresh while keeping what matters.', features: ['Full remodels', 'Open concept', 'Historical restoration', 'Modern updates', 'Structural changes'] },
+  { title: 'Interior updates', description: 'Not ready for a full remodel? Fresh paint, new trim, updated fixtures. Small changes that make a big difference.', features: ['Drywall & paint', 'Trim & molding', 'Built-ins', 'Fireplace updates', 'Ceiling work'] },
+  { title: 'System upgrades', description: "Old wiring, outdated plumbing, or HVAC that's on its last legs? We update the stuff behind the walls too.", features: ['Electrical', 'Plumbing', 'HVAC', 'Insulation', 'Smart home'] },
 ]
 
 const process = [
-  { step: '01', title: 'We Come Take a Look', description: "We visit your home, see what you're working with, talk about what you want, and give you a real number." },
-  { step: '02', title: 'Plan It Out', description: 'We nail down the layout, pick materials, and figure out all the details before demo day. Fewer surprises that way.' },
-  { step: '03', title: 'Prep Work', description: 'We protect the rest of your house, set up work areas, and start demo. We try to keep the mess contained.' },
-  { step: '04', title: 'The Work', description: 'This is where it happens. We work efficiently and keep you posted on progress.' },
-  { step: '05', title: 'Wrap Up', description: "Finishing touches, cleanup, and a walkthrough with you to make sure everything's right." },
+  { step: '01', title: 'We come take a look', description: "We visit your home, see what you're working with, talk about what you want, and give you a real number." },
+  { step: '02', title: 'Plan it out', description: 'We nail down the layout, pick materials, and figure out all the details before demo day. Fewer surprises that way.' },
+  { step: '03', title: 'Prep work', description: 'We protect the rest of your house, set up work areas, and start demo. We try to keep the mess contained.' },
+  { step: '04', title: 'The work', description: 'This is where it happens. We work efficiently and keep you posted on progress.' },
+  { step: '05', title: 'Wrap up', description: "Finishing touches, cleanup, and a walkthrough with you to make sure everything's right." },
 ]
 
 const faqs = [
@@ -47,21 +47,21 @@ const faqJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
   <PageHero
-    label="Home Renovation"
-    title="Home Remodeling & Renovation"
+    label="Home renovation"
+    title="Home remodeling & renovation"
     description="Love where you live but hate how it looks? We fix that. Kitchens, bathrooms, additions, or the whole house. We make old homes work like new ones."
-    ctaLabel="Get a Quote"
+    ctaLabel="Get a quote"
   />
   <Breadcrumbs items={[
     { name: 'Home', href: '/' },
     { name: 'Home Remodeling' },
   ]} />
 
-  <section class="py-20 lg:py-28 bg-stone-50">
+  <section class="py-20 lg:py-28">
     <div class="container-wide section-padding">
       <div class="max-w-3xl mx-auto text-center">
-        <span class="section-label">Home Remodeling</span>
-        <h2 class="section-title">Make Your House Work for You</h2>
+        <span class="section-label">Home remodeling</span>
+        <h2 class="section-title">Make your house work for you</h2>
         <div class="mt-6 space-y-4 text-stone-600 leading-relaxed text-left sm:text-center">
           <p>
             Houses don&apos;t age gracefully. Kitchens get outdated, bathrooms stop working right, and
@@ -79,25 +79,20 @@ const faqJsonLd = {
   <section class="py-20 lg:py-28 bg-white">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">What We Do</span>
-        <h2 class="section-title">Remodeling Services</h2>
+        <span class="section-label">What we do</span>
+        <h2 class="section-title">Remodeling services</h2>
         <p class="section-subtitle mx-auto">Updates and remodels for every part of your home.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
         {subServices.map((service, index) => (
-          <div class="card p-8">
-            <span class="text-sm font-mono text-stone-400 mb-3 block">0{index + 1}</span>
-            <h3 class="font-display text-xl font-semibold text-stone-900 mb-3">{service.title}</h3>
-            <p class="text-stone-600 mb-6 leading-relaxed">{service.description}</p>
-            <ul class="space-y-1.5 pt-5 border-t border-stone-100">
-              {service.features.map((feature) => (
-                <li class="flex items-baseline gap-2.5 text-sm text-stone-500">
-                  <span class="text-ridge-400" aria-hidden="true">&middot;</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+          <div class="border-t border-stone-300 pt-5">
+            <span class="font-display text-lg text-stone-400 mb-2 block" aria-hidden="true">0{index + 1}</span>
+            <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{service.title}</h3>
+            <p class="text-stone-600 mb-5 leading-relaxed">{service.description}</p>
+            <p class="text-sm text-stone-500 leading-relaxed">
+              {service.features.join(' · ')}
+            </p>
           </div>
         ))}
       </div>
@@ -107,21 +102,19 @@ const faqJsonLd = {
   <section class="py-20 lg:py-28 bg-ridge-50">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">How It Works</span>
-        <h2 class="section-title">Our Remodeling Process</h2>
+        <span class="section-label">How it works</span>
+        <h2 class="section-title">Our remodeling process</h2>
         <p class="section-subtitle mx-auto">Here&apos;s how it goes from start to finish.</p>
       </div>
 
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-3xl mx-auto">
         {process.map((step, index) => (
-          <div class="flex gap-6 mb-8 last:mb-0">
-            <div class="flex-shrink-0">
-              <div class="w-16 h-16 bg-ridge-600 text-white rounded-full flex items-center justify-center font-display text-xl font-bold">
-                {step.step}
-              </div>
-              {index < process.length - 1 && <div class="w-0.5 h-16 bg-ridge-200 mx-auto mt-2"></div>}
+          <div class="flex gap-6 sm:gap-10">
+            <div class="flex flex-col items-center flex-shrink-0 w-12">
+              <span class="font-display text-2xl sm:text-3xl font-semibold text-ridge-700 leading-none" aria-hidden="true">{step.step}</span>
+              {index < process.length - 1 && <div class="w-px flex-1 bg-stone-300 mt-4"></div>}
             </div>
-            <div class="pt-3">
+            <div class={index < process.length - 1 ? 'pb-12' : ''}>
               <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{step.title}</h3>
               <p class="text-stone-600 leading-relaxed">{step.description}</p>
             </div>
@@ -135,7 +128,7 @@ const faqJsonLd = {
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="section-label">FAQ</span>
-        <h2 class="section-title">Common Questions</h2>
+        <h2 class="section-title">Common questions</h2>
       </div>
 
       <div class="max-w-3xl mx-auto">
@@ -150,8 +143,8 @@ const faqJsonLd = {
   </section>
 
   <CTASection
-    heading="Ready to Update Your Home?"
+    heading="Ready to update your home?"
     description="Let's talk about what you want to change. Free estimates."
-    primaryLabel="Request Quote"
+    primaryLabel="Get a quote"
   />
 </BaseLayout>

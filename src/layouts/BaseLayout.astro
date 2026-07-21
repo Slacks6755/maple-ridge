@@ -87,14 +87,58 @@ const GA_ID = 'G-NEE25MJKMQ'
     </main>
     <Footer />
     <FloatingContact />
+    <div
+      id="copy-toast"
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-stone-900 text-white text-sm font-medium px-5 py-3 rounded-sm shadow-lg opacity-0 pointer-events-none transition-opacity duration-200"
+      role="status"
+      aria-live="polite"
+    ></div>
 
     <script>
       import { trackEvent } from '../lib/analytics'
+      import { contact } from '../data/contact'
+
       document.addEventListener('click', (e) => {
         const target = (e.target as Element | null)?.closest<HTMLElement>('[data-track]')
         if (!target) return
         const label = target.dataset.track
         if (label) trackEvent('click', 'contact', label)
+      })
+
+      let toastTimer: number | undefined
+      function showCopyToast(message: string) {
+        const toast = document.getElementById('copy-toast')
+        if (!toast) return
+        toast.textContent = message
+        toast.classList.remove('opacity-0')
+        window.clearTimeout(toastTimer)
+        toastTimer = window.setTimeout(() => toast.classList.add('opacity-0'), 2000)
+      }
+
+      async function copyContact(text: string) {
+        if (!text) return
+        try {
+          await navigator.clipboard.writeText(text)
+        } catch {
+          return
+        }
+        showCopyToast(`Copied ${text}`)
+      }
+
+      // Every click-to-copy works the same: copy, then confirm via the toast.
+      // Buttons opt in with data-copy. Phone links copy on desktop only —
+      // tel: is useless without a phone — and stay tap-to-call below lg
+      // (the same breakpoint as the header strip and FloatingContact).
+      document.addEventListener('click', (e) => {
+        const el = (e.target as Element | null)?.closest<HTMLElement>('button[data-copy], a[href^="tel:"]')
+        if (!el) return
+        if (el instanceof HTMLAnchorElement) {
+          if (!window.matchMedia('(min-width: 1024px)').matches) return
+          e.preventDefault()
+          void copyContact(contact.phone)
+        } else {
+          void copyContact(el.dataset.copy ?? '')
+        }
       })
     </script>
   </body>

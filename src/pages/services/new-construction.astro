@@ -9,20 +9,20 @@ const description =
   'Custom home construction in Southeast Tennessee. Maple Ridge Construction builds new homes in McMinn, Bradley, Polk & Monroe Counties. Licensed general contractor. Your plans, your land, built right.'
 
 const features = [
-  { title: 'Your Floor Plan', description: "We build what you want, not cookie-cutter plans. Tell us how you live and we'll design around that." },
-  { title: 'Energy Efficient', description: 'Good insulation, quality windows, proper sealing. It makes a real difference on your utility bills.' },
-  { title: 'Quality Materials', description: 'We use materials that last. No cutting corners with cheap stuff that falls apart in a few years.' },
-  { title: 'Built Right', description: "Every phase gets inspected. We build to code because that's the minimum, and we go beyond where it matters." },
-  { title: 'Skilled Crews', description: "Our people know what they're doing. Clean work, attention to detail, and pride in the finished product." },
-  { title: 'No Surprises', description: 'We keep you updated on progress and let you know if anything changes. No disappearing for weeks.' },
+  { title: 'Your floor plan', description: "We build what you want, not cookie-cutter plans. Tell us how you live and we'll design around that." },
+  { title: 'Energy efficient', description: 'Good insulation, quality windows, proper sealing. It makes a real difference on your utility bills.' },
+  { title: 'Quality materials', description: 'We use materials that last. No cutting corners with cheap stuff that falls apart in a few years.' },
+  { title: 'Built right', description: "Every phase gets inspected. We build to code because that's the minimum, and we go beyond where it matters." },
+  { title: 'Skilled crews', description: "Our people know what they're doing. Clean work, attention to detail, and pride in the finished product." },
+  { title: 'No surprises', description: 'We keep you updated on progress and let you know if anything changes. No disappearing for weeks.' },
 ]
 
 const process = [
-  { step: '01', title: "Let's Talk", description: 'We sit down and figure out what you want to build, what you can spend, and when you need it done. Bring ideas, plans, Pinterest boards, whatever you have.' },
-  { step: '02', title: 'Design & Selections', description: 'We nail down the floor plan, pick out materials, and make all the decisions before we break ground. Changes are easier now than later.' },
-  { step: '03', title: 'Site Work', description: "If your lot needs prep, we handle it. Clearing, grading, utilities, foundation. If it's ready, we move straight to building." },
+  { step: '01', title: "Let's talk", description: 'We sit down and figure out what you want to build, what you can spend, and when you need it done. Bring ideas, plans, Pinterest boards, whatever you have.' },
+  { step: '02', title: 'Design & selections', description: 'We nail down the floor plan, pick out materials, and make all the decisions before we break ground. Changes are easier now than later.' },
+  { step: '03', title: 'Site work', description: "If your lot needs prep, we handle it. Clearing, grading, utilities, foundation. If it's ready, we move straight to building." },
   { step: '04', title: 'Build', description: 'Your home goes up. We keep you in the loop with regular updates, and you can visit the site whenever you want.' },
-  { step: '05', title: 'Walkthrough & Keys', description: "We go through everything together, make sure you're happy, and hand over the keys." },
+  { step: '05', title: 'Walkthrough & keys', description: "We go through everything together, make sure you're happy, and hand over the keys." },
 ]
 
 const faqs = [
@@ -47,21 +47,21 @@ const faqJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
   <PageHero
-    label="Custom Home Building"
-    title="New Home Construction"
+    label="Custom home building"
+    title="New home construction"
     description="Want to build new? We handle custom homes from scratch. Your plans, your land, your choices. We just make sure it gets built right."
-    ctaLabel="Start Your Build"
+    ctaLabel="Start your build"
   />
   <Breadcrumbs items={[
     { name: 'Home', href: '/' },
     { name: 'New Construction' },
   ]} />
 
-  <section class="py-20 lg:py-28 bg-stone-50">
+  <section class="py-20 lg:py-28">
     <div class="container-wide section-padding">
       <div class="max-w-3xl mx-auto">
-        <span class="section-label">Custom Home Building</span>
-        <h2 class="section-title">Built How You Want It</h2>
+        <span class="section-label">Custom home building</span>
+        <h2 class="section-title">Built how you want it</h2>
         <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
           <p>
             Building a house is a big deal. You&apos;re spending real money and you want it done right.
@@ -83,17 +83,17 @@ const faqJsonLd = {
   <section class="py-20 lg:py-28 bg-white">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">Our Services</span>
-        <h2 class="section-title">Complete Home Building Services</h2>
+        <span class="section-label">Our services</span>
+        <h2 class="section-title">Complete home building services</h2>
         <p class="section-subtitle mx-auto">
           From planning through completion, we handle every aspect of your new home construction.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
         {features.map((feature, index) => (
-          <div class="border-t-2 border-ridge-500 pt-5">
-            <span class="text-sm font-mono text-stone-400 mb-2 block">0{index + 1}</span>
+          <div class="border-t border-stone-300 pt-5">
+            <span class="font-display text-lg text-stone-400 mb-2 block" aria-hidden="true">0{index + 1}</span>
             <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{feature.title}</h3>
             <p class="text-stone-600 leading-relaxed">{feature.description}</p>
           </div>
@@ -105,21 +105,19 @@ const faqJsonLd = {
   <section class="py-20 lg:py-28 bg-ridge-50">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">How It Works</span>
-        <h2 class="section-title">From Plans to Keys</h2>
+        <span class="section-label">How it works</span>
+        <h2 class="section-title">From plans to keys</h2>
         <p class="section-subtitle mx-auto">Here&apos;s what building with us looks like.</p>
       </div>
 
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-3xl mx-auto">
         {process.map((step, index) => (
-          <div class="flex gap-6 mb-8 last:mb-0">
-            <div class="flex-shrink-0">
-              <div class="w-16 h-16 bg-ridge-600 text-white rounded-full flex items-center justify-center font-display text-xl font-bold">
-                {step.step}
-              </div>
-              {index < process.length - 1 && <div class="w-0.5 h-16 bg-ridge-200 mx-auto mt-2"></div>}
+          <div class="flex gap-6 sm:gap-10">
+            <div class="flex flex-col items-center flex-shrink-0 w-12">
+              <span class="font-display text-2xl sm:text-3xl font-semibold text-ridge-700 leading-none" aria-hidden="true">{step.step}</span>
+              {index < process.length - 1 && <div class="w-px flex-1 bg-stone-300 mt-4"></div>}
             </div>
-            <div class="pt-3">
+            <div class={index < process.length - 1 ? 'pb-12' : ''}>
               <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{step.title}</h3>
               <p class="text-stone-600 leading-relaxed">{step.description}</p>
             </div>
@@ -133,7 +131,7 @@ const faqJsonLd = {
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="section-label">FAQ</span>
-        <h2 class="section-title">Common Questions</h2>
+        <h2 class="section-title">Common questions</h2>
       </div>
 
       <div class="max-w-3xl mx-auto">
@@ -148,8 +146,8 @@ const faqJsonLd = {
   </section>
 
   <CTASection
-    heading="Ready to Build Your Home?"
+    heading="Ready to build your home?"
     description="Let's talk about what you have in mind. Free consultations and estimates."
-    primaryLabel="Get Free Estimate"
+    primaryLabel="Get a free estimate"
   />
 </BaseLayout>

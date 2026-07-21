@@ -1,0 +1,20 @@
+---
+// Copies `value` to the clipboard on click; the shared handler + "Copied"
+// toast live in BaseLayout, so any page can use this without its own script.
+interface Props {
+  value: string
+  label: string
+  track: string
+}
+
+const { value, label, track } = Astro.props
+---
+
+<button
+  type="button"
+  data-copy={value}
+  data-track={track}
+  class="inline-flex items-center px-4 py-2.5 text-sm font-medium rounded-sm border border-stone-300 text-stone-700 hover:border-ridge-500 hover:text-ridge-700 transition-colors"
+>
+  {label}
+</button>

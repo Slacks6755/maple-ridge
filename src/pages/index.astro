@@ -1,6 +1,5 @@
 ---
 import { Picture } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CTASection from '../components/CTASection.astro'
 import Reviews from '../components/Reviews.astro'
@@ -13,14 +12,13 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
 ---
 
 <BaseLayout>
-  <section class="relative bg-stone-900 overflow-hidden">
+  <section class="relative bg-stone-900 overflow-hidden texture-overlay">
     <div class="container-wide section-padding">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 py-16 lg:py-24">
         <div class="flex flex-col justify-center">
-          <div class="inline-flex items-center gap-2 text-ridge-400 text-sm font-medium mb-6">
-            <Icon name="lucide:map-pin" class="h-4 w-4" />
+          <span class="text-ridge-400 text-xs font-semibold uppercase tracking-[0.22em] mb-6">
             {contact.address.locality}, {contact.address.regionFull}
-          </div>
+          </span>
 
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight">
             General Contractor &amp; Home Builder in Southeast Tennessee
@@ -30,38 +28,34 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
             New construction, renovations, and land development across McMinn, Bradley, Polk, and Monroe Counties. Straightforward pricing, quality work.
           </p>
 
-          <div class="mt-8 flex flex-wrap gap-6">
-            <div class="flex items-center gap-2 text-stone-300">
-              <Icon name="lucide:shield" class="h-5 w-5 text-ridge-400" />
-              <span class="text-sm">Licensed &amp; Insured</span>
-            </div>
-            <div class="flex items-center gap-2 text-stone-300">
-              <Icon name="lucide:check-circle" class="h-5 w-5 text-ridge-400" />
-              <span class="text-sm">Locally Owned</span>
-            </div>
-          </div>
-
           <div class="mt-10 flex flex-col sm:flex-row gap-4">
             <a
               href="/contact"
-              class="group inline-flex items-center justify-center gap-3 bg-ridge-500 hover:bg-ridge-600 text-white px-8 py-4 rounded-lg font-medium transition-colors"
+              class="inline-flex items-center justify-center bg-ridge-500 hover:bg-ridge-600 text-white px-8 py-4 rounded-sm font-medium transition-colors"
             >
               Get a free quote
-              <Icon name="lucide:arrow-right" class="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href={contact.phoneHref}
-              class="inline-flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-lg font-medium transition-colors border border-white/10"
+              data-track="call_hero"
+              class="inline-flex items-center justify-center bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded-sm font-medium transition-colors border border-white/25"
             >
-              <Icon name="lucide:phone" class="h-5 w-5" />
-              {contact.phone}
+              <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
             </a>
           </div>
+
+          <p class="mt-10 pt-6 border-t border-white/10 text-xs uppercase tracking-[0.18em] text-stone-400">
+            Licensed &amp; insured
+            <span class="mx-2 text-stone-600" aria-hidden="true">&middot;</span>
+            Locally owned
+            <span class="mx-2 text-stone-600" aria-hidden="true">&middot;</span>
+            Free estimates
+          </p>
         </div>
 
         <div class="relative hidden lg:flex flex-col justify-center">
           <div class="grid grid-cols-12 gap-3">
-            <div class="col-span-5 overflow-hidden rounded-2xl bg-stone-800 aspect-[9/16]">
+            <div class="col-span-5 overflow-hidden rounded-lg bg-stone-800 aspect-[9/16]">
               <Picture
                 src={heroBathroom}
                 formats={['avif']}
@@ -75,7 +69,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
               />
             </div>
             <div class="col-span-7 flex flex-col gap-3">
-              <div class="flex-1 overflow-hidden rounded-2xl bg-stone-800">
+              <div class="flex-1 overflow-hidden rounded-lg bg-stone-800">
                 <Picture
                   src={heroKitchen}
                   formats={['avif']}
@@ -87,7 +81,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
                   class="w-full h-full object-cover"
                 />
               </div>
-              <div class="flex-1 overflow-hidden rounded-2xl bg-stone-800">
+              <div class="flex-1 overflow-hidden rounded-lg bg-stone-800">
                 <Picture
                   src={heroBarndo}
                   formats={['avif']}
@@ -106,37 +100,37 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
     </div>
   </section>
 
-  <section class="py-24 bg-white border-t border-stone-200">
+  <section class="py-24 bg-white">
     <div class="container-wide section-padding">
-      <div class="max-w-xl mb-16">
-        <h2 class="text-4xl font-display font-bold text-stone-900 mb-4">What we do</h2>
+      <div class="max-w-xl mb-14">
+        <span class="section-label">What we do</span>
+        <h2 class="text-4xl font-display font-bold text-stone-900 tracking-tight mb-4">Three things, done well</h2>
         <p class="text-lg text-stone-600">Full-service construction from start to finish.</p>
       </div>
 
-      <div class="grid lg:grid-cols-3 gap-6">
+      <div class="border-t border-stone-300">
         {services.map((service, index) => (
           <a
             href={service.href}
-            class="group relative bg-white p-8 rounded-2xl border border-stone-200 hover:border-ridge-300 hover:shadow-lg transition-all duration-300 flex flex-col"
+            class="group grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 border-b border-stone-200 transition-colors hover:bg-earth-50"
           >
-            <span class="text-sm font-mono text-stone-400 mb-4 block">0{index + 1}</span>
-            <h3 class="text-xl font-semibold text-stone-900 mb-3">{service.name}</h3>
-            <p class="text-stone-600 leading-relaxed flex-1">{service.description}</p>
-            <span class="mt-6 inline-flex items-center gap-2 text-ridge-700 font-medium">
-              Learn more
-              <Icon name="lucide:arrow-right" class="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </span>
+            <span class="md:col-span-1 font-display text-lg text-stone-400" aria-hidden="true">0{index + 1}</span>
+            <h3 class="md:col-span-4 font-display text-2xl font-semibold text-stone-900 group-hover:text-ridge-800 transition-colors">
+              {service.name}
+            </h3>
+            <p class="md:col-span-5 text-stone-600 leading-relaxed">{service.description}</p>
+            <span class="md:col-span-2 md:text-right text-link">Learn more</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="py-24 bg-stone-50">
+  <section class="py-24">
     <div class="container-wide section-padding">
       <div class="max-w-2xl mx-auto">
         <span class="section-label">A note from Zack</span>
-        <h2 class="text-3xl sm:text-4xl font-display font-bold text-stone-900 mb-8">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-stone-900 tracking-tight mb-8">
           How we work, and why
         </h2>
 
@@ -161,19 +155,17 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
           </p>
         </div>
 
-        <div class="mt-10 flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-stone-200">
+        <div class="mt-10 flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-stone-300">
           <div>
             <p class="font-display text-xl text-stone-900">Zack Newman</p>
             <p class="text-sm text-stone-500">Owner, Maple Ridge Construction</p>
           </div>
-          <div class="flex items-center gap-4">
-            <a href={contact.phoneHref} class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800">
-              <Icon name="lucide:phone" class="h-4 w-4" />
+          <div class="flex items-center gap-6">
+            <a href={contact.phoneHref} data-track="call_home_note" class="text-link">
               {contact.phone}
             </a>
-            <a href="/about" class="inline-flex items-center gap-2 text-stone-600 font-medium hover:text-ridge-700">
+            <a href="/about" class="text-link">
               More about us
-              <Icon name="lucide:arrow-right" class="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -181,26 +173,29 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
     </div>
   </section>
 
-  <section class="py-24 bg-white">
+  <section class="py-24 bg-white border-t border-stone-200">
     <div class="container-wide section-padding">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-display font-bold text-stone-900 mb-4">
+      <div class="text-center mb-10">
+        <span class="section-label">Where we work</span>
+        <h2 class="text-3xl font-display font-bold text-stone-900 tracking-tight mb-3">
           Serving Southeast Tennessee
         </h2>
         <p class="text-stone-600">McMinn, Bradley, Polk, and Monroe Counties</p>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-        {serviceAreas.map((area) => (
-          <a
-            href={`/service-areas/${area.slug}`}
-            class="inline-flex items-center gap-2 bg-white border border-stone-200 px-5 py-2.5 rounded-full text-stone-700 hover:border-ridge-300 hover:text-ridge-700 transition-colors"
-          >
-            <Icon name="lucide:map-pin" class="h-4 w-4 text-ridge-500" />
-            {area.name}
-          </a>
+      <p class="text-center max-w-3xl mx-auto font-display text-2xl sm:text-3xl leading-relaxed text-stone-900">
+        {serviceAreas.map((area, index) => (
+          <>
+            {index > 0 && <span class="mx-3 text-stone-300" aria-hidden="true">&middot;</span>}
+            <a
+              href={`/service-areas/${area.slug}`}
+              class="whitespace-nowrap underline decoration-stone-300 decoration-1 underline-offset-[6px] hover:decoration-ridge-600 hover:text-ridge-800 transition-colors"
+            >
+              {area.name}
+            </a>
+          </>
         ))}
-      </div>
+      </p>
     </div>
   </section>
 

@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/PageHero.astro'
 import CTASection from '../../components/CTASection.astro'
@@ -56,31 +55,25 @@ const faqJsonLd = {
     description="We work across four counties in Southeast Tennessee. McMinn, Bradley, Polk, and Monroe. Mostly out of Etowah, Athens, Cleveland, Madisonville, and Sweetwater, but we'll travel for the right job."
   />
 
-  <section class="py-20 lg:py-28 bg-stone-50">
+  <section class="py-20 lg:py-28">
     <div class="container-wide section-padding">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">Our Communities</span>
-        <h2 class="section-title">Primary Service Areas</h2>
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="section-label">Our communities</span>
+        <h2 class="section-title">Primary service areas</h2>
         <p class="section-subtitle mx-auto">
           Click on a location to learn more about our services in that area.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
         {serviceAreas.map((area) => (
-          <a href={`/service-areas/${area.slug}`} class="card-hover p-6 group">
-            <div class="flex items-center gap-3 mb-3">
-              <Icon name="lucide:map-pin" class="h-5 w-5 text-ridge-500 group-hover:text-ridge-600 transition-colors" />
-              <span class="text-sm text-stone-500">{area.county} County</span>
-            </div>
-            <h3 class="font-display text-xl font-semibold text-stone-900 mb-2 group-hover:text-ridge-700 transition-colors">
+          <a href={`/service-areas/${area.slug}`} class="group block border-t border-stone-300 pt-5">
+            <span class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 mb-2 block">{area.county} County</span>
+            <h3 class="font-display text-2xl font-semibold text-stone-900 mb-2 group-hover:text-ridge-800 transition-colors">
               {area.name}, TN
             </h3>
-            <p class="text-stone-600 text-sm mb-4">{area.description}</p>
-            <span class="inline-flex items-center text-ridge-600 font-medium text-sm group-hover:text-ridge-700">
-              Learn More
-              <Icon name="lucide:arrow-right" class="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </span>
+            <p class="text-stone-600 text-sm mb-4 leading-relaxed">{area.description}</p>
+            <span class="text-link text-sm">Learn more</span>
           </a>
         ))}
       </div>
@@ -89,24 +82,21 @@ const faqJsonLd = {
 
   <section class="py-20 lg:py-28 bg-white">
     <div class="container-wide section-padding">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-label">Towns We Work In</span>
-        <h2 class="section-title">Four Counties</h2>
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="section-label">Towns we work in</span>
+        <h2 class="section-title">Four counties</h2>
         <p class="section-subtitle mx-auto">
           Not on the list? Call anyway. If we can get to you, we'll come look.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
         {counties.map((county) => (
-          <div class="card p-6">
-            <h3 class="font-display text-lg font-semibold text-stone-900 mb-4">{county.name}</h3>
+          <div class="border-t border-stone-300 pt-5">
+            <h3 class="font-display text-lg font-semibold text-stone-900 mb-3">{county.name}</h3>
             <ul class="space-y-2">
               {county.cities.map((city) => (
-                <li class="flex items-center gap-2 text-sm text-stone-600">
-                  <div class="w-1.5 h-1.5 bg-ridge-400 rounded-full"></div>
-                  {city}
-                </li>
+                <li class="text-sm text-stone-600">{city}</li>
               ))}
             </ul>
           </div>
@@ -121,11 +111,11 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <section class="py-20 lg:py-28 bg-stone-50 border-t border-stone-100">
+  <section class="py-20 lg:py-28 border-t border-stone-200">
     <div class="container-wide section-padding">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="section-label">Before You Call</span>
-        <h2 class="section-title">Common Questions</h2>
+        <span class="section-label">Before you call</span>
+        <h2 class="section-title">Common questions</h2>
       </div>
 
       <div class="max-w-3xl mx-auto">

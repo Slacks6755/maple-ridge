@@ -6,10 +6,11 @@ import { reviews } from '../data/reviews'
 
 {
   reviews.length > 0 && (
-    <section class="py-24 bg-stone-50">
+    <section class="py-24">
       <div class="container-wide section-padding">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-display font-bold text-stone-900 mb-4">What clients say</h2>
+          <span class="section-label">Reviews</span>
+          <h2 class="text-3xl font-display font-bold text-stone-900 tracking-tight mb-3">What clients say</h2>
           <p class="text-stone-600">Real reviews from Google</p>
         </div>
 
@@ -37,10 +38,9 @@ import { reviews } from '../data/reviews'
             href={contact.googleBusinessUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-ridge-700 font-medium hover:text-ridge-800"
+            class="text-link"
           >
             Read all our reviews on Google
-            <Icon name="lucide:arrow-right" class="h-4 w-4" />
           </a>
         </div>
       </div>
