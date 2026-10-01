@@ -20,7 +20,7 @@ Marketing/lead-gen site for Maple Ridge Construction & Development (owner: Zack 
 
 ## Structure
 
-- `src/pages/` — the full page set: home, about, contact, projects (single-page portfolio), 3 service pages (`services/*.astro`, static files, not a dynamic route), service-areas index + `[slug]` city pages, 404, `sitemap.xml.ts`.
+- `src/pages/` — the full page set: home, about, contact, projects (single-page portfolio), subcontractors (onboarding form that posts to JobTread, not Netlify — field `name`s must match the JobTread form), 3 service pages (`services/*.astro`, static files, not a dynamic route), service-areas index + `[slug]` city pages, 404, `sitemap.xml.ts`.
 - `src/data/` — single source of truth; no hardcoded contact info or service lists in pages:
   - `contact.ts` — phone/email/address/hours/owner. Use `contact.phoneHref` for `tel:`, `` `sms:${contact.phoneRaw}` `` for texts.
   - `services.ts` — 3 services (New Construction, Remodeling, Land Development) with slugs + hrefs.

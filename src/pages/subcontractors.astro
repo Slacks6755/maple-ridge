@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import { contact } from '../data/contact'
+
+const title = 'Subcontractor Onboarding | Maple Ridge Construction'
+const description = `Subcontractors and trades in Southeast Tennessee: send Maple Ridge Construction your contact info, license number, W-9, and certificate of insurance to get set up to work with us.`
+
+// This form posts to JobTread, not Netlify. JobTread's web-form.js finds the
+// form by data-jobtread-web-form and reads fields by `name`, so the markup is
+// ours to style — but every name/value below must match the form in JobTread
+// exactly. If Zack changes the form there, re-copy the names from the new
+// embed code.
+const jobtreadFormKey = '22TXyPRdRi58MXMfuJQxR9qJETRWtJMXn3'
+
+const trades = [
+  'Carpentry',
+  'Concrete',
+  'Demolition',
+  'Design',
+  'Electrical',
+  'Engineering',
+  'Excavation',
+  'Foundation',
+  'Framing, Siding, Walls',
+  'HVAC',
+  'Inspections',
+  'Landscaping',
+  'Masonry',
+  'Painting',
+  'Plumbing',
+  'Rentals',
+  'Roofing',
+  'Tile',
+  'Other',
+]
+
+const inputClass =
+  'w-full px-4 py-3 rounded-sm border border-stone-300 bg-white focus:border-ridge-500 focus:ring-2 focus:ring-ridge-500/20 transition-colors'
+const labelClass = 'block text-sm font-medium text-stone-700 mb-2'
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    label="Subcontractors"
+    title="Work with Maple Ridge"
+    description="Trades and crews in Southeast Tennessee: fill this out once to get set up in our system."
+    showCTA={false}
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-wide section-padding">
+      <div class="grid lg:grid-cols-[1fr,1.25fr] gap-16">
+        <div>
+          <span class="section-label">Before you start</span>
+          <h2 class="section-title">What to have ready</h2>
+
+          <ul class="mt-10 border-t border-stone-300">
+            <li class="py-5 border-b border-stone-200 text-stone-700">Your business name and contact info</li>
+            <li class="py-5 border-b border-stone-200 text-stone-700">License number, if your trade needs one</li>
+            <li class="py-5 border-b border-stone-200 text-stone-700">Your W-9</li>
+            <li class="py-5 border-b border-stone-200 text-stone-700">Certificate of insurance (COI)</li>
+          </ul>
+
+          <p class="mt-8 text-stone-600">
+            You can upload the W-9 and COI at the end of the form as a PDF or photo.
+            Questions? Call or text {contact.owner.split(' ')[0]} at
+            <a href={contact.phoneHref} data-track="call_subcontractors" class="text-link whitespace-nowrap">{contact.phone}</a>.
+          </p>
+        </div>
+
+        <div class="card p-8 lg:p-10">
+          <h3 class="font-display text-2xl font-semibold text-stone-900 tracking-tight mb-2">
+            Subcontractor onboarding
+          </h3>
+          <p class="text-sm text-stone-500 mb-8">Fields marked * are required.</p>
+
+          <form
+            class="space-y-6"
+            data-jobtread-web-form="true"
+            data-key={jobtreadFormKey}
+            data-success-message="Thank you for completing the initial onboarding with Maple Ridge Construction!"
+            data-success-url="https://www.mapleridgedev.com/"
+          >
+            <div>
+              <label for="sub-name" class={labelClass}>First &amp; last name *</label>
+              <input id="sub-name" type="text" name="contact.name" required autocomplete="name" class={inputClass} />
+            </div>
+
+            <div>
+              <label for="sub-business" class={labelClass}>Business name / DBA</label>
+              <input id="sub-business" type="text" name="contact.title" autocomplete="organization" class={inputClass} />
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="sub-phone" class={labelClass}>Phone *</label>
+                <input id="sub-phone" type="tel" name="account.custom.22PeDyENPVZK" required autocomplete="tel" class={inputClass} />
+              </div>
+              <div>
+                <label for="sub-email" class={labelClass}>Email</label>
+                <input id="sub-email" type="email" name="account.custom.22PeDyENNNsS" autocomplete="email" class={inputClass} />
+              </div>
+            </div>
+
+            <div>
+              <label for="sub-address" class={labelClass}>Mailing address</label>
+              <textarea id="sub-address" name="location.address" rows="3" autocomplete="street-address" class={`${inputClass} resize-none`}></textarea>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="sub-website" class={labelClass}>Website</label>
+                <input id="sub-website" type="text" name="account.custom.22PfJHijviLZ" autocomplete="url" class={inputClass} />
+              </div>
+              <div>
+                <label for="sub-license" class={labelClass}>License # (if applicable)</label>
+                <input id="sub-license" type="text" name="account.custom.22PeM3BMsir5" class={inputClass} />
+              </div>
+            </div>
+
+            <fieldset>
+              <legend class={labelClass}>Trade(s)</legend>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 rounded-sm border border-stone-300 px-4 py-2">
+                {trades.map((trade) => (
+                  <label class="flex items-center gap-3 py-2 text-stone-700 cursor-pointer">
+                    <input type="checkbox" name="account.custom.22PeDyENSrdz" value={trade} class="h-4 w-4 shrink-0 accent-ridge-600" />
+                    {trade}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class={labelClass}>Do you have a W-9? *</legend>
+              <div class="flex gap-8">
+                {['Yes', 'No'].map((answer, index) => (
+                  <label class="flex items-center gap-3 py-1 text-stone-700 cursor-pointer">
+                    <input type="radio" name="account.custom.22PeDyENdJnM" value={answer} required={index === 0} class="h-4 w-4 accent-ridge-600" />
+                    {answer}
+                  </label>
+                ))}
+              </div>
+              <p class="text-xs text-stone-500 mt-2">
+                Need one? You can make a W-9 at
+                <a href="https://www.createw9.com" target="_blank" rel="noopener noreferrer" class="text-link">createw9.com</a>.
+              </p>
+            </fieldset>
+
+            <div>
+              <label for="sub-files" class={labelClass}>Upload W-9 &amp; COI</label>
+              <input
+                id="sub-files"
+                type="file"
+                name="account.files"
+                multiple
+                class="block w-full text-sm text-stone-600 file:mr-4 file:px-4 file:py-2.5 file:rounded-sm file:border file:border-stone-300 file:bg-white file:text-sm file:font-medium file:text-stone-700 hover:file:border-ridge-500 file:cursor-pointer"
+              />
+              <p class="text-xs text-stone-500 mt-2">PDF or photo. 50 MB total max.</p>
+            </div>
+
+            <button
+              type="submit"
+              data-submit-button
+              data-track="submit_subcontractor_form"
+              class="btn-primary w-full justify-center disabled:cursor-not-allowed"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline async src="https://app.jobtread.com/web-form.js"></script>
+</BaseLayout>

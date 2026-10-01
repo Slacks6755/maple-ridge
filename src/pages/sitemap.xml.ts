@@ -11,6 +11,7 @@ const paths = [
   '/about',
   '/contact',
   '/projects',
+  '/subcontractors',
   '/services/new-construction',
   '/services/remodeling',
   '/services/land-development',

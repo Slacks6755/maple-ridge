@@ -18,16 +18,19 @@ const mainLinks = [
     <div class="container-wide section-padding">
       <div class="flex justify-between items-center py-2 text-sm">
         <span class="text-xs uppercase tracking-[0.18em] text-ridge-200">Licensed General Contractor &middot; Southeast Tennessee</span>
-        <button
-          type="button"
-          data-copy={contact.phone}
-          data-track="copy_phone_header"
-          title="Copy phone number"
-          class="group inline-flex items-center gap-2.5 py-0.5 text-sm font-medium text-white transition-colors"
-        >
-          {contact.phone}
-          <span class="text-[0.65rem] uppercase tracking-[0.18em] text-ridge-300 group-hover:text-white transition-colors">Copy</span>
-        </button>
+        <div class="flex items-center gap-8">
+          <a href="/subcontractors" class="text-ridge-200 hover:text-white transition-colors">Subcontractors</a>
+          <button
+            type="button"
+            data-copy={contact.phone}
+            data-track="copy_phone_header"
+            title="Copy phone number"
+            class="group inline-flex items-center gap-2.5 py-0.5 text-sm font-medium text-white transition-colors"
+          >
+            {contact.phone}
+            <span class="text-[0.65rem] uppercase tracking-[0.18em] text-ridge-300 group-hover:text-white transition-colors">Copy</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +45,7 @@ const mainLinks = [
         </div>
       </a>
 
-      <div class="hidden lg:flex items-center gap-8">
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8 whitespace-nowrap">
         <div class="relative group">
           <button
             type="button"
@@ -153,6 +156,9 @@ const mainLinks = [
             {item.name}
           </a>
         ))}
+        <a href="/subcontractors" class="block px-2 py-2 text-stone-700 hover:text-ridge-600 font-medium">
+          Subcontractors
+        </a>
       </div>
 
       <div class="pt-4 border-t border-stone-100 mt-2 space-y-3">

@@ -51,3 +51,4 @@ Photo portfolio (before/after where applicable) at [Projects](https://www.mapler
 - [Projects](https://www.mapleridgedev.com/projects): Photo portfolio of completed builds and remodels, with before/after where applicable.
 - [Service Areas](https://www.mapleridgedev.com/service-areas): All cities and counties served.
 - [Contact](https://www.mapleridgedev.com/contact): Free estimate form, phone, email, hours, and service-area map.
+- [Subcontractors](https://www.mapleridgedev.com/subcontractors): Onboarding form for trades and subcontractors (contact info, license number, W-9, and certificate of insurance).
