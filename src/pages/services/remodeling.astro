@@ -3,6 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/PageHero.astro'
 import CTASection from '../../components/CTASection.astro'
 import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import ProjectPhotos from '../../components/ProjectPhotos.astro'
+import kitchenBefore from '../../assets/projects/central-house/before/IMG_7153.webp'
+import kitchenAfter from '../../assets/projects/central-house/after/IMG_2378.webp'
 
 const title = 'Home Remodeling in Southeast TN | Maple Ridge Construction'
 const description =
@@ -73,6 +76,15 @@ const faqJsonLd = {
           </p>
         </div>
       </div>
+
+      <ProjectPhotos
+        class="mt-14 max-w-5xl mx-auto"
+        project="central-house"
+        photos={[
+          { src: kitchenBefore, alt: 'Kitchen before the remodel, with wood paneling and bare concrete floor', tag: 'Before' },
+          { src: kitchenAfter, alt: 'The same kitchen after the remodel, with white cabinets and new flooring', tag: 'After' },
+        ]}
+      />
     </div>
   </section>
 

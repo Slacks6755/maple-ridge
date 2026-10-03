@@ -1,0 +1,411 @@
+---
+// "Raw land to move-in day": an elevation drawing that builds itself — the
+// lot is cleared and graded, then the house goes up phase by phase.
+//
+// Self-contained: everything lives in this folder. To remove it, delete the
+// folder and its <BuildSequence /> line + import in src/pages/index.astro.
+//
+// Geometry and timing: scene.ts. Playback: player.ts. With no JS or with
+// prefers-reduced-motion, the finished drawing shows as a still image.
+import { getImage } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import treePng from '../../assets/brand/tree.png'
+import treeSilhouette from './tree-silhouette.png'
+import { DIM, DOZER, G, LOT, parts, phases, SIDING, SPEED, TOTAL, walls } from './scene'
+
+interface Props {
+  kicker?: string
+  heading?: string
+  intro?: string
+}
+
+const {
+  kicker = 'From the ground up',
+  heading = 'Raw land to move-in day',
+  intro = "Here's how a new build goes, from the first day of dirt work to handing over the keys.",
+} = Astro.props
+
+const tree = await getImage({ src: treePng, width: 320, format: 'webp' })
+const TREE = { x: 800, y: 241, w: 160, h: 205.7 }
+
+const id = `bs${Math.random().toString(36).slice(2, 7)}`
+const url = (name: string | undefined) => (name ? `url(#${id}-${name})` : undefined)
+// Crop off empty sky; the drawing lives between y=128 and y=500.
+const viewBox = '0 128 1200 372'
+---
+
+<section class="bs py-20 lg:py-28 border-b border-stone-200" data-build-sequence data-total={TOTAL} data-speed={SPEED}>
+  <div class="container-wide section-padding">
+    <div class="grid lg:grid-cols-12 gap-6 lg:gap-12 items-end">
+      <div class="lg:col-span-7">
+        <span class="section-label">{kicker}</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-stone-900 tracking-tight">{heading}</h2>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="text-lg text-stone-600 leading-relaxed">{intro}</p>
+        <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="/services/new-construction" class="text-link">New construction</a>
+          <a href="/services/land-development" class="text-link">Land development</a>
+        </p>
+      </div>
+    </div>
+
+    <figure class="mt-12 lg:mt-16">
+      <div class="bs-stage">
+        <svg
+          viewBox={viewBox}
+          role="img"
+          aria-labelledby={`${id}-title`}
+          xmlns="http://www.w3.org/2000/svg"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <title id={`${id}-title`}>
+            Drawing of a brushy lot with a hill on it being cleared and graded by a bulldozer, a block foundation laid, and a
+            farmhouse framed, roofed, sided, and finished with a front porch beside a big maple tree.
+          </title>
+
+          <defs>
+            <pattern id={`${id}-earth`} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="6" class="hatch" />
+            </pattern>
+            <linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" />
+              <stop offset="1" stop-color="#000" />
+            </linearGradient>
+            <mask id={`${id}-under`} maskUnits="userSpaceOnUse" x="0" y={G} width="1200" height="30">
+              <rect x="0" y={G} width="1200" height="30" fill={`url(#${id}-fade)`} />
+            </mask>
+            <linearGradient id={`${id}-edge`} x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#000" />
+              <stop offset=".1" stop-color="#fff" />
+              <stop offset=".9" stop-color="#fff" />
+              <stop offset="1" stop-color="#000" />
+            </linearGradient>
+            <mask id={`${id}-edges`} maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="520">
+              <rect x="0" y="0" width="1200" height="520" fill={`url(#${id}-edge)`} />
+            </mask>
+            <mask id={`${id}-tree`} maskUnits="userSpaceOnUse" x={TREE.x} y={TREE.y} width={TREE.w} height={TREE.h}>
+              <image href={treeSilhouette.src} x={TREE.x} y={TREE.y} width={TREE.w} height={TREE.h} preserveAspectRatio="none" />
+            </mask>
+            <clipPath id={`${id}-graded`}>
+              <rect data-clip="graded" x={LOT.x0} y="380" width={LOT.x1 - LOT.x0} height="80" />
+            </clipPath>
+            <clipPath id={`${id}-rough`}>
+              <rect data-clip="rough" x={LOT.x1} y="380" width="0" height="80" />
+            </clipPath>
+            <clipPath id={`${id}-walls`}>
+              <path d={walls} />
+            </clipPath>
+            <clipPath id={`${id}-wipe`}>
+              <rect
+                data-a={SIDING.wipe}
+                data-bottom={SIDING.bottom}
+                data-h={SIDING.bottom - SIDING.top}
+                x="340"
+                y={SIDING.top}
+                width="400"
+                height={SIDING.bottom - SIDING.top}
+              />
+            </clipPath>
+          </defs>
+
+          {parts.map(p => {
+            const path = (
+              <path
+                d={p.d}
+                class:list={[p.cls, p.draw && 'bs-draw', p.gone && 'bs-gone']}
+                stroke-width={p.w}
+                pathLength={p.draw ? '1' : undefined}
+                fill={url(p.fill)}
+                mask={url(p.mask)}
+                data-a={p.a}
+              />
+            )
+            const placed = p.at ? <g transform={`translate(${p.at[0]} ${p.at[1]})`}>{path}</g> : path
+            return p.clip ? <g clip-path={url(p.clip)}>{placed}</g> : placed
+          })}
+
+          <text x={DIM.x} y={DIM.y} text-anchor="middle" class="dim bs-gone" data-a={DIM.a}>{DIM.label}</text>
+
+          {/* ── the dozer (drawn facing right; origin at the back of the tracks) ── */}
+          <g
+            data-dozer
+            data-x0={DOZER.x0}
+            data-x1={DOZER.x1}
+            data-start={DOZER.start}
+            data-dur={DOZER.dur}
+            data-blade={DOZER.blade}
+            data-lot0={LOT.x0}
+            data-lot1={LOT.x1}
+            data-ground={G}
+            transform={`translate(${DOZER.x1} ${G})`}
+          >
+            <g>
+              <g transform={`scale(${DOZER.scale})`}>
+                {[0, 1, 2, 3].map(() => <circle data-puff cx="0" cy="-6" r="3" class="puff" stroke-width=".6" opacity="0" />)}
+                {[0, 1, 2].map(() => <circle data-exhaust cx="104" cy="-74" r="2" class="exhaust" stroke-width=".6" opacity="0" />)}
+                <g data-pile>
+                  <path d="M163 1.5C167 -14 183 -24 197 -16C205 -11 210 -4 214 1.5Z" class="dirt" stroke-width=".8" />
+                  <path d="M176 -12a1.6 1.6 0 1 0 .1 0M190 -17a1.8 1.8 0 1 0 .1 0M201 -8a1.4 1.4 0 1 0 .1 0M184 -4a1.2 1.2 0 1 0 .1 0" class="clod" />
+                </g>
+                {/* ripper */}
+                <path d="M8 -20L-5 -25M8 -26L-5 -31" class="ink" stroke-width="2.2" />
+                <path d="M-8 -33H-1L-1 -9Q-1 -3 -7 -1L-7.5 -4Q-5 -6 -5 -10L-8 -10Z" class="blade" stroke-width=".8" />
+                {/* undercarriage */}
+                <path d="M21 0H109A11 11 0 0 0 109 -22H21A11 11 0 0 0 21 0Z" class="track" stroke-width="1.2" />
+                <path data-tread d="M21 1.8H109A12.8 12.8 0 0 0 109 -23.8H21A12.8 12.8 0 0 0 21 1.8Z" class="tread" stroke-width="2.4" />
+                <path d="M22 -5H108A6 6 0 0 0 108 -17H22A6 6 0 0 0 22 -5Z" class="body" stroke-width=".9" />
+                <circle cx="21" cy="-11" r="9.6" class="teeth" stroke-width="1.6" />
+                <circle cx="21" cy="-11" r="8.4" class="body" stroke-width="1.1" />
+                <circle cx="21" cy="-11" r="3" class="body" stroke-width=".9" />
+                <circle cx="109" cy="-11" r="8" class="body" stroke-width="1.1" />
+                <circle cx="109" cy="-11" r="2.6" class="body" stroke-width=".9" />
+                {[40, 54, 68, 82, 95].map(x => <circle cx={x} cy="-7" r="3.2" class="body" stroke-width=".9" />)}
+                {/* push arm + lift cylinder */}
+                <path d="M60 -11L152 -8L152 -17L62 -20Z" class="steel" stroke-width="1" />
+                <path d="M118 -51L142 -40" class="cylinder" stroke-width="4.6" />
+                <path d="M138 -42L152 -35" class="rod" stroke-width="2" />
+                {/* deck, hood, grille, stack */}
+                <path d="M6 -27H128V-23H6Z" class="body" stroke-width="1" />
+                <path d="M62 -27V-54H122L131 -47V-27Z" class="body" stroke-width="1.2" />
+                <path d="M124 -45V-29M127.5 -45V-29M74 -46H112M74 -42H112M74 -38H112M70 -54V-57.5M114 -54V-57.5M66 -57.5H118" class="ink-2" stroke-width=".8" />
+                <path d="M102 -54V-70L107 -72" class="ink" stroke-width="2.2" />
+                <path d="M84 -54V-60H90V-54" class="body" stroke-width=".9" />
+                {/* cab */}
+                <path d="M20 -27V-88H60V-27Z" class="body" stroke-width="1.2" />
+                <path d="M24 -84H38V-52H24ZM42 -84H56V-52H42Z" class="glass" stroke-width=".9" />
+                <path d="M44 -52Q44 -61 49 -61Q54 -61 55 -55M49 -61V-64" class="ink-2" stroke-width="1" />
+                <circle cx="49" cy="-66.5" r="3" class="body" stroke-width=".9" />
+                <path d="M45 -68Q45 -73.5 49 -73.5Q53 -73.5 53 -68H54.5" class="hardhat" stroke-width=".9" />
+                <path d="M27 -58L35 -76M45 -58L53 -76" class="shine" stroke-width="1" />
+                <path d="M15 -88H65V-93H15Z" class="blade" stroke-width="1" />
+                <path d="M50 -46H55M62 -44V-31" class="ink" stroke-width="1" />
+                {/* blade */}
+                <path d="M146 -50C160 -44 168 -24 166 2L155 2C157 -18 153 -36 141 -45Z" class="blade" stroke-width="1" />
+                <path d="M155 2H167" class="steel" stroke-width="2" />
+              </g>
+            </g>
+          </g>
+
+          {/* ── the maple that stayed ── */}
+          <g>
+            <rect x={TREE.x} y={TREE.y} width={TREE.w} height={TREE.h} class="paper-fill" mask={`url(#${id}-tree)`} />
+            <image href={tree.src} x={TREE.x} y={TREE.y} width={TREE.w} height={TREE.h} opacity=".88" />
+          </g>
+        </svg>
+      </div>
+
+      <figcaption class="mt-4 flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.18em] text-stone-500">
+        <span>Fig. 1 · A new build, start to finish<span class="max-sm:hidden"> · Not to scale</span></span>
+        <button type="button" class="bs-control" data-control data-state="paused" aria-label="Play the animation">
+          <span class="bs-when-playing"><Icon name="lucide:pause" class="h-3.5 w-3.5" />Pause</span>
+          <span class="bs-when-paused"><Icon name="lucide:play" class="h-3.5 w-3.5" />Play</span>
+          <span class="bs-when-done"><Icon name="lucide:rotate-ccw" class="h-3.5 w-3.5" />Replay</span>
+        </button>
+      </figcaption>
+    </figure>
+
+    <ol class="mt-8 grid grid-cols-5 gap-2 md:gap-6">
+      {phases.map((ph, i) => (
+        <li data-phase data-state="done" data-start={ph.start} data-end={ph.end} data-title={ph.title} data-text={ph.text}>
+          <button type="button" class="bs-step">
+            <span class="bs-bar" aria-hidden="true"><span></span></span>
+            <span class="block font-display text-sm text-stone-400 mt-4">0{i + 1}</span>
+            <span class="max-md:sr-only block mt-1 font-display text-lg font-semibold text-stone-900">{ph.title}</span>
+            <span class="max-md:sr-only block mt-2 text-sm text-stone-600 leading-relaxed">{ph.text}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+    <div class="md:hidden mt-5 min-h-[5.5rem]" aria-hidden="true">
+      <p class="font-display text-lg font-semibold text-stone-900 whitespace-pre" data-now-title>05  {phases[4].title}</p>
+      <p class="mt-1 text-sm text-stone-600 leading-relaxed" data-now-text>{phases[4].text}</p>
+    </div>
+  </div>
+</section>
+
+{/* Hide the parts before first paint so the finished drawing never flashes. */}
+<script is:inline>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-build-sequence]:not(.is-armed)').forEach(el => el.classList.add('is-armed'))
+  }
+</script>
+
+<script>
+  import { mount } from './player'
+  document.querySelectorAll<HTMLElement>('[data-build-sequence]').forEach(mount)
+</script>
+
+<style>
+  .bs {
+    --ink: #3d3d38;
+    --ink-2: #6d6d63;
+    --ink-3: #a8a89e;
+    --faint: #d0d0c9;
+    --paper: #faf8f5;
+    --wall: #fffefb;
+    --wood: #a0825f;
+    --osb: #ece3d3;
+    --sage: #547454;
+    --sage-3: #a3baa3;
+    --sage-fill: #e4ebe4;
+    --glow: #f3dca6;
+    --dirt: #e5ddd0;
+    --machine: #ead9b5;
+  }
+
+  /* Full-bleed and cropped to the house on phones; whole drawing from ~720px up. */
+  .bs-stage {
+    overflow: hidden;
+    margin-inline: -1rem;
+  }
+  .bs-stage svg {
+    display: block;
+    width: max(100%, 720px);
+    height: auto;
+    margin-left: min(0px, calc((100% - 720px) / 2));
+  }
+  @media (min-width: 640px) {
+    .bs-stage {
+      margin-inline: 0;
+    }
+  }
+
+  /* strokes + fills */
+  .ink, .ink-2, .ink-3, .faint, .wood, .sage, .sage-3, .seam, .smoke, .shine, .brick-line, .downspout { fill: none; }
+  .ink { stroke: var(--ink); }
+  .ink-2 { stroke: var(--ink-2); }
+  .ink-3 { stroke: var(--ink-3); }
+  .faint { stroke: var(--faint); }
+  .wood { stroke: var(--wood); }
+  .sage { stroke: var(--sage); }
+  .sage-3 { stroke: var(--sage-3); }
+  .seam { stroke: var(--ink-2); }
+  .smoke { stroke: var(--ink-3); }
+  .shine { stroke: #fff; stroke-opacity: 0.85; }
+  .paper { fill: var(--paper); }
+  .paper-fill { fill: var(--paper); }
+  .hatch { stroke: var(--faint); stroke-width: 0.7; }
+  .block { fill: #e9e7e1; }
+  .osb { fill: var(--osb); stroke: #d4c5b0; }
+  .siding { fill: var(--wall); }
+  .trim { fill: var(--wall); stroke: var(--ink); }
+  .timber { fill: var(--wood); stroke: var(--ink); }
+  .roof { fill: var(--ink); }
+  .gutter { fill: var(--ink-2); stroke: var(--ink); }
+  .downspout { stroke: var(--ink-2); }
+  .brick { fill: #dccab5; }
+  .brick-line { stroke: #a0825f; }
+  .glass { fill: #eceee9; }
+  .glow { fill: var(--glow); }
+  .door { fill: var(--sage); }
+  .knob { fill: var(--ink); }
+  .halo { fill: var(--glow); fill-opacity: 0.45; }
+  .post { fill: var(--wall); stroke: var(--ink); }
+  .shrub { fill: var(--sage-fill); stroke: var(--sage); }
+  .mailbox { fill: #4a4a44; stroke: var(--ink); }
+  .mailbox-seam { fill: none; stroke: #8a8a7f; }
+  .flag { fill: #a8563f; stroke: #7a3f2e; }
+
+  /* the dozer */
+  .body { fill: var(--machine); stroke: var(--ink); }
+  .steel { fill: var(--ink-2); stroke: var(--ink); }
+  .track { fill: var(--ink-2); stroke: var(--ink); }
+  .tread { fill: none; stroke: var(--ink); stroke-dasharray: 2 2.6; }
+  .teeth { fill: none; stroke: var(--ink); stroke-dasharray: 1.6 1.6; }
+  .cylinder { fill: none; stroke: var(--ink-2); }
+  .rod { fill: none; stroke: #d0d0c9; }
+  .blade { fill: var(--ink); stroke: var(--ink); }
+  .dirt { fill: var(--dirt); stroke: #856a50; }
+  .clod { fill: #bfa88a; }
+  .hardhat { fill: #fff; stroke: var(--ink); }
+  .puff { fill: var(--dirt); stroke: #bfa88a; }
+  .exhaust { fill: #e3e3df; stroke: var(--ink-3); }
+  .dim {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    fill: var(--ink-2);
+  }
+
+  /* Line drawing: pathLength="1" + offset 1.01 (hidden) → 0 (drawn). */
+  .bs-draw { stroke-dasharray: 1 2; }
+  [data-a],
+  [data-pile] {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  [data-pile] { transform-origin: 0% 100%; }
+  /* Things that are gone in the finished drawing (scrub, stakes, string line). */
+  .bs-gone { opacity: 0; }
+
+  .is-armed .bs-draw { stroke-dashoffset: 1.01; }
+  .is-armed [data-a]:not(.bs-draw) { opacity: 0; }
+
+  /* phase list */
+  .bs-step {
+    display: block;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+  .bs-step:focus-visible {
+    outline: 2px solid #547454;
+    outline-offset: 4px;
+  }
+  .bs-bar {
+    position: relative;
+    display: block;
+    height: 1px;
+    background: #d0d0c9;
+  }
+  .bs-bar > span {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    height: 3px;
+    width: 100%;
+    background: #547454;
+    transform-origin: left;
+    transform: scaleX(var(--p, 1));
+  }
+  li[data-state='todo'] .bs-step > span:not(.bs-bar) {
+    color: #a8a89e;
+  }
+  .bs-step > span:not(.bs-bar) {
+    transition: color 0.3s;
+  }
+  li[aria-current='step'] .bs-step > span:nth-child(2) {
+    color: #374b37;
+  }
+  .bs-step:hover > span:nth-child(3) {
+    text-decoration: underline;
+    text-decoration-color: #a3baa3;
+    text-underline-offset: 4px;
+  }
+
+  /* play / pause / replay */
+  .bs-control {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: #4a4a44;
+    font-weight: 600;
+  }
+  .bs-control:hover { color: #263326; }
+  .bs-control > span {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .bs-control[data-state='playing'] .bs-when-playing,
+  .bs-control[data-state='paused'] .bs-when-paused,
+  .bs-control[data-state='done'] .bs-when-done {
+    display: inline-flex;
+  }
+  /* Before the player runs (or without JS) there's nothing to control. */
+  .bs:not(.is-ready) .bs-control { visibility: hidden; }
+</style>

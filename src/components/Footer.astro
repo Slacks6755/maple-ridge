@@ -5,144 +5,90 @@ import { services } from '../data/services'
 import { serviceAreas } from '../data/service-areas'
 
 const currentYear = new Date().getFullYear()
+
+const companyLinks = [
+  { name: 'Projects', href: '/projects' },
+  { name: 'About us', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+  { name: 'Subcontractors', href: '/subcontractors' },
+]
+
+const linkClass = 'text-stone-400 hover:text-white transition-colors'
+const headingClass = 'text-sm font-semibold text-white mb-4'
 ---
 
-<footer class="bg-stone-950 text-stone-300">
-  <div class="container-wide section-padding py-16 lg:py-20">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-      <div class="lg:col-span-1">
-        <a href="/" class="flex items-center gap-3 mb-6">
-          <Logo class="h-10 w-10" />
+<footer class="bg-stone-950 text-stone-400 text-sm">
+  <div class="container-wide section-padding py-16">
+    <div class="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-12">
+      <div class="col-span-2 lg:col-span-6">
+        <a href="/" class="inline-flex items-center gap-3">
+          <Logo class="h-12 w-auto invert" />
           <div class="flex flex-col">
             <span class="font-display font-semibold text-lg text-white leading-tight">Maple Ridge</span>
             <span class="text-[0.65rem] uppercase tracking-[0.14em] text-stone-400 leading-tight mt-0.5">Construction &amp; Development</span>
           </div>
         </a>
-        <p class="text-stone-400 text-sm leading-relaxed mb-8">
-          Licensed General Contractor serving Southeast Tennessee. New construction, remodeling, and land development.
+        <p class="mt-6 max-w-sm leading-relaxed">
+          Licensed general contractor in Etowah, TN. New construction, remodeling, and land development across McMinn, Bradley, Polk, and Monroe Counties.
         </p>
-        <dl class="space-y-4 text-sm">
-          <div>
-            <dt class="text-xs uppercase tracking-[0.18em] text-stone-500 mb-1">Phone</dt>
-            <dd>
-              <a href={contact.phoneHref} data-track="call_footer" class="text-stone-200 hover:text-white transition-colors">{contact.phone}</a>
-            </dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.18em] text-stone-500 mb-1">Email</dt>
-            <dd>
-              <a href={contact.emailHref} data-track="email_footer" class="text-stone-200 hover:text-white transition-colors">{contact.email}</a>
-            </dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.18em] text-stone-500 mb-1">Address</dt>
-            <dd class="text-stone-300">{contact.address.full}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.18em] text-stone-500 mb-1">Hours</dt>
-            <dd class="text-stone-300">{contact.hours}</dd>
-          </div>
-        </dl>
+        <ul class="mt-6 space-y-2">
+          <li>
+            <a href={contact.phoneHref} data-track="call_footer" class="text-white hover:text-ridge-300 transition-colors">{contact.phone}</a>
+          </li>
+          <li>
+            <a href={contact.emailHref} data-track="email_footer" class="text-white hover:text-ridge-300 transition-colors">{contact.email}</a>
+          </li>
+          <li>{contact.address.full}</li>
+          <li>{contact.hours}</li>
+        </ul>
       </div>
 
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 mb-6">Services</h3>
+      <nav class="lg:col-span-2" aria-label="Services">
+        <h3 class={headingClass}>Services</h3>
         <ul class="space-y-3">
           {services.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                class="text-stone-300 hover:text-white transition-colors text-sm"
-              >
-                {item.name}
-              </a>
-            </li>
+            <li><a href={item.href} class={linkClass}>{item.name}</a></li>
           ))}
         </ul>
-      </div>
+      </nav>
 
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 mb-6">Service areas</h3>
-        <ul class="grid grid-cols-2 gap-x-4 gap-y-3">
-          {serviceAreas.map((area) => (
-            <li>
-              <a
-                href={`/service-areas/${area.slug}`}
-                class="text-stone-300 hover:text-white transition-colors text-sm"
-              >
-                {area.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p class="text-stone-500 text-xs mt-4">
-          Serving McMinn, Bradley, Polk &amp; Monroe Counties
-        </p>
-      </div>
-
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500 mb-6">Company</h3>
+      <nav class="lg:col-span-2" aria-label="Service areas">
+        <h3 class={headingClass}>Service areas</h3>
         <ul class="space-y-3">
-          <li>
-            <a href="/projects" class="text-stone-300 hover:text-white transition-colors text-sm">
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="/about" class="text-stone-300 hover:text-white transition-colors text-sm">
-              About us
-            </a>
-          </li>
-          <li>
-            <a href="/subcontractors" class="text-stone-300 hover:text-white transition-colors text-sm">
-              Subcontractors
-            </a>
-          </li>
-          <li>
-            <a href="/contact" class="text-stone-300 hover:text-white transition-colors text-sm">
-              Contact
-            </a>
-          </li>
+          {serviceAreas.map((area) => (
+            <li><a href={`/service-areas/${area.slug}`} class={linkClass}>{area.name}</a></li>
+          ))}
         </ul>
-        <div class="mt-10 pt-8 border-t border-stone-800">
-          <p class="text-sm text-stone-400 mb-4">Ready to start your project?</p>
-          <a href="/contact" class="btn-primary text-sm">
-            Get a free quote
-          </a>
-        </div>
-      </div>
+      </nav>
+
+      <nav class="lg:col-span-2" aria-label="Company">
+        <h3 class={headingClass}>Company</h3>
+        <ul class="space-y-3">
+          {companyLinks.map((item) => (
+            <li><a href={item.href} class={linkClass}>{item.name}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </div>
 
   <div class="border-t border-stone-800">
-    <div class="container-wide section-padding py-6">
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-stone-500">
-        <p>
-          &copy; {currentYear} Maple Ridge Construction & Development. All rights reserved.
-        </p>
-        <div class="flex items-center gap-4 sm:gap-6">
-          <span class="hidden sm:inline">Licensed General Contractor &middot; Tennessee</span>
-          <a
-            href={contact.googleBusinessUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-stone-500 hover:text-stone-300 transition-colors text-sm"
-          >
-            Find us on Google
-          </a>
-          <a href="/sitemap.xml" class="text-stone-500 hover:text-stone-300 transition-colors text-sm">
-            Sitemap
-          </a>
-          <a
-            href="https://www.smbhelp.co"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-stone-500 hover:text-stone-300 transition-colors text-sm"
-            aria-label="Website by SMB Help"
-          >
-            Site by SMB Help
-          </a>
-        </div>
+    <div class="container-wide section-padding pt-6 pb-28 lg:pb-6 flex flex-col sm:flex-row justify-between gap-4 text-stone-500">
+      <p>&copy; {currentYear} Maple Ridge Construction &amp; Development</p>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <a href={contact.googleBusinessUrl} target="_blank" rel="noopener noreferrer" class="hover:text-stone-300 transition-colors">
+          Find us on Google
+        </a>
+        <a href="/sitemap.xml" class="hover:text-stone-300 transition-colors">Sitemap</a>
+        <a
+          href="https://www.smbhelp.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-stone-300 transition-colors"
+          aria-label="Website by SMB Help"
+        >
+          Site by SMB Help
+        </a>
       </div>
     </div>
   </div>

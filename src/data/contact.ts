@@ -13,8 +13,8 @@ export const contact = {
     country: 'US',
     full: '138 County Road 502, Etowah, TN 37331',
   },
-  hours: 'Mon–Fri: 8AM – 5PM',
-  hoursShort: '8AM–5PM',
+  hours: 'Mon–Fri, 8AM to 5PM',
+  hoursShort: '8AM to 5PM',
   hoursStructured: {
     days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] as const,
     opens: '08:00',

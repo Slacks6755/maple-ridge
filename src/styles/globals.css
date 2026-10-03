@@ -93,6 +93,16 @@
     mix-blend-mode: multiply;
   }
 
+  /* Faint contour lines (public/topo.svg), tinted with the element's text color. */
+  .topo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: currentColor;
+    -webkit-mask: url('/topo.svg') center / cover no-repeat;
+    mask: url('/topo.svg') center / cover no-repeat;
+  }
+
   .decorative-line {
     @apply w-12 h-1 bg-ridge-500 rounded-full;
   }

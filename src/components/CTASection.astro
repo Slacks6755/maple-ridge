@@ -16,8 +16,9 @@ const {
 } = Astro.props
 ---
 
-<section class="py-20 lg:py-24 bg-ridge-800 text-white texture-overlay">
-  <div class="container-wide section-padding">
+<section class="relative overflow-hidden py-20 lg:py-24 bg-ridge-800 text-white texture-overlay">
+  <div class="topo text-ridge-200/[0.08]" aria-hidden="true"></div>
+  <div class="container-wide section-padding relative">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-5">
         {heading}
