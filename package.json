@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "convert-photos": "node scripts/convert-photos.mjs"
+    "convert-photos": "node scripts/convert-photos.mjs",
+    "brand-kit": "python3 scripts/brand-kit/render.py"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",

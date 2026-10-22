@@ -7,6 +7,7 @@ Marketing/lead-gen site for Maple Ridge Construction & Development (owner: Zack 
 - Astro 5, fully static output. Tailwind CSS 3 (`@astrojs/tailwind`, `applyBaseStyles: false` — base styles live in `src/styles/globals.css`). Icons via `astro-icon` + Lucide (`lucide:*`). Images via Astro assets + sharp.
 - `npm run dev` / `npm run build` (→ `dist/`) / `npm run preview`
 - `npm run convert-photos` — converts/resizes new project photos (see `scripts/convert-photos.mjs`)
+- `npm run brand-kit` — regenerates every file under `public/brand/` (logos, business cards, social images, previews, zip) from `scripts/brand-kit/render.html`. Needs Google Chrome, `rsvg-convert` and `pdftocairo` (Homebrew `librsvg`, `poppler`). The tree vector `scripts/brand-kit/tree.svg` is traced from `src/assets/brand/tree.png` by `trace.py` (needs `potrace`).
 - Deploy: push to `main` → Netlify builds and publishes `dist/`. Config in `netlify.toml`.
 
 ## URL rules (important — this broke Search Console once)
@@ -20,7 +21,7 @@ Marketing/lead-gen site for Maple Ridge Construction & Development (owner: Zack 
 
 ## Structure
 
-- `src/pages/` — the full page set: home, about, contact, projects (single-page portfolio), subcontractors (onboarding form that posts to JobTread, not Netlify — field `name`s must match the JobTread form), 3 service pages (`services/*.astro`, static files, not a dynamic route), service-areas index + `[slug]` city pages, `roofing-athens-tn.astro` (SEO landing page for Athens roofing, deliberately not in the nav; linked from the Athens city page via `extraServices`), 404, `sitemap.xml.ts`.
+- `src/pages/` — the full page set: home, about, contact, projects (single-page portfolio), subcontractors (onboarding form that posts to JobTread, not Netlify — field `name`s must match the JobTread form), 3 service pages (`services/*.astro`, static files, not a dynamic route), service-areas index + `[slug]` city pages, `roofing-athens-tn.astro` (SEO landing page for Athens roofing, deliberately not in the nav; linked from the Athens city page via `extraServices`), `brand.astro` (unlisted brand-file downloads for Zack: noindex, not in nav/sitemap/llms.txt, files under `/brand/*` get `X-Robots-Tag: noindex` from netlify.toml), 404, `sitemap.xml.ts`.
 - `src/data/` — single source of truth; no hardcoded contact info or service lists in pages:
   - `contact.ts` — phone/email/address/hours/owner. Use `contact.phoneHref` for `tel:`, `` `sms:${contact.phoneRaw}` `` for texts.
   - `services.ts` — 3 services (New Construction, Remodeling, Land Development) with slugs + hrefs.

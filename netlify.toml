@@ -23,3 +23,9 @@
   from = "/services"
   to = "/"
   status = 301
+
+# Brand downloads (/brand page files): keep PDFs and images out of search results
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

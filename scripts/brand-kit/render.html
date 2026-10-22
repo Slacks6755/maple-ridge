@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Maple Ridge brand asset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=block" />
+<style>
+  /* Brand tokens: same values as tailwind.config.ts */
+  :root {
+    --green: #263326;   /* ridge-900 */
+    --cream: #faf8f5;   /* earth-50 */
+    --ink: #1c1c1a;
+    --muted: #5a5a52;   /* stone-700 */
+    --tan: #a0825f;     /* earth-600 */
+    --leaf: #374b37;    /* ridge-700: the green logo color */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: transparent; overflow: hidden; }
+  body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; }
+
+  #root { position: relative; transform-origin: 0 0; }
+  .canvas { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .on-green { background: var(--green); color: #fff; }
+  .on-cream { background: var(--cream); color: var(--ink); }
+  .ink { color: var(--ink); }
+  .white { color: #fff; }
+  .green { color: var(--leaf); }
+
+  .tree { display: block; width: auto; }
+
+  /* Lockups: tree, MAPLE RIDGE, then CONSTRUCTION & DEVELOPMENT */
+  .stack { display: flex; flex-direction: column; align-items: center; }
+  .row { display: flex; align-items: center; }
+  .words { display: flex; flex-direction: column; align-items: flex-start; }
+  .name { font-family: "Source Serif 4", serif; font-variation-settings: "opsz" 60; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; line-height: 1; white-space: nowrap; }
+  .sub { font-family: "DM Sans", sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; line-height: 1; white-space: nowrap; }
+  .on-cream .sub, .ink .sub { color: #3d3d38; }
+  .on-green .sub, .white .sub { color: rgba(255, 255, 255, .86); }
+  .green .sub { color: var(--leaf); }
+
+  .serif { font-family: "Source Serif 4", serif; font-variation-settings: "opsz" 60; font-weight: 600; }
+  .caps { text-transform: uppercase; font-weight: 500; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const C = {
+    phone: "(423) 506-2380",
+    email: "zack@mapleridgedev.com",
+    web: "mapleridgedev.com",
+  }
+  const TAG = "Construction &amp; Development"
+
+  // n = name font size. With a tagline, the tagline sets the width and the
+  // name is tracked out to match it, the way Zack's letterhead is set.
+  const words = (n, tagline) => `
+    <div class="name" style="font-size:${n}px">Maple Ridge</div>
+    ${tagline ? `<div class="sub" style="font-size:${n * 0.4}px; margin-top:${n * 0.36}px">${TAG}</div>` : ""}`
+
+  const stack = (treeH, n, { tagline = true, gap = 0.62 } = {}) => `
+    <div class="stack lockup">
+      <img class="tree" src="tree.svg" style="height:${treeH}px; margin-bottom:${n * gap}px" />
+      ${words(n, tagline)}
+    </div>`
+
+  const row = (treeH, n, { tagline = true } = {}) => `
+    <div class="row lockup">
+      <img class="tree" src="tree.svg" style="height:${treeH}px; margin-right:${n * 0.7}px" />
+      <div class="words">${words(n, tagline)}</div>
+    </div>`
+
+  const rule = (m1, m2) => `<div style="width:120px; height:2px; background:var(--tan); margin:${m1}px 0 ${m2}px"></div>`
+
+  const cardBack = (theme) => `
+    <div class="canvas ${theme}" style="display:block">
+      <img class="tree" src="tree.svg" style="position:absolute; top:150px; right:160px; height:260px" />
+      <div style="position:absolute; left:160px; top:150px">
+        <div class="serif" style="font-size:124px; line-height:1; letter-spacing:-.005em">Zack Newman</div>
+        <div class="caps" style="font-size:54px; letter-spacing:.18em; margin-top:36px; opacity:.8">Owner</div>
+        <div class="caps" style="font-size:46px; letter-spacing:.1em; margin-top:22px; opacity:.7">Maple Ridge ${TAG}</div>
+      </div>
+      <div style="position:absolute; left:160px; bottom:135px; font-size:74px; line-height:1.42">
+        <div style="font-weight:500">${C.phone}</div>
+        <div>${C.email}</div>
+        <div style="opacity:.75">${C.web}</div>
+      </div>
+    </div>`
+
+  const contact = (labelPx, phonePx, webPx, gap) => `
+    <div class="caps" style="font-size:${labelPx}px; letter-spacing:.22em; opacity:.75">Call or text Zack</div>
+    <div class="serif" style="font-size:${phonePx}px; margin-top:${gap}px; letter-spacing:.01em; line-height:1">${C.phone}</div>
+    <div style="font-size:${webPx}px; margin-top:${gap * 1.3}px; opacity:.85">${C.web}</div>`
+
+  const logoSet = (base, make) => ({
+    [`${base}-black`]: () => make("ink"),
+    [`${base}-white`]: () => make("white"),
+    [`${base}-green`]: () => make("green"),
+  })
+
+  const post = (theme) => `<div class="canvas ${theme}" style="flex-direction:column">
+      ${stack(340, 84)}
+      ${rule(70, 60)}
+      ${contact(32, 108, 40, 24)}
+    </div>`
+
+  const story = (theme) => `<div class="canvas ${theme}" style="flex-direction:column">
+      ${stack(620, 116)}
+      ${rule(140, 110)}
+      ${contact(40, 140, 48, 32)}
+    </div>`
+
+  const assets = {
+    // ---- Logos (transparent; trimmed to the art). One per color: black, white, green ----
+    ...logoSet("logo", (c) => `<div class="canvas ${c}">${stack(470, 92)}</div>`),
+    ...logoSet("logo-name", (c) => `<div class="canvas ${c}">${stack(470, 100, { tagline: false })}</div>`),
+    ...logoSet("logo-horizontal", (c) => `<div class="canvas ${c}">${row(340, 92)}</div>`),
+    ...logoSet("logo-horizontal-name", (c) => `<div class="canvas ${c}">${row(330, 100, { tagline: false })}</div>`),
+
+    // ---- Business cards, 3.5 x 2 in at 600 dpi ----
+    "card-front-cream": () => `<div class="canvas on-cream">${stack(470, 128)}</div>`,
+    "card-front-cream-name": () => `<div class="canvas on-cream">${stack(520, 140, { tagline: false, gap: 0.55 })}</div>`,
+    "card-back-cream": () => cardBack("on-cream"),
+    "card-front-green": () => `<div class="canvas on-green">${stack(470, 128)}</div>`,
+    "card-front-green-name": () => `<div class="canvas on-green">${stack(520, 140, { tagline: false, gap: 0.55 })}</div>`,
+    "card-back-green": () => cardBack("on-green"),
+
+    // ---- Social ----
+    "profile-tree-green": () => `<div class="canvas on-green"><img class="tree" src="tree.svg" style="height:580px" /></div>`,
+    "profile-tree-cream": () => `<div class="canvas on-cream"><img class="tree" src="tree.svg" style="height:580px" /></div>`,
+    "profile-name-green": () => `<div class="canvas on-green">${stack(430, 84, { tagline: false, gap: 0.55 })}</div>`,
+    "profile-name-cream": () => `<div class="canvas on-cream">${stack(430, 84, { tagline: false, gap: 0.55 })}</div>`,
+    "cover-green": () => `<div class="canvas on-green">${row(350, 92)}</div>`,
+    "cover-green-name": () => `<div class="canvas on-green">${row(330, 100, { tagline: false })}</div>`,
+    "cover-cream": () => `<div class="canvas on-cream">${row(350, 92)}</div>`,
+    "post-cream": () => post("on-cream"),
+    "post-green": () => post("on-green"),
+    "story-green": () => story("on-green"),
+    "story-cream": () => story("on-cream"),
+  }
+
+  // Letter-spacing adds a gap after the last letter; pull it back so text
+  // stays optically centered.
+  function trimTrailing(el) {
+    const ls = parseFloat(getComputedStyle(el).letterSpacing) || 0
+    el.style.marginRight = `-${ls}px`
+  }
+
+  function fitLockups() {
+    document.querySelectorAll(".name").forEach((name) => {
+      const sub = name.nextElementSibling?.classList.contains("sub") ? name.nextElementSibling : null
+      if (sub) {
+        trimTrailing(sub)
+        const target = sub.getBoundingClientRect().width
+        const base = parseFloat(getComputedStyle(name).letterSpacing)
+        name.style.marginRight = `-${base}px`
+        const natural = name.getBoundingClientRect().width
+        const ls = base + (target - natural) / (name.textContent.length - 1)
+        name.style.letterSpacing = `${ls}px`
+        name.style.marginRight = `-${ls}px`
+      } else {
+        trimTrailing(name)
+      }
+    })
+  }
+
+  // Tree color comes from separate vector files, not a CSS filter, so PDFs
+  // stay vector.
+  function treeColors() {
+    document.querySelectorAll(".white .tree, .on-green .tree").forEach((img) => (img.src = "tree-white.svg"))
+    document.querySelectorAll(".green .tree").forEach((img) => (img.src = "tree-green.svg"))
+  }
+
+  // PDF mode: size the page to the art (logos) or to the physical card.
+  function setupPrint(p) {
+    const root = document.getElementById("root")
+    let x = 0, y = 0, w = p.w, h = p.h
+    if (p.trim) {
+      const r = document.querySelector(".lockup").getBoundingClientRect()
+      const pad = Math.max(r.width, r.height) * 0.08
+      x = r.left - pad; y = r.top - pad; w = r.width + pad * 2; h = r.height + pad * 2
+    }
+    const k = p.k
+    root.style.transform = `scale(${k}) translate(${-x}px, ${-y}px)`
+    const style = document.createElement("style")
+    style.textContent = `@page { size: ${w * k}px ${h * k}px; margin: 0 }
+      html, body { width: ${w * k}px; height: ${h * k}px }`
+    document.head.append(style)
+  }
+
+  const params = Object.fromEntries(new URLSearchParams(location.hash.slice(1)))
+  const p = { name: params.a, w: +params.w, h: +params.h, mode: params.mode, trim: params.trim === "1", k: +params.k || 1 }
+  const root = document.getElementById("root")
+  root.style.width = `${p.w}px`
+  root.style.height = `${p.h}px`
+  root.innerHTML = (assets[p.name] || (() => `missing: ${p.name}`))()
+  treeColors()
+  document.fonts.ready.then(() => {
+    fitLockups()
+    if (p.mode === "pdf") setupPrint(p)
+  })
+</script>
+</body>
+</html>
