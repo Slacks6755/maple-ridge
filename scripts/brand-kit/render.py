@@ -27,6 +27,7 @@ GREEN = "#374b37"  # ridge-700, same as --leaf in render.html
 #   logo   - transparent PNG at 3x trimmed to the art, plus SVG + PDF vectors
 #   card   - PNG at 600 dpi plus a print PDF at the exact 3.5 x 2 in size
 #   image  - PNG at 2x
+#   sig    - email signature: drawn at 2x, trimmed to its box, opaque PNG
 ASSETS = {}
 for base, w, h in (
     ("logo", 1600, 1200),
@@ -52,6 +53,8 @@ for name, w, h in (
     ("story-cream", 1080, 1920),
 ):
     ASSETS[name] = ("social", w, h, "image")
+for name in ("email-signature", "email-signature-green", "email-signature-compact"):
+    ASSETS[name] = ("email", 1400, 500, "sig")
 
 
 def chrome(url, w, h, output_flag, scale=1):
@@ -87,16 +90,16 @@ def preview(png, name, size):
     img.save(PREVIEWS / f"{name}.webp", quality=88, method=6)
 
 
-def png(name, folder, w, h, scale, trim):
+def png(name, folder, w, h, scale, trim, pad=0.08):
     out = OUT / folder / f"{PREFIX}{name}.png"
     chrome(url(name, w, h), w, h, f"--screenshot={out}", scale)
     img = Image.open(out).crop((0, 0, w * scale, h * scale))
     if trim:
         img = img.convert("RGBA")
         art = img.crop(img.getchannel("A").getbbox())
-        pad = round(max(art.size) * 0.08)
-        img = Image.new("RGBA", (art.width + pad * 2, art.height + pad * 2), (0, 0, 0, 0))
-        img.paste(art, (pad, pad))
+        px = round(max(art.size) * pad)
+        img = Image.new("RGBA", (art.width + px * 2, art.height + px * 2), (0, 0, 0, 0))
+        img.paste(art, (px, px))
     else:
         img = img.convert("RGB")
     img.save(out, optimize=True)
@@ -124,6 +127,11 @@ def render(name, folder, w, h, kind):
         pdf(name, stem.with_suffix(".pdf"), w, h, k=96 / 600, trim=False)
         preview(out, name, 900)
         made = f"{size} png + print pdf"
+    elif kind == "sig":
+        out, size = png(name, folder, w, h, 1, trim=True, pad=0)
+        Image.open(out).convert("RGB").save(out, optimize=True)
+        preview(out, name, 900)
+        made = f"{size} png"
     else:
         out, size = png(name, folder, w, h, 2, trim=False)
         preview(out, name, 900)
@@ -150,22 +158,10 @@ def tree_files():
         print(f"logos/{PREFIX}tree-{color}  png + svg + pdf")
 
 
-def email_signature():
-    """Small horizontal logo for email signatures: 600 px wide, shown at 300."""
-    src = Image.open(OUT / "logos" / f"{PREFIX}logo-horizontal-black.png")
-    art = src.crop(src.getchannel("A").getbbox())
-    w = 600
-    img = art.resize((w, round(art.height * w / art.width)), Image.LANCZOS)
-    out = OUT / "logos" / f"{PREFIX}email-signature.png"
-    img.save(out, optimize=True)
-    preview(out, "email-signature", 900)
-    print(f"logos/{PREFIX}email-signature  {img.width}x{img.height}")
-
-
 def zip_all():
     out = OUT / f"{PREFIX}brand-kit.zip"
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-        for folder in ("logos", "business-cards", "social"):
+        for folder in ("logos", "business-cards", "social", "email"):
             for f in sorted((OUT / folder).iterdir()):
                 z.write(f, f"maple-ridge-brand-kit/{folder}/{f.name}")
     print(f"{out.name}  {out.stat().st_size // 1024 // 1024} MB")
@@ -177,10 +173,9 @@ if __name__ == "__main__":
         for n in names:
             render(n, *ASSETS[n])
         sys.exit()
-    for folder in ("logos", "business-cards", "social", "previews"):
+    for folder in ("logos", "business-cards", "social", "email", "previews"):
         shutil.rmtree(OUT / folder, ignore_errors=True)
     tree_files()
     for n in ASSETS:
         render(n, *ASSETS[n])
-    email_signature()
     zip_all()

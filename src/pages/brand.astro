@@ -86,12 +86,18 @@ const social = [
   },
 ]
 
+const signatures = [
+  { key: 'email-signature', title: 'Full', note: 'Name, title, phone, email, and website.' },
+  { key: 'email-signature-green', title: 'Full, green', note: 'Same info on the dark green.' },
+  { key: 'email-signature-compact', title: 'Short', note: 'Name, company, and phone. Good for quick replies.' },
+]
+
 const swatches = [
-  { name: 'Ridge green', hex: '#263326', use: 'Dark backgrounds' },
-  { name: 'Leaf green', hex: '#374b37', use: 'The green logo' },
-  { name: 'Cream', hex: '#faf8f5', use: 'Light backgrounds' },
-  { name: 'Ink', hex: '#1c1c1a', use: 'Text and the black logo' },
-  { name: 'Earth', hex: '#a0825f', use: 'Thin accent lines only' },
+  { name: 'Ridge green', hex: '#263326' },
+  { name: 'Leaf green', hex: '#374b37' },
+  { name: 'Cream', hex: '#faf8f5' },
+  { name: 'Ink', hex: '#1c1c1a' },
+  { name: 'Earth', hex: '#a0825f' },
 ]
 
 const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-offset-4 hover:decoration-ridge-700'
@@ -105,29 +111,10 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
     showCTA={false}
   />
 
-  <section class="py-16 lg:py-20 border-b border-stone-200">
-    <div class="container-wide section-padding grid lg:grid-cols-3 gap-10 lg:gap-12">
-      <div>
-        <h2 class="font-display text-2xl font-semibold text-stone-900">Get everything</h2>
-        <p class="mt-3 text-stone-600">Every file on this page in one zip.</p>
-        <a href={`${dir}/maple-ridge-brand-kit.zip`} download class="btn-primary mt-6">Download all (13 MB)</a>
-      </div>
-      <div>
-        <h2 class="font-display text-2xl font-semibold text-stone-900">Which file type?</h2>
-        <dl class="mt-4 space-y-3 text-stone-600">
-          <div><dt class="inline font-semibold text-stone-900">PNG.</dt> <dd class="inline">Everyday use: documents, websites, social media. Logos have see-through backgrounds.</dd></div>
-          <div><dt class="inline font-semibold text-stone-900">PDF.</dt> <dd class="inline">Send this to printers, sign shops, and embroidery shops. Stays sharp at any size.</dd></div>
-          <div><dt class="inline font-semibold text-stone-900">SVG.</dt> <dd class="inline">For designers and websites. Also stays sharp at any size.</dd></div>
-        </dl>
-      </div>
-      <div>
-        <h2 class="font-display text-2xl font-semibold text-stone-900">Which color?</h2>
-        <dl class="mt-4 space-y-3 text-stone-600">
-          <div><dt class="inline font-semibold text-stone-900">Black</dt> <dd class="inline">on white or light backgrounds.</dd></div>
-          <div><dt class="inline font-semibold text-stone-900">White</dt> <dd class="inline">on dark backgrounds and photos.</dd></div>
-          <div><dt class="inline font-semibold text-stone-900">Green</dt> <dd class="inline">for a softer look on white or cream.</dd></div>
-        </dl>
-      </div>
+  <section class="py-12 lg:py-14 border-b border-stone-200">
+    <div class="container-wide section-padding flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
+      <a href={`${dir}/maple-ridge-brand-kit.zip`} download class="btn-primary">Download everything (13 MB)</a>
+      <p class="text-stone-800">Every file on this page in one zip.</p>
     </div>
   </section>
 
@@ -150,7 +137,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
             </div>
             <div class="p-6 flex-1 flex flex-col">
               <h3 class="font-display text-xl font-semibold text-stone-900">{logo.title}</h3>
-              <p class="mt-1 text-stone-600">{logo.note}</p>
+              <p class="mt-1 text-stone-700">{logo.note}</p>
               <table class="mt-5 w-full text-sm">
                 <tbody>
                   {colors.map((c) => (
@@ -168,19 +155,6 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
             </div>
           </article>
         ))}
-
-        <article class="card flex flex-col">
-          <div class="aspect-[4/3] border-b border-stone-200 bg-white flex items-center justify-center p-8">
-            <img src={preview('email-signature')} alt="Email signature logo" loading="lazy" class="max-h-full max-w-full object-contain" />
-          </div>
-          <div class="p-6 flex-1 flex flex-col">
-            <h3 class="font-display text-xl font-semibold text-stone-900">Email signature</h3>
-            <p class="mt-1 text-stone-600">A small horizontal logo, ready to add to an email signature. Set it to about 300 pixels wide.</p>
-            <p class="mt-5 pt-2.5 border-t border-stone-200 text-sm text-right">
-              <a href={f('logos', 'email-signature', 'png')} download class={dl}>PNG</a>
-            </p>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -202,7 +176,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
             </div>
             <div class="p-6 flex-1 flex flex-col">
               <h3 class="font-display text-xl font-semibold text-stone-900">{card.title}</h3>
-              <p class="mt-1 text-stone-600">{card.note}</p>
+              <p class="mt-1 text-stone-700">{card.note}</p>
               <p class="mt-auto pt-5 flex justify-end gap-6 text-sm">
                 <a href={f('business-cards', card.key, 'pdf')} download class={dl}>Print PDF</a>
                 <a href={f('business-cards', card.key, 'png')} download class={dl}>PNG</a>
@@ -216,6 +190,33 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
 
   <section class="py-16 lg:py-20">
     <div class="container-wide section-padding">
+      <span class="section-label">Email</span>
+      <h2 class="section-title">Email signatures</h2>
+      <p class="section-subtitle">
+        Add one as a picture in your email signature settings and set it to about 500 pixels wide.
+      </p>
+
+      <div class="mt-12 grid md:grid-cols-2 gap-6">
+        {signatures.map((sig) => (
+          <article class="card flex flex-col">
+            <div class="bg-stone-100 px-6 py-10 border-b border-stone-200 flex items-center justify-center min-h-56">
+              <img src={preview(sig.key)} alt={`Email signature: ${sig.title.toLowerCase()}`} loading="lazy" class="w-full max-w-[500px] shadow-sm" />
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="font-display text-xl font-semibold text-stone-900">{sig.title}</h3>
+              <p class="mt-1 text-stone-700">{sig.note}</p>
+              <p class="mt-auto pt-5 text-sm text-right">
+                <a href={f('email', sig.key, 'png')} download class={dl}>PNG</a>
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-white border-y border-stone-200">
+    <div class="container-wide section-padding">
       <span class="section-label">Social media</span>
       <h2 class="section-title">Social media images</h2>
       <p class="section-subtitle">Made at double size so they stay sharp after Facebook and Instagram compress them.</p>
@@ -223,7 +224,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
       {social.map((group) => (
         <div class="mt-14">
           <h3 class="font-display text-2xl font-semibold text-stone-900">{group.title}</h3>
-          <p class="mt-1 text-stone-600 max-w-2xl">{group.note}</p>
+          <p class="mt-1 text-stone-700 max-w-2xl">{group.note}</p>
           <div class={`mt-6 grid gap-6 ${group.cols}`}>
             {group.items.map((item) => (
               <article class="card flex flex-col">
@@ -237,7 +238,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
                 </div>
                 <div class="p-5 flex-1 flex flex-col">
                   <h4 class="font-semibold text-stone-900">{item.title}</h4>
-                  {item.note && <p class="mt-1 text-sm text-stone-600">{item.note}</p>}
+                  {item.note && <p class="mt-1 text-sm text-stone-700">{item.note}</p>}
                   <p class="mt-auto pt-4 text-sm text-right">
                     <a href={f('social', item.key, 'png')} download class={dl}>PNG</a>
                   </p>
@@ -250,7 +251,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
     </div>
   </section>
 
-  <section class="py-16 lg:py-20 bg-white border-t border-stone-200">
+  <section class="py-16 lg:py-20">
     <div class="container-wide section-padding grid lg:grid-cols-[1.4fr,1fr] gap-12 lg:gap-16">
       <div>
         <span class="section-label">For designers</span>
@@ -261,8 +262,7 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
               <div class="h-16 border-b border-stone-200" style={`background:${s.hex}`}></div>
               <div class="p-3 text-sm">
                 <p class="font-semibold text-stone-900">{s.name}</p>
-                <p class="font-mono text-stone-600">{s.hex}</p>
-                <p class="text-stone-500">{s.use}</p>
+                <p class="font-mono text-stone-700">{s.hex}</p>
               </div>
             </li>
           ))}
@@ -273,13 +273,13 @@ const dl = 'font-medium text-ridge-800 underline decoration-ridge-300 underline-
         <div class="mt-8 space-y-6">
           <div>
             <p class="font-display text-3xl font-semibold text-stone-900">Source Serif 4</p>
-            <p class="mt-1 text-stone-600">The name, headings, and phone numbers.</p>
+            <p class="mt-1 text-stone-700">The name, headings, and phone numbers.</p>
           </div>
           <div>
             <p class="font-body text-3xl text-stone-900">DM Sans</p>
-            <p class="mt-1 text-stone-600">Everything else, including “Construction &amp; Development.”</p>
+            <p class="mt-1 text-stone-700">Everything else, including “Construction &amp; Development.”</p>
           </div>
-          <p class="text-stone-600">
+          <p class="text-stone-700">
             Both are free from <a href="https://fonts.google.com" class="text-link" rel="noopener">Google Fonts</a>.
           </p>
         </div>

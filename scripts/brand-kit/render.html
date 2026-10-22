@@ -35,13 +35,11 @@
   .row { display: flex; align-items: center; }
   .words { display: flex; flex-direction: column; align-items: flex-start; }
   .name { font-family: "Source Serif 4", serif; font-variation-settings: "opsz" 60; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; line-height: 1; white-space: nowrap; }
-  .sub { font-family: "DM Sans", sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; line-height: 1; white-space: nowrap; }
-  .on-cream .sub, .ink .sub { color: #3d3d38; }
-  .on-green .sub, .white .sub { color: rgba(255, 255, 255, .86); }
-  .green .sub { color: var(--leaf); }
+  .sub { font-family: "DM Sans", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; line-height: 1; white-space: nowrap; }
 
   .serif { font-family: "Source Serif 4", serif; font-variation-settings: "opsz" 60; font-weight: 600; }
-  .caps { text-transform: uppercase; font-weight: 500; }
+  .caps { text-transform: uppercase; font-weight: 600; }
+  .on-white { background: #fff; color: var(--ink); }
 </style>
 </head>
 <body>
@@ -74,25 +72,54 @@
 
   const rule = (m1, m2) => `<div style="width:120px; height:2px; background:var(--tan); margin:${m1}px 0 ${m2}px"></div>`
 
+  // Print sizes at 600 dpi: 124px = 15pt, 74px = 9pt, 56px = 6.7pt.
   const cardBack = (theme) => `
     <div class="canvas ${theme}" style="display:block">
-      <img class="tree" src="tree.svg" style="position:absolute; top:150px; right:160px; height:260px" />
       <div style="position:absolute; left:160px; top:150px">
         <div class="serif" style="font-size:124px; line-height:1; letter-spacing:-.005em">Zack Newman</div>
-        <div class="caps" style="font-size:54px; letter-spacing:.18em; margin-top:36px; opacity:.8">Owner</div>
-        <div class="caps" style="font-size:46px; letter-spacing:.1em; margin-top:22px; opacity:.7">Maple Ridge ${TAG}</div>
+        <div class="caps" style="font-size:60px; letter-spacing:.16em; margin-top:40px">Owner</div>
+        <div class="caps" style="font-size:56px; letter-spacing:.06em; margin-top:26px">Maple Ridge ${TAG}</div>
       </div>
-      <div style="position:absolute; left:160px; bottom:135px; font-size:74px; line-height:1.42">
-        <div style="font-weight:500">${C.phone}</div>
+      <div style="position:absolute; left:160px; bottom:135px; font-size:74px; line-height:1.4; font-weight:500">
+        <div>${C.phone}</div>
         <div>${C.email}</div>
-        <div style="opacity:.75">${C.web}</div>
+        <div>${C.web}</div>
       </div>
+      <img class="tree" src="tree.svg" style="position:absolute; bottom:135px; right:160px; height:320px" />
     </div>`
 
   const contact = (labelPx, phonePx, webPx, gap) => `
-    <div class="caps" style="font-size:${labelPx}px; letter-spacing:.22em; opacity:.75">Call or text Zack</div>
+    <div class="caps" style="font-size:${labelPx}px; letter-spacing:.2em">Call or text Zack</div>
     <div class="serif" style="font-size:${phonePx}px; margin-top:${gap}px; letter-spacing:.01em; line-height:1">${C.phone}</div>
-    <div style="font-size:${webPx}px; margin-top:${gap * 1.3}px; opacity:.85">${C.web}</div>`
+    <div style="font-size:${webPx}px; margin-top:${gap * 1.3}px; font-weight:500">${C.web}</div>`
+
+  const divider = (h, color) => `<div style="width:3px; height:${h}px; background:${color}; margin:0 44px"></div>`
+
+  const signature = (theme) => `
+    <div class="sig lockup ${theme}" style="display:inline-flex; align-items:center; padding:40px 48px">
+      <img class="tree" src="tree.svg" style="height:230px" />
+      ${divider(230, theme === "on-green" ? "#fff" : "var(--tan)")}
+      <div style="line-height:1">
+        <div class="serif" style="font-size:58px">Zack Newman</div>
+        <div style="font-size:28px; font-weight:600; margin-top:16px">Owner, Maple Ridge ${TAG}</div>
+        <div style="font-size:30px; font-weight:500; line-height:1.4; margin-top:24px">
+          <div>${C.phone}</div>
+          <div>${C.email}</div>
+          <div>${C.web}</div>
+        </div>
+      </div>
+    </div>`
+
+  const signatureCompact = () => `
+    <div class="sig lockup on-white" style="display:inline-flex; align-items:center; padding:32px 44px">
+      <img class="tree" src="tree.svg" style="height:150px" />
+      ${divider(150, "var(--tan)")}
+      <div style="line-height:1">
+        <div class="serif" style="font-size:48px">Zack Newman</div>
+        <div style="font-size:28px; font-weight:600; margin-top:14px">Maple Ridge ${TAG}</div>
+        <div style="font-size:30px; font-weight:500; margin-top:14px">${C.phone}</div>
+      </div>
+    </div>`
 
   const logoSet = (base, make) => ({
     [`${base}-black`]: () => make("ink"),
@@ -103,13 +130,13 @@
   const post = (theme) => `<div class="canvas ${theme}" style="flex-direction:column">
       ${stack(340, 84)}
       ${rule(70, 60)}
-      ${contact(32, 108, 40, 24)}
+      ${contact(38, 108, 44, 24)}
     </div>`
 
   const story = (theme) => `<div class="canvas ${theme}" style="flex-direction:column">
       ${stack(620, 116)}
       ${rule(140, 110)}
-      ${contact(40, 140, 48, 32)}
+      ${contact(46, 140, 52, 32)}
     </div>`
 
   const assets = {
@@ -120,10 +147,10 @@
     ...logoSet("logo-horizontal-name", (c) => `<div class="canvas ${c}">${row(330, 100, { tagline: false })}</div>`),
 
     // ---- Business cards, 3.5 x 2 in at 600 dpi ----
-    "card-front-cream": () => `<div class="canvas on-cream">${stack(470, 128)}</div>`,
+    "card-front-cream": () => `<div class="canvas on-cream">${stack(470, 140)}</div>`,
     "card-front-cream-name": () => `<div class="canvas on-cream">${stack(520, 140, { tagline: false, gap: 0.55 })}</div>`,
     "card-back-cream": () => cardBack("on-cream"),
-    "card-front-green": () => `<div class="canvas on-green">${stack(470, 128)}</div>`,
+    "card-front-green": () => `<div class="canvas on-green">${stack(470, 140)}</div>`,
     "card-front-green-name": () => `<div class="canvas on-green">${stack(520, 140, { tagline: false, gap: 0.55 })}</div>`,
     "card-back-green": () => cardBack("on-green"),
 
@@ -132,13 +159,18 @@
     "profile-tree-cream": () => `<div class="canvas on-cream"><img class="tree" src="tree.svg" style="height:580px" /></div>`,
     "profile-name-green": () => `<div class="canvas on-green">${stack(430, 84, { tagline: false, gap: 0.55 })}</div>`,
     "profile-name-cream": () => `<div class="canvas on-cream">${stack(430, 84, { tagline: false, gap: 0.55 })}</div>`,
-    "cover-green": () => `<div class="canvas on-green">${row(350, 92)}</div>`,
+    "cover-green": () => `<div class="canvas on-green">${row(320, 94)}</div>`,
     "cover-green-name": () => `<div class="canvas on-green">${row(330, 100, { tagline: false })}</div>`,
-    "cover-cream": () => `<div class="canvas on-cream">${row(350, 92)}</div>`,
+    "cover-cream": () => `<div class="canvas on-cream">${row(320, 94)}</div>`,
     "post-cream": () => post("on-cream"),
     "post-green": () => post("on-green"),
     "story-green": () => story("on-green"),
     "story-cream": () => story("on-cream"),
+
+    // ---- Email signatures (trimmed to the box) ----
+    "email-signature": () => signature("on-white"),
+    "email-signature-green": () => signature("on-green"),
+    "email-signature-compact": () => signatureCompact(),
   }
 
   // Letter-spacing adds a gap after the last letter; pull it back so text
