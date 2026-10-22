@@ -1,11 +1,14 @@
 ---
 import { contact } from '../data/contact'
+import QuickContactForm from './QuickContactForm.astro'
 
 interface Props {
   heading: string
   description: string
   primaryLabel?: string
   primaryHref?: string
+  /** Show the short name/phone/message form instead of the quote button */
+  form?: boolean
 }
 
 const {
@@ -13,37 +16,61 @@ const {
   description,
   primaryLabel = 'Get a free quote',
   primaryHref = '/contact',
+  form = false,
 } = Astro.props
 ---
 
 <section class="relative overflow-hidden py-20 lg:py-24 bg-ridge-800 text-white texture-overlay">
   <div class="topo text-ridge-200/[0.08]" aria-hidden="true"></div>
   <div class="container-wide section-padding relative">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-5">
-        {heading}
-      </h2>
-      <p class="text-lg sm:text-xl text-ridge-200 mb-10">
-        {description}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href={primaryHref}
-          class="inline-flex items-center justify-center bg-white text-ridge-800 hover:bg-earth-100 px-8 py-4 rounded-sm font-medium transition-colors"
-        >
-          {primaryLabel}
-        </a>
-        <a
-          href={contact.phoneHref}
-          data-track="call_cta_section"
-          class="inline-flex items-center justify-center bg-transparent text-white hover:bg-white/10 px-8 py-4 rounded-sm font-medium transition-colors border border-white/25"
-        >
-          <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
-        </a>
+    {form ? (
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+        <div>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-5">
+            {heading}
+          </h2>
+          <p class="text-lg sm:text-xl text-ridge-200">
+            {description}
+          </p>
+          <p class="mt-8 text-ridge-200">
+            Rather talk now?{' '}
+            <a href={contact.phoneHref} data-track="call_cta_section" class="text-link-dark">
+              <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
+            </a>
+            <span class="lg:hidden">
+              {' '}or <a href={`sms:${contact.phoneRaw}`} data-track="text_cta_section" class="text-link-dark">text us</a>
+            </span>
+          </p>
+        </div>
+        <QuickContactForm submitLabel={primaryLabel} />
       </div>
-      <p class="mt-8 text-sm text-ridge-300 lg:hidden">
-        Or text us at <a href={`sms:${contact.phoneRaw}`} data-track="text_cta_section" class="text-link-dark">{contact.phone}</a>
-      </p>
-    </div>
+    ) : (
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-5">
+          {heading}
+        </h2>
+        <p class="text-lg sm:text-xl text-ridge-200 mb-10">
+          {description}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={primaryHref}
+            class="inline-flex items-center justify-center bg-white text-ridge-800 hover:bg-earth-100 px-8 py-4 rounded-sm font-medium transition-colors"
+          >
+            {primaryLabel}
+          </a>
+          <a
+            href={contact.phoneHref}
+            data-track="call_cta_section"
+            class="inline-flex items-center justify-center bg-transparent text-white hover:bg-white/10 px-8 py-4 rounded-sm font-medium transition-colors border border-white/25"
+          >
+            <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
+          </a>
+        </div>
+        <p class="mt-8 text-sm text-ridge-300 lg:hidden">
+          Or text us at <a href={`sms:${contact.phoneRaw}`} data-track="text_cta_section" class="text-link-dark">{contact.phone}</a>
+        </p>
+      </div>
+    )}
   </div>
 </section>
