@@ -37,7 +37,7 @@ Marketing/lead-gen site for Maple Ridge Construction & Development (owner: Zack 
 
 ## Contact form
 
-Netlify Forms (`data-netlify`, honeypot `bot-field`), two forms: `contact` (full form on /contact) and `quick-contact` (`QuickContactForm.astro`: name, phone, optional message, plus a hidden `page` field with the source path). The quick form renders inside the bottom CTA band when a page passes `<CTASection form />`. It's on home, the 3 service pages, the service-area index + city pages, and roofing. Keep the two form names separate, because Netlify only keeps the fields from a form's first detected definition. Submissions land in the Netlify dashboard; the email notification to zack@mapleridgedev.com must be configured in the dashboard — code alone does not deliver leads.
+Netlify Forms (`data-netlify`, honeypot `bot-field`), two forms: `contact` (full form on /contact) and `quick-contact` (`QuickContactForm.astro`: name, phone, optional message, plus a hidden `page` field with the source path). The quick form sits at the top of the page. On inner pages it renders beside the title when a page passes `<PageHero form />`, and on the homepage it replaces the hero buttons. It's on home, the 3 service pages, the service-area index + city pages, and roofing. The bottom CTA band stays button-only, so a page has one form. Keep the two form names separate, because Netlify only keeps the fields from a form's first detected definition. Submissions land in the Netlify dashboard; the email notification to zack@mapleridgedev.com must be configured in the dashboard — code alone does not deliver leads.
 
 ## Client preferences (from Zack)
 

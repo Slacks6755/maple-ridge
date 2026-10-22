@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CTASection from '../components/CTASection.astro'
+import QuickContactForm from '../components/QuickContactForm.astro'
 import Reviews from '../components/Reviews.astro'
 import BuildSequence from '../components/build-sequence/BuildSequence.astro'
 import { contact } from '../data/contact'
@@ -16,7 +17,7 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
   <section class="relative bg-stone-900 overflow-hidden texture-overlay">
     <div class="topo text-ridge-300/[0.07]" aria-hidden="true"></div>
     <div class="container-wide section-padding relative">
-      <div class="grid lg:grid-cols-2 xl:grid-cols-12 gap-12 lg:gap-16 xl:gap-14 py-16 lg:py-24 xl:py-20">
+      <div class="grid lg:grid-cols-2 xl:grid-cols-12 gap-12 lg:gap-16 xl:gap-14 py-12 lg:py-16">
         <div class="flex flex-col justify-center xl:col-span-5">
           <span class="text-ridge-400 text-xs font-semibold uppercase tracking-[0.22em] mb-6">
             {contact.address.locality}, {contact.address.regionFull}
@@ -30,21 +31,19 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
             New construction, renovations, and land development across McMinn, Bradley, Polk, and Monroe Counties. Straightforward pricing, quality work.
           </p>
 
-          <div class="mt-10 flex flex-col sm:flex-row gap-4">
-            <a
-              href="/contact"
-              class="inline-flex items-center justify-center bg-ridge-500 hover:bg-ridge-600 text-white px-8 py-4 rounded-sm font-medium transition-colors"
-            >
-              Get a free quote
-            </a>
-            <a
-              href={contact.phoneHref}
-              data-track="call_hero"
-              class="inline-flex items-center justify-center bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded-sm font-medium transition-colors border border-white/25"
-            >
+          <div class="mt-8">
+            <QuickContactForm submitLabel="Get a free quote" compact />
+          </div>
+
+          <p class="mt-6 text-stone-300">
+            Rather talk now?{' '}
+            <a href={contact.phoneHref} data-track="call_hero" class="text-link-dark">
               <span class="lg:hidden">Call&nbsp;</span>{contact.phone}
             </a>
-          </div>
+            <span class="lg:hidden">
+              {' '}or <a href={`sms:${contact.phoneRaw}`} data-track="text_hero" class="text-link-dark">text us</a>
+            </span>
+          </p>
 
           <p class="mt-10 pt-6 border-t border-white/10 text-xs uppercase tracking-[0.18em] text-stone-400">
             Licensed &amp; insured
@@ -206,7 +205,6 @@ import heroBarndo from '../assets/projects/barndo-porch/IMG_2028.webp'
   <Reviews />
 
   <CTASection
-    form
     heading="Ready to get started?"
     description="Give us a call or send a message. We'll talk through your project and give you an honest number."
   />
