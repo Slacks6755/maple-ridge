@@ -1,0 +1,348 @@
+---
+// SEO landing page for roofing in Athens, TN. Deliberately not in the header
+// nav. It's reached from the Athens service-area page, the sitemap, and
+// search. Keyword targets (from Google autocomplete, Oct 2026): "roofing
+// athens tn", "roofers athens tn", "roof repair athens tn", "roofing companies
+// athens tn", "metal roofing athens tn", plus roof replacement cost questions.
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import CTASection from '../components/CTASection.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+import { Picture } from 'astro:assets'
+import { contact } from '../data/contact'
+// Stock photo (Unsplash License, free for commercial use, no attribution required):
+// https://unsplash.com/photos/4XMHsy4Rvi8 by Zohair Mirza. Swap for a real job photo when there is one.
+import roofPhoto from '../assets/roofing/shingle-bundles-on-roof.webp'
+
+const title = 'Roofing in Athens, TN: Roof Replacement & Repair | Maple Ridge'
+const description =
+  'Roof replacement & repair in Athens, TN. Shingle and metal roofs, rotten decking fixed, permits handled. Licensed McMinn County contractor. Call (423) 506-2380.'
+
+const replacementSteps = [
+  'Tear-off down to the decking. New shingles don’t go over old ones.',
+  'Every sheet of decking checked, and bad wood replaced before anything goes over it.',
+  'Synthetic underlayment, with ice and water shield in the valleys and around chimneys and pipes.',
+  'New drip edge, flashing, and pipe boots. Reused flashing is where a lot of leaks start.',
+  'Ridge vent or other attic ventilation, sized for the house.',
+  'Cleanup at the end, including a magnet sweep of the yard and driveway for nails.',
+  'Permits pulled when the job needs one, in the city or the county.',
+]
+
+const leakSources = [
+  { title: 'Pipe boots', description: 'The rubber collars around plumbing vents crack from sun exposure. This is one of the most common leaks and one of the cheapest to fix.' },
+  { title: 'Flashing', description: 'The metal around chimneys, skylights, and where a roof meets a wall. If it was caulked over instead of replaced, it will leak sooner or later.' },
+  { title: 'Wind damage', description: 'Storms can lift shingles or tear a few off. It’s usually a simple repair if it gets fixed before water soaks the decking.' },
+  { title: 'Metal roof screws', description: 'On exposed-fastener metal roofs, the rubber washers on the screws wear out and start letting water in. Replacing the screws fixes it.' },
+  { title: 'Valleys', description: 'Leaves collect where two roof slopes meet, hold water, and wear the shingles out early.' },
+]
+
+const replaceSigns = [
+  'Shingle granules piling up in the gutters or at the bottom of the downspouts',
+  'Shingles curling at the edges or cupping in the middle',
+  'Bald, dark patches where the granules are gone',
+  'Leaks in more than one spot, or the same leak coming back after a repair',
+  'Soft spots underfoot, or daylight through the boards in the attic',
+  'Rust around most of the screws on a metal roof',
+  'The roof is already two layers deep',
+]
+
+const costFactors = [
+  { title: 'Size', description: 'Roofs are priced by the square, which is 100 square feet of roof. A roof has more area than the floor of the house because of the slope and overhangs.' },
+  { title: 'Pitch', description: 'Steep roofs take longer and need more safety equipment, so they cost more per square than low-slope roofs.' },
+  { title: 'Layers', description: 'If there are two layers of old shingles, there’s twice as much to tear off and haul away.' },
+  { title: 'Decking', description: 'Any rotten decking has to be replaced. Older houses with board decking may need new plywood over the whole roof.' },
+  { title: 'Material', description: 'Architectural shingles, exposed-fastener metal, and standing seam metal are each priced differently.' },
+  { title: 'Details', description: 'Chimneys, skylights, valleys, and dormers add flashing work and time.' },
+]
+
+const faqs = [
+  {
+    question: 'How much does a new roof cost in Athens, TN?',
+    answer: 'It depends on the size and pitch of the roof, how many layers are coming off, how much decking needs replacing, and whether you choose shingles or metal. We’ll measure the roof, look in the attic, and give you a price. Estimates are free.',
+  },
+  {
+    question: 'Do I need a permit to replace my roof in Athens?',
+    answer: 'It depends on where the house is and how much of the roof is being replaced. Inside city limits, permits go through the City of Athens. Outside city limits, they go through McMinn County. If your job needs a permit, we pull it and handle the inspection.',
+  },
+  {
+    question: 'Can you put a metal roof over my old shingles?',
+    answer: 'Sometimes. If there’s only one layer of shingles and the decking is solid, metal can go over the top with the right underlayment or furring strips. We check the decking from the attic first, because covering rotten wood just hides the problem.',
+  },
+  {
+    question: 'A storm damaged my roof. What should I do?',
+    answer: 'Take photos from the ground, catch any water coming inside, and call your insurance company to start a claim. Then give us a call. We’ll look at the roof, take photos of the damage, and give you an estimate for the repair or replacement.',
+  },
+  {
+    question: 'How long does a roof replacement take?',
+    answer: 'Most houses take one to three days once the materials are delivered, depending on size and weather. If we find decking or framing that needs repair, it can take longer, and we’ll let you know before we keep going.',
+  },
+  {
+    question: 'Do you do roof repairs, or only full replacements?',
+    answer: 'Both. We fix leaks, replace flashing and pipe boots, and repair storm damage. If a repair will solve the problem, that’s what we’ll recommend.',
+  },
+  {
+    question: 'Do you work outside of Athens?',
+    answer: 'Yes. We’re based in Etowah and work throughout McMinn, Bradley, Monroe, and Polk Counties.',
+  },
+]
+
+const siteUrl = contact.url
+const pageUrl = `${siteUrl}/roofing-athens-tn`
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${pageUrl}#service`,
+  name: 'Roof replacement and repair in Athens, TN',
+  serviceType: 'Roofing',
+  url: pageUrl,
+  description,
+  provider: { '@id': `${siteUrl}/#business` },
+  areaServed: [
+    { '@type': 'City', name: 'Athens', addressRegion: 'TN' },
+    { '@type': 'AdministrativeArea', name: 'McMinn County, TN' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Roofing services',
+    itemListElement: [
+      'Roof replacement',
+      'Roof repair',
+      'Metal roofing',
+      'Storm damage roof repair',
+      'Roof decking replacement',
+    ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+  },
+}
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <PageHero
+    label="McMinn County, Tennessee"
+    title="Roof replacement & repair in Athens, TN"
+    description="Shingle and metal roofs for homes in Athens and across McMinn County. We're a licensed general contractor, so if the wood under your old roof is rotten, we fix that too."
+    ctaLabel="Get a roof estimate"
+  />
+  <Breadcrumbs items={[
+    { name: 'Home', href: '/' },
+    { name: 'Service Areas', href: '/service-areas' },
+    { name: 'Athens, TN', href: '/service-areas/athens' },
+    { name: 'Roofing' },
+  ]} />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-wide section-padding">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <span class="section-label">Roofing</span>
+          <h2 class="section-title">Roofing from a licensed general contractor</h2>
+          <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
+            <p>
+              We replace and repair roofs on homes in Athens and the surrounding area. Shingle or metal,
+              a full replacement or a single leak.
+            </p>
+            <p>
+              Being a general contractor matters on roof jobs. Sometimes the old shingles come off and the
+              decking underneath is soft, a rafter is cracked, or water has already stained a ceiling. We
+              fix all of that ourselves, so you don&apos;t have to find a carpenter after the roofers leave.
+            </p>
+            <p>
+              {contact.owner} owns the company and comes out to look at your roof himself. He&apos;ll tell
+              you straight whether you need a repair or a new roof.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-lg bg-stone-200 aspect-[4/3]">
+          <Picture
+            src={roofPhoto}
+            formats={['avif']}
+            fallbackFormat="webp"
+            alt="Roofer carrying a bundle of shingles across a house roof during a roof replacement"
+            widths={[400, 700, 1000, 1400]}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="section-label">New roofs</span>
+          <h2 class="section-title">Roof replacement</h2>
+          <div class="mt-6 space-y-4 text-stone-600 leading-relaxed">
+            <p>
+              Before we price a new roof, we get up on it and look in the attic. That&apos;s how we catch
+              the things that change the job, like two layers of old shingles or rotten decking.
+            </p>
+            <p>
+              Older houses often have board decking, which is planks with gaps between them instead of
+              plywood. Shingle nails don&apos;t hold well in it, so it usually needs plywood over the top
+              before the new roof goes on. If your house needs that, it&apos;s in the estimate from the start.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl font-semibold text-stone-900 mb-5">What a new roof from us includes</h3>
+          <ol class="space-y-4">
+            {replacementSteps.map((step, index) => (
+              <li class="flex gap-5 border-t border-stone-300 pt-4">
+                <span class="font-display text-lg text-stone-400 flex-shrink-0 w-8" aria-hidden="true">0{index + 1}</span>
+                <span class="text-stone-600 leading-relaxed">{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-wide section-padding">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <span class="section-label">Materials</span>
+        <h2 class="section-title">Shingle or metal roofing</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-12 max-w-5xl mx-auto">
+        <div>
+          <h3 class="font-display text-xl font-semibold text-stone-900 mb-3">Architectural shingles</h3>
+          <p class="text-stone-600 leading-relaxed">
+            Architectural shingles are on most houses around here, and they&apos;re the right choice for
+            most homeowners. They cost less than metal and they&apos;re easy to repair if a storm tears a
+            few off. They also last longer when the attic is vented well, so we check the ventilation too.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl font-semibold text-stone-900 mb-3">Metal roofing</h3>
+          <p class="text-stone-600 leading-relaxed">
+            Metal roofs come in two main types. Exposed-fastener panels are screwed through the face of
+            the metal. They cost less, but the rubber washers on the screws wear out over time and the
+            screws eventually need replacing. Standing seam metal hides the fasteners under raised seams.
+            It costs more up front and needs less upkeep, so it&apos;s a good fit if you plan to stay in
+            the house a long time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="max-w-3xl mx-auto">
+        <span class="section-label">Repairs</span>
+        <h2 class="section-title">Roof repair</h2>
+        <p class="mt-6 text-stone-600 leading-relaxed">
+          A leak doesn&apos;t always mean you need a new roof. Most leaks start in one of these places.
+        </p>
+
+        <div class="mt-10">
+          {leakSources.map((source) => (
+            <div class="border-t border-stone-300 py-5">
+              <h3 class="font-semibold text-stone-900 mb-1">{source.title}</h3>
+              <p class="text-stone-600 leading-relaxed">{source.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-8 text-stone-600 leading-relaxed">
+          If a repair will fix it, that&apos;s what we&apos;ll recommend. If the whole roof is worn out,
+          patching one spot won&apos;t last, and we&apos;ll tell you that. Have a leak right now? Call <a href={contact.phoneHref} data-track="call_roofing_leak" class="text-link">{contact.phone}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-ridge-50">
+    <div class="container-wide section-padding">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="section-label">Repair or replace</span>
+          <h2 class="section-title">Signs you need a new roof</h2>
+          <p class="mt-6 text-stone-600 leading-relaxed">
+            Most of these show up from the yard or the attic before water ever reaches a ceiling. If
+            you&apos;re seeing more than one, it&apos;s a good time to have the roof looked at.
+          </p>
+        </div>
+        <ul class="space-y-0">
+          {replaceSigns.map((sign) => (
+            <li class="border-t border-stone-300 py-4 text-stone-700 leading-relaxed">{sign}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-wide section-padding">
+      <div class="max-w-5xl mx-auto mb-14">
+        <span class="section-label">Cost</span>
+        <h2 class="section-title">How much a new roof costs</h2>
+        <p class="mt-6 max-w-3xl text-stone-600 leading-relaxed">
+          Two houses the same size can have very different roof prices. These are the things that change
+          the number. Once we&apos;ve measured your roof and looked in the attic, we&apos;ll give you an
+          actual price.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 max-w-5xl mx-auto">
+        {costFactors.map((factor) => (
+          <div class="border-t border-stone-300 pt-5">
+            <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{factor.title}</h3>
+            <p class="text-stone-600 leading-relaxed">{factor.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container-wide section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Roofing questions</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {faqs.map((faq) => (
+          <div class="border-b border-stone-200 py-6 first:pt-0 last:border-0">
+            <h3 class="font-semibold text-stone-900 mb-3">{faq.question}</h3>
+            <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-stone-500 mt-12 max-w-2xl mx-auto">
+        If a leak has already damaged the inside of your house, we can <a href="/services/remodeling" class="text-link">repair that too</a>.
+        See everything else we do in <a href="/service-areas/athens" class="text-link">Athens, TN</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Need a roof looked at?"
+    description="Call or send a message. Zack will come look at your roof and give you a free estimate."
+    primaryLabel="Get a roof estimate"
+  />
+</BaseLayout>

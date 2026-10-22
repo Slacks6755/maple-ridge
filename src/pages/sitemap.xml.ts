@@ -15,6 +15,7 @@ const paths = [
   '/services/new-construction',
   '/services/remodeling',
   '/services/land-development',
+  '/roofing-athens-tn',
   '/service-areas',
   ...serviceAreas.map((area) => `/service-areas/${area.slug}`),
 ]

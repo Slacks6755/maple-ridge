@@ -12,6 +12,8 @@ export interface ServiceArea {
   description: string
   localContent: string
   faqs: ServiceAreaFaq[]
+  /** Area-specific services listed after the main three (e.g. Athens roofing page) */
+  extraServices?: { name: string; description: string; href: string }[]
 }
 
 export const serviceAreas: ServiceArea[] = [
@@ -48,6 +50,13 @@ export const serviceAreas: ServiceArea[] = [
     county: 'McMinn',
     size: 'big',
     heroTitle: 'Home Builder & Contractor in Athens, TN',
+    extraServices: [
+      {
+        name: 'Roof Replacement & Repair',
+        description: 'New roofs, leak repairs, and metal roofing in Athens',
+        href: '/roofing-athens-tn',
+      },
+    ],
     description: 'As the county seat of McMinn County, Athens has a mix of established neighborhoods and new developments. Maple Ridge Construction serves Athens homeowners with new builds, renovations, and land development.',
     localContent: 'Athens is the county seat, so it\'s a real mix. Older homes around the square and near Tennessee Wesleyan that need full renovation, and new lots opening up off I-75 and out past the bypass. Inside the city limits your job runs through Athens. Outside, it goes through McMinn County. Either way, we deal with the permit office so you don\'t have to. A lot of the in-town houses hide surprises behind the walls, and we tell you what we find and what it costs before we keep going.',
     faqs: [

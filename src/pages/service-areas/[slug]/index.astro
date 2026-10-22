@@ -17,6 +17,8 @@ export function getStaticPaths() {
 const { area } = Astro.props
 const { slug } = Astro.params
 
+const areaServices = [...services, ...(area.extraServices ?? [])]
+
 const otherAreas = serviceAreas.filter((a) => a.slug !== slug).slice(0, 4)
 
 const title = `${area.heroTitle} | Maple Ridge Construction`
@@ -63,9 +65,9 @@ const faqJsonLd = {
         </div>
 
         <div>
-          {services.map((service, index) => (
+          {areaServices.map((service, index) => (
             <a
-              href={`/services/${service.slug}`}
+              href={service.href}
               class="group flex gap-6 border-t border-stone-300 py-6 last:pb-0"
             >
               <span class="font-display text-lg text-stone-400 flex-shrink-0 w-8 pt-0.5" aria-hidden="true">0{index + 1}</span>
