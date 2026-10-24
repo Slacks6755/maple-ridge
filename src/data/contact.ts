@@ -25,4 +25,6 @@ export const contact = {
   facebookUrl: 'https://www.facebook.com/caltenncustoms/',
   url: 'https://www.mapleridgedev.com',
   owner: 'Zack Newman',
+  // Tennessee contractor license
+  license: 'BC #82563',
 } as const

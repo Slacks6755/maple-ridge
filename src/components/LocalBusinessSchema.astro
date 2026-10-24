@@ -37,6 +37,15 @@ const schema = {
       closes: contact.hoursStructured.closes,
     },
   ],
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'license',
+    name: `Tennessee Contractor License ${contact.license}`,
+    recognizedBy: {
+      '@type': 'GovernmentOrganization',
+      name: 'Tennessee Board for Licensing Contractors',
+    },
+  },
   priceRange: '$$',
   paymentAccepted: 'Cash, Check',
   hasOfferCatalog: {
