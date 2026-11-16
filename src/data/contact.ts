@@ -5,13 +5,11 @@ export const contact = {
   email: 'zack@mapleridgedev.com',
   emailHref: 'mailto:zack@mapleridgedev.com',
   address: {
-    street: '138 County Road 502',
     locality: 'Etowah',
     region: 'TN',
     regionFull: 'Tennessee',
     postalCode: '37331',
     country: 'US',
-    full: '138 County Road 502, Etowah, TN 37331',
   },
   hours: 'Mon–Fri, 8AM to 5PM',
   hoursShort: '8AM to 5PM',
